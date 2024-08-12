@@ -34,6 +34,9 @@ public class AdminController {
 //		return "admin/ad_login";
 //	}
 	
+	
+	
+//	테스트
 	// 로그인 페이지 이동 (interceptor를 위한 moveUrl 설정)
 	@GetMapping("adminLogin.do")
 	public String loginForm(String moveUrl, Model model) {
