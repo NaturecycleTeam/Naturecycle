@@ -24,6 +24,9 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	
+	
+	
 	@GetMapping("/register.do")
 	public String register() {
 		
