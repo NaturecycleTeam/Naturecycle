@@ -32,8 +32,8 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println(dto);
 				
 		if(adLoginDTO != null) {
-			String inputPw = dto.getPassword();
-			String dbPw = adLoginDTO.getPassword();
+			String inputPw = dto.getAd_password();
+			String dbPw = adLoginDTO.getAd_password();
 						
 			if(inputPw.equals(dbPw)) { // 비번 일치
 				session.setAttribute("adLoginDTO", adLoginDTO);

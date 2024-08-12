@@ -5,7 +5,7 @@
 <mapper namespace="com.mbc.mapper.AdminMapper">
 	
 	<select id="adminLogin" resultType="adminDTO">
-		SELECT id, password, name, email FROM admin_info WHERE id = #{id}
+		SELECT * FROM ad_member WHERE ad_id = #{ad_id}
 	</select>
 	
 	<select id="getData" resultType="dataDTO">
