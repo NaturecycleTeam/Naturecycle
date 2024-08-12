@@ -1,0 +1,19 @@
+-- 상품 테이블
+drop table product_info;
+create table product_info(
+    pnum int auto_increment primary key,    -- 상품번호
+    pname varchar(50) not null,    -- 상품명
+    pcategory_fk varchar(20) not null, -- 카테고리
+    pcompany varchar(50),     -- 제조회사
+    pwriter varchar(20),   -- 작가
+    pimage varchar(50),        -- 상품이미지
+    pqty int default 0,    -- 수량
+    price int default 0, -- 가격
+    pspec varchar(20),         -- 상품사양(인기, 추천, 신규)
+    pcontent varchar(300),     -- 상품상세  
+    point int default 0,  -- 상품별 포인트
+    pinput_date datetime default now()   -- 등록 날짜
+);
+
+select * from product_info;
+

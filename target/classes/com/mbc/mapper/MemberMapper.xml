@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbc.mapper.MemberMapper">
+	<select id="memberList" resultType="memberDTO">
+		select * from tbl_member
+	</select>
+
+	<insert id="memberInsert" parameterType="memberDTO">
+		INSERT INTO tbl_member(id, pw, name, age, email, tel)
+		VALUES(#{id}, #{pw}, #{name},#{age},#{email},#{tel})
+	</insert>
+
+	<delete id="deleteMember" parameterType="int">
+		DELETE FROM tbl_member WHERE no = #{no}
+	</delete>
+
+	<select id="memberInfo" resultType="memberDTO">
+		SELECT * FROM tbl_member WHERE id = #{id}
+	</select>
+
+	<update id="memberUpdate" parameterType="memberDTO">
+		UPDATE tbl_member SET age=#{age}, email=#{email}, tel=#{tel}
+		WHERE no = #{no}
+	</update>
+
+	<select id="idCheck" resultType="memberDTO">
+		SELECT * FROM tbl_member WHERE id = #{uid}
+	</select>
+	
+	<!-- 멤버 로그인 -->
+	<select id="memberLogin" resultType="memberDTO">
+		SELECT id, pw, name FROM tbl_member WHERE id = #{id}
+	</select>
+
+	<select id="findId" resultType="String">
+		SELECT id FROM tbl_member 
+		WHERE name = #{name} AND tel = #{tel}
+	</select>
+	
+	<update id="findPw">
+		UPDATE tbl_member SET pw=#{param3} 
+		WHERE id = #{param1} AND email = #{param2}
+	</update>
+	
+	<update id="updatePw">
+		UPDATE tbl_member SET pw=#{npw} 
+		WHERE id = #{id} AND pw = #{pw}
+	</update>
+	
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbc.mapper.CategoryMapper">
+	
+	<!-- 카테고리 등록 -->
+	<insert id="categoryInsert">
+		INSERT INTO category_info
+		VALUES(#{cat_num}, #{code}, #{cat_name})
+	</insert>
+	
+	<!-- 카테고리 전체 리스트 -->
+	<select id="categoryList" resultType="categoryDTO">
+		select * from category_info order by cat_num ASC
+	</select>
+	
+	<!-- 카테고리 삭제 -->
+	<delete id="categoryDelete">
+		DELETE FROM category_info WHERE cat_num = #{cat_num}
+	</delete>
+
+</mapper>

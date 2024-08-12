@@ -1,0 +1,138 @@
+-- 관리자 테이블 admin(관리자 등록)
+drop table admin_info;
+create table admin_info(
+    id varchar(20) not null,
+    password varchar(20) not null,
+    name varchar(20) not null,
+    email varchar(50) not null    
+);
+
+insert into admin_info values('test','test','정형인','test@gmail.com');
+select * from admin_info;
+commit;
+
+
+-- 게시판(tbl_board) 테이블
+drop table tbl_board;
+create table tbl_board(
+	bid int auto_increment primary key,
+    subject varchar(100) not null,
+    contents varchar(3000) not null,
+    hit int default 0,
+    writer varchar(50) not null,
+                     -- now() == oracle sysdate
+    reg_date datetime default now() not null
+);
+
+select * from tbl_board;
+
+insert into tbl_board(subject, contents, writer)
+values('테스트!~~', '테스트', '아무개');
+
+select * from tbl_board
+where subject like '%제목%'
+order by bid desc
+limit 10, 10;
+
+-- 게시판(tbl_board) 테이블에 replycnt 컬럼을 추가
+alter table tbl_board add (replyCnt int default 0);
+
+-- safe update mode 해제 방법 : Edit > preferences > SQO Editor > Safe updates 체크 해제
+-- 초기 셋팅 (이미 댓글이 달려있는 상황이므로)
+update tbl_board set replyCnt = (select count(rno)
+							     from tbl_reply
+								 where tbl_reply.bid = tbl_board.bid);
+                                 
+-- 장바구니 테이블
+drop table tbl_cart;
+create table tbl_cart(
+	cart_num int primary key auto_increment,
+    id varchar(20),
+    pnum int,
+    pqty int default 1,
+    indate timestamp default now(),
+    
+    foreign key (id) references tbl_member(id),
+    foreign key (pnum) references product_info(pnum)
+ );
+ 
+ select * from tbl_cart;
+ 
+-- 카테고리 테이블
+drop table category_info;
+create table category_info(
+    cat_num int auto_increment primary key,
+    code varchar(10) not null,
+    cat_name varchar(20) not null
+);
+select * from category_info;
+
+-- 회원 테이블
+drop table tbl_member;
+create table tbl_member(
+    id varchar(20) unique not null, -- 외래키로 사용되기 때문에 unique 제약조건 추가
+    pw varchar(200) not null,
+    name varchar(50) not null,
+    tel varchar(20) not null,
+    email varchar(50) not null,
+    -- addr varchar(100) not null,
+    zipcode varchar(5),
+    road_addr varchar(100),
+    detail_addr varchar(100),
+    rdate timestamp not null
+);
+
+insert into tbl_member values('test', '1234', '김길동', '1111', 'test@gmail.com', '7733', '서울', '강서구 화곡동', now());
+select * from tbl_member;
+commit;
+
+-- 상품 테이블
+drop table product_info;
+create table product_info(
+    pnum int auto_increment primary key,    -- 상품번호
+    pname varchar(50) not null,    -- 상품명
+    pcategory_fk varchar(20) not null, -- 카테고리
+    pcompany varchar(50),     -- 제조회사
+    pwriter varchar(20),   -- 작가
+    pimage varchar(50),        -- 상품이미지
+    pqty int default 0,    -- 수량
+    price int default 0, -- 가격
+    pspec varchar(20),         -- 상품사양(인기, 추천, 신규)
+    pcontent varchar(300),     -- 상품상세  
+    point int default 0,  -- 상품별 포인트
+    pinput_date datetime default now()   -- 등록 날짜
+);
+
+-- 일대일　문의　게시판 테이블
+select * from product_info;
+
+drop table question_board;
+create table question_board(
+	bid int auto_increment primary key,
+    subject varchar(100) not null,
+    contents varchar(3000) not null,    
+    writer varchar(50) not null,                     
+    reg_date datetime default now() not null,
+    mid varchar(30) not null,
+    
+    foreign key(mid) references tbl_member(id)
+);
+
+-- 댓글　테이블
+drop table tbl_reply;
+create table tbl_reply(
+	rno int auto_increment primary key,
+	bid  int,
+    r_contents varchar(1000) not null,
+    replyer varchar(20) not null,
+    r_date datetime default now(),
+    update_date datetime default now(),
+    
+    -- bid를 외래키로 설정
+    foreign key(bid) references tbl_board(bid)
+);
+
+insert into tbl_reply(bid, r_contents, replyer)
+values(125, '댓글 테스트', '홍길동');
+
+select * from tbl_reply;                                 

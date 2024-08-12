@@ -1,0 +1,14 @@
+-- 장바구니 테이블
+drop table tbl_cart;
+create table tbl_cart(
+	cart_num int primary key auto_increment,
+    id varchar(20),
+    pnum int,
+    pqty int default 1,
+    indate timestamp default now(),
+    
+    foreign key (id) references tbl_member(id),
+    foreign key (pnum) references product_info(pnum)
+ );
+ 
+ select * from tbl_cart;

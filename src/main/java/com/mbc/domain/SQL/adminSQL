@@ -1,0 +1,12 @@
+-- 관리자 테이블 admin(관리자 등록)
+drop table admin_info;
+create table admin_info(
+    id varchar(20) not null,
+    password varchar(20) not null,
+    name varchar(20) not null,
+    email varchar(50) not null    
+);
+
+insert into admin_info values('test','test','정형인','test@gmail.com');
+select * from admin_info;
+commit;

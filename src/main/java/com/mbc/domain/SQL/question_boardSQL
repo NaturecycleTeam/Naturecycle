@@ -1,0 +1,11 @@
+drop table question_board;
+create table question_board(
+	bid int auto_increment primary key,
+    subject varchar(100) not null,
+    contents varchar(3000) not null,    
+    writer varchar(50) not null,                     
+    reg_date datetime default now() not null,
+    mid varchar(30) not null,
+    
+    foreign key(mid) references tbl_member(id)
+);
