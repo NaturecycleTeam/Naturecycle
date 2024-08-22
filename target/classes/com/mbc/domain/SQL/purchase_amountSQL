@@ -1,0 +1,41 @@
+WITH
+DAILY_PURCHASE AS(
+				SELECT A.order_date,
+                substr(A.order_date,1,4) AS YY,
+                substr(A.order_date,6,2) AS MM,
+                substr(A.order_date,9,2) AS DD,
+                SUM(B.qty_ordered*B.price_each) AS PURCHASE_AMOUNT,
+                count(A.order_num) AS ORDER_CNT
+                FROM tbl_order A
+                LEFT
+                JOIN orderdetail B
+                ON A.order_num = B.order_num
+				GROUP BY YY, MM, DD )
+SELECT DATE_FORMAT(order_date, "%Y-%m-%d") as order_date,		
+       PURCHASE_AMOUNT      
+FROM DAILY_PURCHASE
+WHERE order_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
+GROUP BY YY, MM, DD
+ORDER BY order_date;
+ 
+ 
+ 
+ 
+WITH
+MONTHLY_PURCHASE AS(
+				SELECT A.order_date,
+                substr(A.order_date,1,4) AS YY,
+                substr(A.order_date,6,2) AS MM,
+                substr(A.order_date,9,2) AS DD,
+                SUM(B.qty_ordered*B.price_each) AS PURCHASE_AMOUNT,
+                count(A.order_num) AS ORDER_CNT
+                FROM tbl_order A
+                LEFT
+                JOIN orderdetail B
+                ON A.order_num = B.order_num
+                GROUP BY YY, MM
+               )      
+SELECT CONCAT(YY, '-', MM) AS order_month,
+       PURCHASE_AMOUNT    
+ FROM MONTHLY_PURCHASE 
+ ORDER BY order_month;  

@@ -5,7 +5,9 @@
  <configuration>
  	<typeAliases>
  		<typeAlias type="com.mbc.domain.AdminDTO" alias="adminDTO"/>
- 		<typeAlias type="com.mbc.domain.DataDTO" alias="dataDTO"/>
+ 		<!-- <typeAlias type="com.mbc.domain.DataDTO" alias="dataDTO"/> -->
+ 		<typeAlias type="com.mbc.domain.OrderDTO" alias="orderDTO"/>
+ 		<!-- <typeAlias type="com.mbc.domain.OrderDetailDTO" alias="orderDetailDTO"/> -->
  		<typeAlias type="com.mbc.domain.CategoryDTO" alias="categoryDTO"/>
  		<typeAlias type="com.mbc.domain.ProductDTO" alias="productDTO"/>
  		<typeAlias type="com.mbc.domain.BoardDTO" alias="boardDTO"/>

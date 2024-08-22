@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
 </head>
 <body>
 <header>	
@@ -21,7 +24,7 @@
       <li class="nav-item">
         <a class="nav-link active" href="<c:url value="adminMain.do"/>">관리자HOME</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="catInput.do">카테고리 등록</a>
       </li>
       <li class="nav-item">
@@ -38,11 +41,17 @@
       </li> 
       <li class="nav-item">
         <a class="nav-link" href="listQT.do">일대일문의사항</a>
-      </li> 
+      </li>  -->
       <!-- ms-auto: 왼쪽마진 자동, me-auto:오른쪽마진 자동 -->
       <li class="nav-item ms-auto my-auto">
+<<<<<<< Updated upstream
       	<c:if test="${sessionScope.adLoginDTO.ad_name != null}">
         	<sapn class="text-white">${sessionScope.adLoginDTO.ad_name}님 환영합니다!!</span>
+=======
+      	<c:if test="${sessionScope.adLoginDTO.name != null}">
+        	<%-- <sapn class="text-white">${sessionScope.adLoginDTO.name}님 환영합니다!!</span> --%>
+        	<sapn class="text-white">관리자님 환영합니다!!</span>
+>>>>>>> Stashed changes
         </c:if>
       	<c:if test="${sessionScope.adLoginDTO.ad_name == null}">
         	<a class="text-white" href="adminLogin.do">로그인</a>

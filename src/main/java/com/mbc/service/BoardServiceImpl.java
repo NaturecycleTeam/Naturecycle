@@ -73,11 +73,11 @@ public class BoardServiceImpl implements BoardService{
 		mapper.question(qDto);		
 	}
 
-	@Override
-	public List<QuestionBoardDTO> getListQ(QuestionBoardDTO qDto) {
-		
-		return mapper.getListQ(qDto);
-	}
+//	@Override
+//	public List<QuestionBoardDTO> getListQ(QuestionBoardDTO qDto) {
+//		
+//		return mapper.getListQ(qDto);
+//	}
 
 	@Override
 	public List<QuestionBoardDTO> getListQT(QuestionBoardDTO qDto) {
@@ -85,6 +85,12 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getListQT(qDto);
 	}
 
+	@Override
+	public QuestionBoardDTO getListQ(String mid) {
 	
+		return mapper.getListQ(mid);
+	}
+
+
 	
 }

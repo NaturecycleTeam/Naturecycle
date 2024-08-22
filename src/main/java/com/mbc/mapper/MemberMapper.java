@@ -43,6 +43,7 @@ public interface MemberMapper {
 
 	int updatePw(MemberDTO dto);
 
+<<<<<<< Updated upstream
 	//이미 가입된 회원인지 확인하는 메소드
     MemberDTO findkakao(HashMap<String, Object> userInfo);
 
@@ -50,4 +51,8 @@ public interface MemberMapper {
     void kakaoinsert(HashMap<String, Object> userInfo);
 
 	MemberDTO selectMember(String string);
+=======
+	MemberDTO myProfile(String id);
+
+>>>>>>> Stashed changes
 }

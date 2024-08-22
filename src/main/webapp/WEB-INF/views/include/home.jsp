@@ -23,7 +23,7 @@
       <div id="tab2" class="cont">
       	<p>이주의 책 소개</p>
         <div class="home_card">
-			<c:set var="cnt" value="0" />
+			<c:set var="cnt" value="0" /> 
 			<c:set var="doneLoop" value="false" />
 				<c:forEach var="pDto" items="${map[key]}" varStatus="status">
 					<c:if test="${not doneLoop}">

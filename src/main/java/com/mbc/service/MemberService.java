@@ -41,8 +41,12 @@ public interface MemberService {
 
 	int modifyPw(MemberDTO dto);
 
+<<<<<<< Updated upstream
 	String getAccessToken(String code);
 
 	String getuserinfo(String access_Token, HttpSession session, RedirectAttributes rttr);
+=======
+	MemberDTO myProfile(String id);
+>>>>>>> Stashed changes
 
 }

@@ -25,11 +25,12 @@ public interface BoardService {
 	//////////////////////1:1 문의하기  //////////////////////////////
 	void question(QuestionBoardDTO qDto);
 
-	List<QuestionBoardDTO> getListQ(QuestionBoardDTO qDto);
+//	List<QuestionBoardDTO> getListQ(QuestionBoardDTO qDto);
 
 	List<QuestionBoardDTO> getListQT(QuestionBoardDTO qDto);
 
-	
+	QuestionBoardDTO getListQ(String mid);
+
 
 	
 

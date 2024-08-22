@@ -67,6 +67,7 @@
 		UPDATE tbl_member SET pw=#{npw}
 		WHERE id = #{id} AND pw = #{pw}
 	</update>
+<<<<<<< Updated upstream
 
 	<!-- 카카오 로그인 api -->
 	<select id="findkakao" resultType="MemberDTO"
@@ -81,4 +82,11 @@
 		null, null, null, null, null, null, null, null, null, null)
 	</insert>
 
+=======
+	
+	<select id="myProfile" resultType="memberDTO">
+		SELECT * FROM tbl_member 
+		WHERE id = #{id}
+	</select>
+>>>>>>> Stashed changes
 </mapper>

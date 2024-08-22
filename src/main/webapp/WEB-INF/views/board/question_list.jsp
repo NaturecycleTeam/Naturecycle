@@ -25,14 +25,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="dto" items="${qList}">
+			<%-- <c:forEach var="dto" items="${qList}"> --%>
 				<tr>
 					<td><c:out value="${dto.subject}" /></td>
 					<td>${dto.contents}</td>
 					<td>${dto.writer}</td>
 					<td>${dto.reg_date}</td>
 				</tr>
-			</c:forEach>
+			<%-- </c:forEach> --%>
 		</tbody>
 	</table>
 

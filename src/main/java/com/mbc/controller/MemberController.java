@@ -306,10 +306,18 @@ public class MemberController {
 
 	/////////////////// 마이 프로필 /////////////////////
 	// 마이 프로필 이동
+<<<<<<< Updated upstream
 	@RequestMapping("/myProfile.do")
 	public String myProfile(@RequestParam String id, Model model) {
 		MemberDTO dto = service.myProfile(id);
 		model.addAttribute("dto", dto);
+=======
+	@GetMapping("/myProfile.do")
+	public String myProfile(String id, Model model) {
+		MemberDTO dto = service.myProfile(id);
+		model.addAttribute("dto", dto);
+		
+>>>>>>> Stashed changes
 		return "member/myProfile";
 	}
 	

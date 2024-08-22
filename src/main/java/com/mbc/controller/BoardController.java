@@ -145,12 +145,17 @@ public class BoardController {
 	
 	// 유저 
 	@RequestMapping("/listQ.do")
-	public String listQ(QuestionBoardDTO qDto, Model model, String mid, HttpSession session) {		
-		List<QuestionBoardDTO> qList = service.getListQ(qDto);
-		model.addAttribute("qList", qList);
-						
+//	public String listQ(QuestionBoardDTO qDto, Model model, String mid, HttpSession session) {
+//		public String listQ(QuestionBoardDTO qDto, Model model) {	
+		public String listQ(String mid, QuestionBoardDTO qDto, Model model) {	
+//		List<QuestionBoardDTO> qList = service.getListQ(qDto);
+		QuestionBoardDTO dto = (QuestionBoardDTO)service.getListQ(mid);
+//		model.addAttribute("qList", qList);
+		model.addAttribute("dto", dto);
+//		model.addAttribute("mid", mid);
+		System.out.println("@@dto@@ = " + dto);
 		// serviceImpl에서 셋팅된 qDto
-		model.addAttribute("qDto", qDto);
+		// model.addAttribute("qDto", qDto);
 		
 		return "board/question_list";
 	}

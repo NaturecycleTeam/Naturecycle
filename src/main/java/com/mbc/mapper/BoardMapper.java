@@ -38,12 +38,12 @@ public interface BoardMapper {
 
 	void question(QuestionBoardDTO qDto);
 
-	List<QuestionBoardDTO> getListQ(QuestionBoardDTO qDto);
+//	List<QuestionBoardDTO> getListQ(QuestionBoardDTO qDto);
 
 	List<QuestionBoardDTO> getListQT(QuestionBoardDTO qDto);
 
+	QuestionBoardDTO getListQ(String mid);
 
 
-	
 	
 }
