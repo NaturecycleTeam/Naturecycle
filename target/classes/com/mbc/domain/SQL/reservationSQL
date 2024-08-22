@@ -1,0 +1,16 @@
+-- 예약 테이블
+drop table tbl_reservation;
+create table tbl_reservation(
+	rno int primary key auto_increment,
+	rid varchar(20),
+	date varchar(30),
+    time varchar(20) unique,
+    contents varchar(300),	
+    
+    foreign key(rid) references tbl_member(id)
+);
+
+INSERT INTO tbl_reservation (rid, date, time, contents)
+		VALUES ('test', '2024-08-22', '10:00', '테스트');
+
+select * from tbl_reservation;  

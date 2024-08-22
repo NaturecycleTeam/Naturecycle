@@ -8,8 +8,8 @@
 
  <div class='container w-50 shadow mt-5 p-5 rounded-3 border'>                                                               
  <h2>회원 정보</h2>                                                                        
- <form action='memberUpdate.do' method='post'>          
-    <input type='text' name='no' value='<%=dto.getId()%>'>                                 
+ <form action='myProfile.do' method='post'>          
+    <input type='text' name='id' value='<%=dto.getId()%>'>                                 
                                  
        <table class='table table-borderless'>
           <thead>
@@ -30,10 +30,6 @@
           <tr>                                                                                          
              <td>이름</td>                                                                             
              <td><input class='form-control' type='text' name='name' value='<%=dto.getName()%>' disabled /></td>                                                                                  
-          </tr>                                                                                        
-          <tr>                                                                                         
-             <td>나이</td>                                                                            
-             <td><input class='form-control' type='text' name='age' value='<%=dto.getAge()%>'/></td>   
           </tr>                                                                                        
           <tr>                                                                                         
              <td>이메일</td>                                                                          

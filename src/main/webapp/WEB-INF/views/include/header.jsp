@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>spring study</title>
+<title>NatureCycle</title>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -53,7 +53,7 @@ li>a {
 						<%-- <a class="nav-link"	href="<c:url value="myProfile.do?no=${sessionScope.loginDTO.no}"/>">내정보관리</a>&nbsp;&nbsp;&nbsp; --%> 
 						<a class="nav-link login" href="<c:url value="javascript:logout()"/>">로그아웃</a>&nbsp;&nbsp;&nbsp; 
 						<div class="dropdown">
-						  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">회원안내</button>
+						  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" >회원안내</button>
 						  <ul class="dropdown-menu">
 						    <li><a class="dropdown-item" href="#">신규가입 혜택</a></li>
    							<li><a class="dropdown-item" href="#">멤버쉽 혜택</a></li>
@@ -71,7 +71,10 @@ li>a {
 		<div class="container">
 			<ul class="navbar-nav w-100">
 				<li class="nav-item">
-					<a class="nav-link" href="<c:url value="userMainForm.do"/>" style="width:300px; color:green"><h2>NATURE CYCLE</h2></a>
+					<%-- <a class="nav-link" href="<c:url value="userMainForm.do"/>" style="width:300px; color:green"><h2>NATURE CYCLE</h2></a> --%>
+					<a class="nav-link" href="<c:url value="userMainForm.do"/>" >
+						<img src="https://naturcycle.com/wp-content/uploads/2019/08/Naturcycle_mobile-logo2.gif" srcset="https://naturcycle.com/wp-content/uploads/2019/08/Naturcycle_mobile-logo2.gif 1x" width="200" height="94" alt="Naturcycle Logo" data-retina_logo_url="" class="fusion-mobile-logo">
+					</a>
 				</li>
 				<li class="nav-item my-auto">
 					<form action="prodSearch.do" id="searchForm" method="post">
@@ -109,7 +112,7 @@ li>a {
 						<a class="nav-link shoppingcart" href="<c:url value="cartList.do"/>"><i class="fas fa-shopping-cart ps-1"></i></a>&nbsp;&nbsp;
 					</c:if>
 					
-					<a class="nav-link myinfo" href="<c:url value="myProfile.do"/>"><i class="fas fa-user-edit ps-2"></i></a>&nbsp;&nbsp;			
+					<a class="nav-link myinfo" href="<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>"><i class="fas fa-user-edit ps-2"></i></a>&nbsp;&nbsp;			
 				</li>
 							
 			</ul>
@@ -159,7 +162,10 @@ li>a {
 			      <a class="nav-link" href="UspecList.do?pSpec=NEW"><b>업사이클</b></a>
 			    </li>&nbsp;&nbsp;&nbsp; 
 			    <li class="nav-item">
-			      <a class="nav-link" href="#"><b>이벤트/혜택</b></a>
+			      <a class="nav-link" href="reservation.do"><b>예약하기</b></a>
+			    </li>&nbsp;&nbsp;&nbsp; 
+			    <li class="nav-item">
+			      <a class="nav-link" href="reservationInfo.do?rid=${sessionScope.loginDTO.id}"><b>예약확인하기</b></a>
 			    </li>&nbsp;&nbsp;&nbsp; 
 			    <li class="nav-item">
 			      <a class="nav-link" href="UspecList.do?pSpec=RECOMMEND"><b>캠페인</b></a>

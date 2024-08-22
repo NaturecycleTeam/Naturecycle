@@ -41,13 +41,13 @@
       </li> 
       <!-- ms-auto: 왼쪽마진 자동, me-auto:오른쪽마진 자동 -->
       <li class="nav-item ms-auto my-auto">
-      	<c:if test="${sessionScope.adLoginDTO.name != null}">
-        	<sapn class="text-white">${sessionScope.adLoginDTO.name}님 환영합니다!!</span>
+      	<c:if test="${sessionScope.adLoginDTO.ad_name != null}">
+        	<sapn class="text-white">${sessionScope.adLoginDTO.ad_name}님 환영합니다!!</span>
         </c:if>
-      	<c:if test="${sessionScope.adLoginDTO.name == null}">
+      	<c:if test="${sessionScope.adLoginDTO.ad_name == null}">
         	<a class="text-white" href="adminLogin.do">로그인</a>
         </c:if>
-      	<c:if test="${sessionScope.adLoginDTO.name != null}">
+      	<c:if test="${sessionScope.adLoginDTO.ad_name != null}">
         	<a class="text-white" href="adminLogout.do">로그아웃</a>
         </c:if>
       </li> 

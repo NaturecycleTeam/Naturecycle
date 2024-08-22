@@ -17,9 +17,9 @@
         <th>아이디</th>                                                                                     
         <th>비밀번호</th>                                                                                   
         <th>이름</th>                                                                                       
-        <th>나이</th>                                                                                       
         <th>이메일</th>                                                                                     
         <th>전화번호</th>                                                                                   
+        <th>포인트</th>                                                                                   
         <th>삭제</th>                                                                                       
       </tr>                                                                                                 
     </thead>                                                                                                
@@ -32,11 +32,11 @@
                  
      <td><%=dto.getPw()%></td>                                                                           
      <td><%=dto.getName()%></td>                                                                         
-     <td><%=dto.getAge()%></td>                                                                          
      <td><%=dto.getEmail()%></td>                                                                        
      <td><%=dto.getTel()%></td>                                                                          
+     <td><%=dto.getPoint()%></td>                                                                          
      <td><input type="button" class='btn btn-danger btn-sm' 
-           value="삭제" onclick="delMember(<%=dto.getId() %>)"/></td>                                                                 
+           value="삭제" onclick="delMember(<%=dto.getId()%>)"/></td>                                                                 
    </tr>                                                                                                
 <%}%>
 <!----------------------------- Ajax 리스트 START --------------------------->
@@ -79,9 +79,9 @@
         html+="       <th>아이디</th>         ";                                                                            
         html+="       <th>비밀번호</th>       ";                                                                            
         html+="       <th>이름</th>           ";                                                                            
-        html+="       <th>나이</th>           ";                                                                            
         html+="       <th>이메일</th>         ";                                                                            
         html+="       <th>전화번호</th>       ";                                
+        html+="       <th>포인트</th>       ";                                
         html+="     </tr>                     ";                                                                            
         html+="   </thead>                    ";                                                                            
         html+="   <tbody>                     ";
@@ -92,9 +92,9 @@
 	        html+="<td>"+obj.id+"</td>";   
 	        html+="<td>"+obj.pw+"</td>";   
 	        html+="<td>"+obj.name+"</td>";   
-	        html+="<td>"+obj.age+"</td>";   
 	        html+="<td>"+obj.email+"</td>";   
 	        html+="<td>"+obj.tel+"</td>";
+	        html+="<td>"+obj.point+"</td>";
 	        html+="</tr>";
         });
 	        html+="</tbody>";
@@ -103,8 +103,8 @@
         $("#ajaxList").html(html);
 	}
 
-	function delMember(no){      
-      location.href="memberDelete.do?no="+no;
+	function delMember(id){      
+      location.href="memberDelete.do?id="+id;
    }
 </script>
 

@@ -77,16 +77,17 @@ create table tbl_member(
     id varchar(20) unique not null, -- 외래키로 사용되기 때문에 unique 제약조건 추가
     pw varchar(200) not null,
     name varchar(50) not null,
-    tel varchar(20) not null,
     email varchar(50) not null,
+    tel varchar(20) not null,
     -- addr varchar(100) not null,
     zipcode varchar(5),
     road_addr varchar(100),
     detail_addr varchar(100),
-    rdate timestamp not null
+    rdate timestamp default now(),
+    point int default 0
 );
 
-insert into tbl_member values('test', '1234', '김길동', '1111', 'test@gmail.com', '7733', '서울', '강서구 화곡동', now());
+insert into tbl_member values('test', '1234', '김길동', 'test@gmail.com', '1111', '7733', '서울', '강서구 화곡동', now(), 1000);
 select * from tbl_member;
 commit;
 
@@ -139,4 +140,21 @@ create table tbl_reply(
 insert into tbl_reply(bid, r_contents, replyer)
 values(125, '댓글 테스트', '홍길동');
 
-select * from tbl_reply;                                 
+select * from tbl_reply;
+
+-- 예약 테이블
+drop table tbl_reservation;
+create table tbl_reservation(
+	rno int primary key auto_increment,
+	rid varchar(20),
+	date varchar(30),
+    time varchar(20) unique,
+    contents varchar(300),	
+    
+    foreign key(rid) references tbl_member(id)
+);
+
+INSERT INTO tbl_reservation (rid, date, time, contents)
+		VALUES ('test', '2024-08-22', '10:00', '테스트');
+
+select * from tbl_reservation;                              

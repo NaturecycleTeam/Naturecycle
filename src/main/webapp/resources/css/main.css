@@ -51,6 +51,7 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 	background : white;
 	color : black;
 	border-style : none;
+	margin-top: 3px;
 }
 
 
@@ -278,7 +279,7 @@ ul.footer_navbar-menu{
 /* nav-tabs : home 상단에 있는 tab menu  */
 ul{list-style:none;}
 a{text-decoration:none; color:#333;}
-.wrap{padding:15px; letter-spacing:-0.5px; display:flex; padding : 0 100px;}
+.wrap{padding:15px; letter-spacing:-0.5px; display:flex; padding : 0 100px; margin-bottom: 30px;}
 .tab_menu{position:relative;}
 .tab_menu .list{overflow:hidden;}
 .tab_menu .list li{float:left; margin-right:14px;}
