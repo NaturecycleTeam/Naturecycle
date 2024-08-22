@@ -1,6 +1,7 @@
 package com.mbc.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,45 +30,57 @@ public class ReservationController {
 //		
 //		return "member/reservationInfo";
 //	}
-	
+
 	@RequestMapping("reservationInfo.do")
 	public String reservationInfo(String rid, Model model) {
 		List<ReservationDTO> list = service.reservationInfo(rid);
 		model.addAttribute("list", list);
-		
+
 		return "member/reservationInfo";
 	}
-	
+
 	// 예약하기
 	@GetMapping("reservation.do")
 	public String reservation() {
-				
+
 		return "member/reservation";
 	}
-	
+
 	// 예약하기
 	@PostMapping("reservation.do")
 	public String reservationOk(ReservationDTO dto) {
 		service.reservation(dto);
-		
+
 		return "redirect:/";
 	}
-	
-	// 예약시간 중복체크
-	@RequestMapping("reservationTimeCheck.do")
+
+	@RequestMapping(value = "/reservationTimeCheck.do", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public String reservationTimeCheck(String date, String time, Model model) {
-		List<ReservationDTO> rDto = service.timeCheck(date, time);
-		if (rDto != null) {
-			model.addAttribute("rDto", rDto);
-		}
-		
-		return "member/reservation";
+	public List<String> reservationTimeCheck(@RequestParam("date") String date) {
+	    List<ReservationDTO> rDto = service.timeCheck(date);
+	    if (rDto != null) {
+	        return rDto.stream()
+	                   .map(ReservationDTO::getTime) // Adjust according to your DTO
+	                   .collect(Collectors.toList());
+	    }
+	    return List.of(); // Return an empty list if no unavailable times
 	}
-	
+
+
+//	// 예약시간 중복체크
+//	@RequestMapping("reservationTimeCheck.do")
+//	@ResponseBody
+//	public String reservationTimeCheck(String date, String time, Model model) {
+//		List<ReservationDTO> rDto = service.timeCheck(date, time);
+//		if (rDto != null) {
+//			model.addAttribute("rDto", rDto);
+//		}
+//		
+//		return "member/reservation";
+//	}
+
 	// model로 바인딩 해서 reservation.jsp로 넘겨
-	
-	
+
 //	
 //	@RequestMapping("reservationTimeCheck.do")
 //	public String reservationcheck(String date, Model model) {
@@ -76,8 +90,5 @@ public class ReservationController {
 //		
 //		return "member/reservation";
 //	}
-	
-	
-	
-	
+
 }

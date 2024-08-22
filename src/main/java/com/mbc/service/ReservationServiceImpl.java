@@ -32,10 +32,16 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<ReservationDTO> timeCheck(String date, String time) {
+	public List<ReservationDTO> timeCheck(String date) {
 		
-		return mapper.timeCheck(date, time);
+		return mapper.timeCheck(date);
 	}
+
+//	@Override
+//	public List<ReservationDTO> timeCheck(String date, String time) {
+//		
+//		return mapper.timeCheck(date, time);
+//	}
 
 	
 

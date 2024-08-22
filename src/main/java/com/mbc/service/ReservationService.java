@@ -12,7 +12,9 @@ public interface ReservationService {
 
 	void reservation(ReservationDTO dto);
 
-	List<ReservationDTO> timeCheck(String date, String time);
+//	List<ReservationDTO> timeCheck(String date, String time);
+
+	List<ReservationDTO> timeCheck(String date);
 
 //	List<ReservationDTO> reservationcheck(String date);
 
