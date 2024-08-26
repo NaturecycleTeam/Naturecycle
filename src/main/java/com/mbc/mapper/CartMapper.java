@@ -9,7 +9,7 @@ import com.mbc.domain.CartDTO;
 public interface CartMapper {
 	
 	// 카트 리스트
-	ArrayList<CartDTO> cartList(String id);
+	ArrayList<CartDTO> cartList(String cid_fk);
 
 	CartDTO checkCart(CartDTO dto);
 

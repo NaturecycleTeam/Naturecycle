@@ -11,7 +11,7 @@ public class ProductDTO {
 	private String pname;
 	private String pcategory_fk;
 	private String pcompany;
-	private String pwriter;
+	/* private String pwriter; */
 	private String pimage;
 	private int pqty;
 	private int price;
@@ -27,14 +27,13 @@ public class ProductDTO {
 	
 	public ProductDTO() {}
 
-	public ProductDTO(int pnum, String pname, String pcategory_fk, String pcompany, String pimage, String pwriter, int pqty, int price,
+	public ProductDTO(int pnum, String pname, String pcategory_fk, String pcompany, String pimage, int pqty, int price,
 			String pspec, String pcontent, int point, Date pinput_date, String keyword, String searchType) {
 		super();
 		this.pnum = pnum;
 		this.pname = pname;
 		this.pcategory_fk = pcategory_fk;
 		this.pcompany = pcompany;
-		this.pwriter = pwriter;
 		this.pimage = pimage;
 		this.pqty = pqty;
 		this.price = price;

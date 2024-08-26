@@ -23,11 +23,11 @@
 		</div>
 
 		<!-- 카카오 Api -->
-		<div class="kakao-btn" onclick="kakaoLogin()">
+		<!-- <div class="kakao-btn" onclick="kakaoLogin()">
 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=97ec31a3e4c1ac77764914d0f6bbf209&redirect_uri=http://localhost:8090/oauth&response_type=code" title="카카오톡으로 간편로그인">
 				<img src="resources/imgs/kakao_login_btn.png">			
 			</a>
-		</div>
+		</div> -->
 
 		<!-- <div class="kakao">
 			<a
@@ -52,7 +52,7 @@
 	</div>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	function kakaoLogin() {
 		$.ajax({
 			url : '/loginForm/getKakaoAuthUrl',
@@ -64,6 +64,6 @@
 			}
 		});
 	}
-</script>
+</script> -->
 
 <%@ include file="../include/footer.jsp"%>

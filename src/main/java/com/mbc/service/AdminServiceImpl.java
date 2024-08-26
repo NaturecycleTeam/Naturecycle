@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mbc.domain.AdminDTO;
 import com.mbc.domain.OrderDTO;
@@ -26,12 +27,13 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminMapper adMapper;
 	
-	@Autowired
-	private BCryptPasswordEncoder pwEncoder;
+	/*
+	 * @Autowired private BCryptPasswordEncoder pwEncoder;
+	 */
 	
 	// 관리자 로그인
 	@Override
-	public boolean adminLogin(AdminDTO dto, HttpServletRequest req) {
+	public boolean adminLogin(AdminDTO dto, HttpServletRequest req, RedirectAttributes redirectAttributes) {
 		HttpSession session = req.getSession();
 		
 		AdminDTO adLoginDTO = adMapper.adminLogin(dto);
@@ -48,9 +50,11 @@ public class AdminServiceImpl implements AdminService {
 				session.setAttribute("mode", "admin");
 				return true;
 			}else{ // 비번 불일치
+				redirectAttributes.addFlashAttribute("loginErr", "pwdErr");
 				return false;
 			}			
 		}
+		redirectAttributes.addFlashAttribute("loginErr", "idErr");
 		return false;
 	}
 	

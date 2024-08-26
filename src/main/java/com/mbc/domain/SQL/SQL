@@ -99,7 +99,6 @@ create table tbl_product(
     pname varchar(50) not null,    -- 상품명
     pcategory_fk varchar(20) not null, -- 카테고리
     pcompany varchar(50),     -- 제조회사
-    pwriter varchar(20),   -- 작가
     pimage varchar(50),        -- 상품이미지
     pqty int default 0,    -- 수량
     price int default 0, -- 가격
@@ -177,4 +176,21 @@ create table tbl_donation(
 );
 
 select * from tbl_donation;
+
+-- 주문 테이블
+drop table tbl_order;
+create table tbl_order(
+	order_num int AUTO_INCREMENT PRIMARY KEY,
+    pnum_fk int,
+    oid_fk varchar(20),
+    order_date datetime default now(),
+    qty_ordered int,
+    price_each int,
+    dlv_status varchar(20),
+    
+    foreign key(oid_fk) references tbl_member(id),
+	foreign key(pnum_fk) references tbl_product(pnum)    
+);
+
+select * from tbl_order;
                          

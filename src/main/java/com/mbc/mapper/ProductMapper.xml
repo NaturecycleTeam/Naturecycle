@@ -3,12 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mbc.mapper.ProductMapper">
-
+	<!-- 관리자 -->
 	<!-- 상품 등록 -->
 	<insert id="prodInsert" parameterType="Map">
 		INSERT INTO
-		tbl_product(pname,pcategory_fk,pcompany,pwriter,pimage,pqty,price,pspec,pcontent,point)
-		VALUES(#{pname},#{pcategory_fk},#{pcompany},#{pwriter},#{pimage},#{pqty},#{price},#{pspec},#{pcontent},#{point})
+		tbl_product(pname,pcategory_fk,pcompany,pimage,pqty,price,pspec,pcontent,point)
+		VALUES(#{pname},#{pcategory_fk},#{pcompany},#{pimage},#{pqty},#{price},#{pspec},#{pcontent},#{point})
 	</insert>
 
 	<!-- 상품 리스트 -->
@@ -48,11 +48,19 @@
 		pcontent = #{pcontent}, point = #{point}, pinput_date = now() WHERE
 		pnum = #{pnum}
 	</update>
-
+	
+	
+	
+	<!-- 유저 -->
+	<!-- 전체 상품 리스트 -->
+	<select id="uprodList" resultType="ProductDTO">
+		select * from tbl_product
+	</select>
+	
 	<!-- 카테고리 - 상품별 리스트 -->
 	<select id="getProdByCategory" resultType="ProductDTO">
 		SELECT * FROM
-		tbl_product WHERE pcategory_fk = #{code}
+		tbl_product WHERE pcategory_fk = #{cat_code}
 	</select>
 
 	<!-- 스펙 - 상품별 리스트 -->

@@ -24,9 +24,9 @@ public class CartServiceImpl implements CartService{
 	
 	// 카트 전체 리스트 가져오기
 	@Override
-	public ArrayList<CartDTO> cartList(String id) {
+	public ArrayList<CartDTO> cartList(String cid_fk) {
 		
-		return cartMapper.cartList(id);
+		return cartMapper.cartList(cid_fk);
 	}
 	
 	//// 카트 리스트 체크(상품이 있는지 없는지)

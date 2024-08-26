@@ -47,7 +47,7 @@
 
 <script>
 	function goCart(pnum){
-		document.prodForm.action="addCart.do?pnum="+pnum;
+		document.prodForm.action="addCart.do?pnum_fk="+pnum;
 		document.prodForm.submit();
 	}
 </script>

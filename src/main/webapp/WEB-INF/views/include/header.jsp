@@ -116,8 +116,8 @@ li>a {
 				  	<button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"><img src="resources/imgs/menu.png"></button>
 					<ul class="dropdown-menu">					
 						<c:if test="${categoryList.size() != 0}">
-						<div class="ms-3 mt-1">
-							<p6><b>도서</b></p6>
+						<div class="ms-3 mt-1 mb-3">
+							<p6><b>SHOPPING</b></p6>
 						</div>
 							<div class="d-flex">
 								<div class="mb-2">		
@@ -125,7 +125,7 @@ li>a {
 									<!-- <h class="mt-1 mb-2 ms-2"><b>도서</b></h>	 -->								
 									<c:forEach var="dto" items="${categoryList}">									
 										<c:set var="cnt" value="${cnt+1}" />
-										<li><a class="dropdown-item" href="UcatList.do?cat_num=${dto.cat_num}&code=${dto.code}&cat_name=${dto.cat_name}">${dto.cat_name}</a></li>							   		
+										<li><a class="dropdown-item" href="UcatList.do?cat_num=${dto.cat_num}&code=${dto.cat_code}&cat_name=${dto.cat_name}">${dto.cat_name}</a></li>							   		
 										<c:if test="${cnt%9==0}">
 									</div>
 								<div class="mb-2">
@@ -142,7 +142,7 @@ li>a {
 				</div>&nbsp;&nbsp;&nbsp; 	  
 			  
 			    <li class="nav-item">
-			      <a class="nav-link" href="UspecList.do?pSpec=STUDY"><b>제품</b></a>
+			      <a class="nav-link" href="UprodList.do"><b>제품</b></a>
 			    </li>&nbsp;&nbsp;&nbsp; 
 			   <li class="nav-item">
 			      <a class="nav-link" href="reservation.do"><b>리사이클</b></a>

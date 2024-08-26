@@ -18,7 +18,7 @@
 		    
 		    <!-- 로그인이 되어있을경우 -->
 		    <c:if test="${sessionScope.loginDTO.id != null}">
-		    	<a href="addCart.do?pnum=${pDto.pnum}&pqty=1&pspec=${pDto.pspec}" class="btn">장바구니 담기</a>
+		    	<a href="addCart.do?pnum_fk=${pDto.pnum}&pqty=1&pspec=${pDto.pspec}" class="btn">장바구니 담기</a>
 		    </c:if>
 		    <!-- 로그인이 안되어있을경우 -->
 		    <c:if test="${sessionScope.loginDTO.id == null}">

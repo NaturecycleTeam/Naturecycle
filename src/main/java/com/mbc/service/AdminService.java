@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mbc.domain.AdminDTO;
 import com.mbc.domain.OrderDTO;
@@ -18,7 +19,7 @@ import com.mbc.mapper.AdminMapper;
 public interface AdminService {
 	
 	// 관리자 로그인
-	boolean adminLogin(AdminDTO dto, HttpServletRequest req);
+	boolean adminLogin(AdminDTO dto, HttpServletRequest req, RedirectAttributes redirectAttributes);
 
 	
 	///////////// 관리자 홈화면 ///////////////////

@@ -27,12 +27,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:if test="${list==null}">
+			<c:if test="${slist==null}">
 				<tr>
 					<td>상품이 존재하지 않습니다!!</td>
 				</tr>
 			</c:if>
-			<c:if test="${list != null}">
+			<c:if test="${slist != null}">
 				<c:forEach var="dto" items="${list}">
 				<tr>
 					<td>${dto.pnum}</td>
@@ -44,7 +44,6 @@
 					<td>${dto.pname}</td>
 					<td>${dto.price}</td>
 					<td>${dto.pcompany}</td>
-					<td>${dto.pwriter}</td>
 					<td>
 						<!-- 로그인이 되어있을경우 -->
 					    <c:if test="${sessionScope.loginDTO.id != null}">

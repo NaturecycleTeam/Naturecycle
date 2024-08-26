@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,9 +46,9 @@ public class AdminController {
 	
 	// 관리자 로그인
 	@PostMapping("adminLogin.do")
-	public String adminLogin(String moveUrl, AdminDTO dto, HttpServletRequest req) {
+	public String adminLogin(String moveUrl, AdminDTO dto, HttpServletRequest req, RedirectAttributes redirectAttributes) {
 				
-		boolean result = adService.adminLogin(dto, req);
+		boolean result = adService.adminLogin(dto, req, redirectAttributes);
 				
 		if(!result) {
 			return "redirect:adminLogin.do";

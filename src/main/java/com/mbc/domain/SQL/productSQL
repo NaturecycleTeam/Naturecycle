@@ -5,7 +5,6 @@ create table product_info(
     pname varchar(50) not null,    -- 상품명
     pcategory_fk varchar(20) not null, -- 카테고리
     pcompany varchar(50),     -- 제조회사
-    pwriter varchar(20),   -- 작가
     pimage varchar(50),        -- 상품이미지
     pqty int default 0,    -- 수량
     price int default 0, -- 가격

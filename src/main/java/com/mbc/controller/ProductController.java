@@ -317,6 +317,15 @@ public class ProductController {
 		return "product/UprodView";
 	}
 	
+	// 전체 상품 리스트
+	@GetMapping("UprodList.do")
+	public String uprodList(Model model) {
+		List<ProductDTO> list = service.uprodList();
+		model.addAttribute("list", list);
+		
+		return "product/UprodList";
+	}
+	
 	
 	// 메뉴 카테고리 리스트 클릭 
 	@GetMapping("/UcatList.do")

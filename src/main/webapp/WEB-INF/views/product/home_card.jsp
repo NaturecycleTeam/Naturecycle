@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<div class="card">
+<%-- <div class="card">
 	<c:forEach var="dto" items="${list}">
 		<tr>
 			<td>${dto.bid}</td>
@@ -14,5 +14,5 @@
 			<td>${dto.reg_date}</td>
 		</tr>
 	</c:forEach>
-</div>
+</div> --%>
 

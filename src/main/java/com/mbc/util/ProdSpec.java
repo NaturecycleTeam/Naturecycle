@@ -2,7 +2,7 @@ package com.mbc.util;
 
 public enum ProdSpec {
 
-	NONE("일반"), STUDY("수능특강"), HIT("베스트셀러"), NEW("기대신간"), RECOMMEND("오늘의 책");
+	ECO("친환경"), ORGANIC("유기농"), REFILL("리필");
 	
 	private final String value;
 	

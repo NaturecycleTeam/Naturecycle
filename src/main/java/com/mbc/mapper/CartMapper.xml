@@ -13,12 +13,12 @@
 	
 	<!-- 카트 등록 -->
 	<insert id="addCart" parameterType="CartDTO">
-		INSERT INTO tbl_cart(cid_fk, pnum_fk, pqty) VALUES(#{id}, #{pnum}, #{pqty})
+		INSERT INTO tbl_cart(cid_fk, pnum_fk, pqty) VALUES(#{cid_fk}, #{pnum_fk}, #{pqty})
 	</insert>
 	
 	<!-- 카트 리스트 체크(상품이 있는지 없는지) -->
  	<select id="checkCart" resultType="CartDTO"> 
-		SELECT * FROM tbl_cart WHERE cid_fk = #{id} AND pnum_fk = #{pnum}
+		SELECT * FROM tbl_cart WHERE cid_fk = #{cid_fk} AND pnum_fk = #{pnum_fk}
 	</select>
 	
 	<!-- 카트 수정하기 OK -->

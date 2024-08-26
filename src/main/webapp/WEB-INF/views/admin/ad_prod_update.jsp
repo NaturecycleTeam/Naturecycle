@@ -38,10 +38,10 @@
                <td>출판사</td>
                <td><input type="text" class="form-control form-control-sm" name="pcompany" value="${pDto.pcompany}"/></td>
             </tr>
-             <tr>
+             <%-- <tr>
                <td>작가</td>
                <td><input type="text" class="form-control form-control-sm" name="pcompany" value="${pDto.pwriter}"/></td>
-            </tr>
+            </tr> --%>
             <tr>
                <td>상품이미지</td>
                <td>
