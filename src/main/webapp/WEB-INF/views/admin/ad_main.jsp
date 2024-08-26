@@ -4,9 +4,9 @@
 <%@include file="../include/ad_header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
-<main class="container d-flex">
+<main class="d-flex">
 	
-	<nav class="container w-25 pt-5">
+	<nav class="container p-5 me-5" style="width:20%; background:#eee;">
 			
 		<h5>[관리자 페이지]</h5>	
 		<ul class="navbar-nav">
@@ -28,25 +28,20 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 	              <li><a class="dropdown-item" href="memberList.do">회원 리스트</a></li>
-				  <li><a class="dropdown-item" href="#">예약관리</a></li>
+				  <li><a class="dropdown-item" href="reservationList.do">예약관리</a></li>
                   <li><a class="dropdown-item" href="listQT.do">문의사항</a></li>
               </ul>
             </li>
-			<!-- <li class="nav-item"><a class="nav-link" href="memberList.do">회원관리</a></li>
-			<li class="nav-item"><a class="nav-link" href="listQT.do">문의사항</a></li> -->
 		</ul>	
 	</nav>
-	<div class="w-75 mt-5">
+	<div class="pt-5 pb-5" style="width:80%;">
 		<div class="graph-container d-flex">
-					
-			<div class="figure m-2" style="width:190px; height:50px; background:#eee; text-align: center; line-height: 50px;">
-				오늘매출 : <b><span id="today_amount"></span></b></div>	
-			<div class="figure m-2" style="width:190px; height:50px; background:#eee; text-align:center; line-height: 50px;">
-				총매출 : <b><span id="tot_amount"></span></b></div> 	
+			<div class="figure m-2" style="width:190px; height:50px; background:#eee; text-align: center; line-height: 50px;">오늘매출 : <b><span id="today_amount"></span></b></div>	
+			<div class="figure m-2" style="width:190px; height:50px; background:#eee; text-align:center; line-height: 50px;">총매출 : <b><span id="tot_amount"></span></b></div> 	
 			<!-- <div class="figure m-2" style="width:190px; height:50px; background:#eee; text-align:center; line-height: 50px;">일일방문자</div> 	
 			<div class="figure m-2" style="width:190px; height:50px; background:#eee; text-align:center; line-height: 50px;">총방문자</div>  -->				
 		</div>
-		<div class="graph-container d-flex">			
+		<div class="graph-container d-flex pt-2">		
 			<div class="graph m-2" style="width:400px; height:200px; background:#eee; text-align:center;">
 				<canvas id="myChart"></canvas>
 			</div>
@@ -54,7 +49,7 @@
 				<canvas id="myChart2"></canvas>
 			</div>		
 		</div>
-		<div class="graph-container d-flex">
+		<div class="graph-container d-flex pt-2">
 			<div class="graph m-2" style="width:400px; height:200px; background:#eee; text-align:center;">
 				<canvas id="myChart3"></canvas>
 			</div>
@@ -64,21 +59,13 @@
 		</div>
 	</div>
 </main>
+</body>
+<%@include file="../include/ad_footer.jsp" %>
 
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script>  -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
-/* function getInputDayLabel() { 
-	var order_date = [];       
-	var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');        
-	var today = new Date(order_date).getDay();    
-	var todayLabel = week[today]; 
-	       
-	return todayLabel;	
-}  
-console.log(getInputDayLabel())	 */
-
 
 $(document).ready(function() {
 	
@@ -351,29 +338,65 @@ $(document).ready(function() {
 	});
 
 	
-	// 4번쨰 그래프 (미정)
-	const ctx4 = document.getElementById('myChart4').getContext('2d');
-	new Chart(ctx4, {
-		type: 'line',
-		data: {
-			labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-			datasets: [{
-				label: '# of Votes',
-				data: [12, 19, 3, 5, 2, 3],
-				backgroundColor: 'rgba(75, 192, 192, 0.2)',
-				borderColor: 'rgba(75, 192, 192, 1)',
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true
-				}
+	// 4번쨰 그래프 (월 기부금)
+	var order_month = [];
+	var monthly_purchase = [];
+	$.ajax({
+		url: "monthlyPurchase.do",
+		async: true,
+		type: "GET",
+		dataType: "json",
+		contentType: "application/json; charset=utf-8",
+		success: function(data) {
+			/* $.each(data, function() {
+				saleQty.push(this["tqty"]);
+				saleName.push(this["tname"]);
+			}); */
+			
+			for(let i = 0; i < data.length; i++){
+				order_month.push(data[i].date);
+				monthly_purchase.push(data[i].sum);
 			}
-		}
+			console.log(order_month);
+			console.log(monthly_purchase);
+			
+			const ctx1 = document.getElementById('myChart4').getContext('2d');
+			new Chart(ctx1, {
+	            type: 'bar', // 기본 차트 타입을 bar로 설정
+	            data: {
+	                labels: order_month,
+	                datasets: [{
+	                        label: '기부금 현황', // bar 차트의 레이블
+	                        data: monthly_purchase,
+	                        backgroundColor: 'lightblue',
+	                        borderColor: 'lightblue',
+	                        borderWidth: 1,
+	                        type: 'bar' // 이 데이터 세트는 bar 차트로 표시
+                    }]
+	            },
+	            options: {
+	                plugins: {
+	                    legend: {
+	                        display: true, // 전체 범례를 표시	                    
+	                    }
+	                },
+	                scales: {
+	                    x: {
+	                        beginAtZero: true
+	                    },
+	                    y: {
+	                        beginAtZero: true
+	                    }
+	                }
+	            }
+	        });
+	    },
+	    error: function(xhr, status, error) {
+	        console.error("AJAX 요청 에러:", error);
+	        alert("데이터를 불러오는 중 문제가 발생했습니다.");
+	    }
 	});
 });
 </script>
 
-<%@include file="../include/ad_footer.jsp" %>
+

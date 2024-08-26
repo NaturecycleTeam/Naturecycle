@@ -23,7 +23,7 @@
                     <option value="a200">주방가전</option> -->
                   	<c:if test="${categoryList != null}">
                   		<c:forEach var="cDto" items="${categoryList}">
-                    		<option value="${cDto.code}" ${(cDto.code == dto.pcategory_fk) ? 'selected':''}>${cDto.cat_name}[${cDto.code}]</option>
+                    		<option value="${cDto.cat_code}" ${(cDto.cat_code == dto.pcategory_fk) ? 'selected':''}>${cDto.cat_name}[${cDto.cat_code}]</option>
                     	</c:forEach>
                     </c:if>
                                         

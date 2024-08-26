@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -54,7 +53,7 @@ public class ProductController {
 		ProdSpec[] pdSpecs = ProdSpec.values();
 		model.addAttribute("pdSpecs", pdSpecs);
 		
-		return "admin/prod_input";
+		return "admin/ad_prod_input";
 	}
 	
 	// 상품 등록
@@ -178,7 +177,7 @@ public class ProductController {
 		List<ProductDTO> list = service.productList();
 		model.addAttribute("list", list);		
 		
-		return "admin/prod_list";
+		return "admin/ad_prod_list";
 	}
 	
 	/*
@@ -232,7 +231,7 @@ public class ProductController {
 		ProductDTO dto = service.getProduct(pnum);
 		model.addAttribute("pDto", dto);
 		
-		return "admin/prod_update";
+		return "admin/ad_prod_update";
 	}
 	
 	// 상품 수정

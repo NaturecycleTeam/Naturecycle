@@ -7,13 +7,13 @@
 	<!-- 상품 등록 -->
 	<insert id="prodInsert" parameterType="Map">
 		INSERT INTO
-		product_info(pname,pcategory_fk,pcompany,pwriter,pimage,pqty,price,pspec,pcontent,point)
+		tbl_product(pname,pcategory_fk,pcompany,pwriter,pimage,pqty,price,pspec,pcontent,point)
 		VALUES(#{pname},#{pcategory_fk},#{pcompany},#{pwriter},#{pimage},#{pqty},#{price},#{pspec},#{pcontent},#{point})
 	</insert>
 
 	<!-- 상품 리스트 -->
 	<select id="productList" resultType="productDTO">
-		SELECT * from product_info
+		SELECT * from tbl_product
 		ORDER BY pnum DESC		
 	</select>
 	
@@ -31,21 +31,20 @@
 
 	<!-- 상품 삭제 -->
 	<delete id="deleteProduct">
-		DELETE FROM product_info WHERE pnum = #{pnum}
+		DELETE FROM tbl_product WHERE pnum = #{pnum}
 	</delete>
 
 	<!-- 상품정보 가져오기 -->
 	<select id="getProduct" resultType="productDTO">
-		SELECT * from product_info
+		SELECT * from tbl_product
 		WHERE pnum = #{pnum}
 	</select>
 
 	<!-- 상품 수정 -->
 	<update id="updateProduct">
-		UPDATE product_info SET pname = #{pname},
+		UPDATE tbl_product SET pname = #{pname},
 		pcategory_fk = #{pcategory_fk}, pcompany = #{pcompany},
-		pimage =
-		#{pimage}, pqty = #{pqty}, price = #{price}, pspec = #{pspec},
+		pimage = #{pimage}, pqty = #{pqty}, price = #{price}, pspec = #{pspec},
 		pcontent = #{pcontent}, point = #{point}, pinput_date = now() WHERE
 		pnum = #{pnum}
 	</update>
@@ -53,12 +52,12 @@
 	<!-- 카테고리 - 상품별 리스트 -->
 	<select id="getProdByCategory" resultType="ProductDTO">
 		SELECT * FROM
-		product_info WHERE pcategory_fk = #{code}
+		tbl_product WHERE pcategory_fk = #{code}
 	</select>
 
 	<!-- 스펙 - 상품별 리스트 -->
 	<select id="getProdBySpec" resultType="ProductDTO">
-		SELECT * FROM product_info
+		SELECT * FROM tbl_product
 		WHERE pspec = #{pSpec}
 	</select>
 
@@ -98,7 +97,7 @@
 	</sql>
 
 	<select id="prodSearch" resultType="ProductDTO">
-		SELECT * FROM product_info
+		SELECT * FROM tbl_product
 		<include refid="criteria"></include>
 			
 	</select>

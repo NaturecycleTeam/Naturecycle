@@ -24,34 +24,11 @@
       <li class="nav-item">
         <a class="nav-link active" href="<c:url value="adminMain.do"/>">관리자HOME</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="catInput.do">카테고리 등록</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="catList.do">카테고리 리스트</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="prodInput.do">상품등록</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="prodList.do">상품리스트</a>
-      </li> 
-       <li class="nav-item">
-        <a class="nav-link" href="memberList.do">회원리스트</a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link" href="listQT.do">일대일문의사항</a>
-      </li>  -->
-      <!-- ms-auto: 왼쪽마진 자동, me-auto:오른쪽마진 자동 -->
+    
       <li class="nav-item ms-auto my-auto">
-<<<<<<< Updated upstream
-      	<c:if test="${sessionScope.adLoginDTO.ad_name != null}">
-        	<sapn class="text-white">${sessionScope.adLoginDTO.ad_name}님 환영합니다!!</span>
-=======
-      	<c:if test="${sessionScope.adLoginDTO.name != null}">
-        	<%-- <sapn class="text-white">${sessionScope.adLoginDTO.name}님 환영합니다!!</span> --%>
+
+      	<c:if test="${sessionScope.adLoginDTO.ad_name != null}">        	
         	<sapn class="text-white">관리자님 환영합니다!!</span>
->>>>>>> Stashed changes
         </c:if>
       	<c:if test="${sessionScope.adLoginDTO.ad_name == null}">
         	<a class="text-white" href="adminLogin.do">로그인</a>
@@ -65,7 +42,7 @@
   </div>
 </nav>
 </header>
-</body>
+
 
 
 

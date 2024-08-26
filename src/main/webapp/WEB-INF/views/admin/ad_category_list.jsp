@@ -24,7 +24,7 @@
 			<c:forEach var="dto" items="${categoryList}">			
 			<tr>
 				<td>${dto.cat_num}</td>
-				<td>${dto.code}</td>
+				<td>${dto.cat_code}</td>
 				<td>${dto.cat_name}</td>
 				<td><a href="catDelete.do?cat_num=${dto.cat_num}" class="btn btn-sm btn-outline-danger">삭제</a></td>
 			</tr>		

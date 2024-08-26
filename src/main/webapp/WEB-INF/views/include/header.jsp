@@ -73,31 +73,20 @@ li>a {
 				<li class="nav-item">
 					<%-- <a class="nav-link" href="<c:url value="userMainForm.do"/>" style="width:300px; color:green"><h2>NATURE CYCLE</h2></a> --%>
 					<a class="nav-link" href="<c:url value="userMainForm.do"/>" >
-						<img src="https://naturcycle.com/wp-content/uploads/2019/08/Naturcycle_mobile-logo2.gif" srcset="https://naturcycle.com/wp-content/uploads/2019/08/Naturcycle_mobile-logo2.gif 1x" width="200" height="94" alt="Naturcycle Logo" data-retina_logo_url="" class="fusion-mobile-logo">
+						<img src="resources/imgs/Naturecycle_logo.gif" alt="Naturcycle Logo">
 					</a>
 				</li>
 				<li class="nav-item my-auto">
 					<form action="prodSearch.do" id="searchForm" method="post">
 					<div class="container d-flex ms-5">			
-						<%-- <select class="form-select form-select-sm me-1" style="width: 100px"
-							name="searchType">
-							<option value="">선택</option>
-							<option value="S" ${dto.searchType == 'S' ? 'selected': ''}>책제목</option>
-							<option value="C" ${dto.searchType == 'C' ? 'selected': ''}>카테고리</option>
-							<option value="W" ${dto.searchType == 'W' ? 'selected': ''}>출판사</option>
-							<option value="SC" ${dto.searchType == 'SC' ? 'selected': ''}>책제목 + 카테고리</option>
-							<option value="SW" ${dto.searchType == 'SW' ? 'selected': ''}>책제목 + 출판사</option>
-							<option value="SCW" ${dto.searchType == 'SCW' ? 'selected': ''}>책제목 + 카테고리 + 출판사</option>
-						</select> --%>
 						<input type="hidden" id="searchType" name="searchType" value="S">
 						<input type="text" id="keyword" name="keyword" placeholder="검색어입력" class="form-control search" value="${pDto.keyword}">
 						<button class="search_btn" id="search_btn"><i class="fa fa-search"></i></button>
 					</div>
 					</form>
 				</li>				
-				<li class="nav-item w-100 d-flex" style="position: relative">
-					
-					<%-- <c:if test="${sessionScope.loginDTO.id == null}"> --%>
+				<li class="nav-item w-100 d-flex my-auto" style="position: relative">
+					<!-- 장바구니 수량  -->
 					<c:if test="${sessionScope.loginDTO.id == null}">
 						<p class="shoppingcart_count">0</p>
 						<a class="nav-link shoppingcart" href="javascript:alert('로그인이 필요합니다!!')"><i class="fas fa-shopping-cart ps-1"></i></a>&nbsp;&nbsp;				
@@ -156,19 +145,10 @@ li>a {
 			      <a class="nav-link" href="UspecList.do?pSpec=STUDY"><b>제품</b></a>
 			    </li>&nbsp;&nbsp;&nbsp; 
 			   <li class="nav-item">
-			      <a class="nav-link" href="UspecList.do?pSpec=HIT"><b>리사이클</b></a>
+			      <a class="nav-link" href="reservation.do"><b>리사이클</b></a>
 			    </li>&nbsp;&nbsp;&nbsp; 
 			    <li class="nav-item">
-			      <a class="nav-link" href="UspecList.do?pSpec=NEW"><b>업사이클</b></a>
-			    </li>&nbsp;&nbsp;&nbsp; 
-			    <li class="nav-item">
-			      <a class="nav-link" href="reservation.do"><b>예약하기</b></a>
-			    </li>&nbsp;&nbsp;&nbsp; 
-			    <li class="nav-item">
-			      <a class="nav-link" href="reservationInfo.do?rid=${sessionScope.loginDTO.id}"><b>예약확인하기</b></a>
-			    </li>&nbsp;&nbsp;&nbsp; 
-			    <li class="nav-item">
-			      <a class="nav-link" href="UspecList.do?pSpec=RECOMMEND"><b>캠페인</b></a>
+			      <a class="nav-link" href="donation.do?id=${sessionScope.loginDTO.id}"><b>캠페인</b></a>
 			    </li>
 		  </ul>
 	  </div>	

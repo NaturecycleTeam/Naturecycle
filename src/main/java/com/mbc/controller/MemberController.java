@@ -58,7 +58,7 @@ public class MemberController {
 	public String memberList(Model model, String id) {
 		List<MemberDTO> memberList = service.memberList(id);
 		model.addAttribute("list", memberList);
-		return "admin/memberList";
+		return "admin/ad_memberList";
 	}
 
 	// 회원 상세정보
@@ -66,7 +66,7 @@ public class MemberController {
 	public String memberInfo(String id, Model model) {
 		MemberDTO dto = service.memberInfo(id);
 		model.addAttribute("dto", dto);
-		return "admin/memberInfo";
+		return "admin/ad_memberInfo";
 	}
 
 	// 회원 수정
@@ -306,18 +306,17 @@ public class MemberController {
 
 	/////////////////// 마이 프로필 /////////////////////
 	// 마이 프로필 이동
-<<<<<<< Updated upstream
-	@RequestMapping("/myProfile.do")
-	public String myProfile(@RequestParam String id, Model model) {
-		MemberDTO dto = service.myProfile(id);
-		model.addAttribute("dto", dto);
-=======
+
+//	@RequestMapping("/myProfile.do")
+//	public String myProfile(@RequestParam String id, Model model) {
+//		MemberDTO dto = service.myProfile(id);
+//		model.addAttribute("dto", dto);
+
 	@GetMapping("/myProfile.do")
 	public String myProfile(String id, Model model) {
 		MemberDTO dto = service.myProfile(id);
 		model.addAttribute("dto", dto);
 		
->>>>>>> Stashed changes
 		return "member/myProfile";
 	}
 	

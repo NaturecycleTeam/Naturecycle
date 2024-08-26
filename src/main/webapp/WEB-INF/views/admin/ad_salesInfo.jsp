@@ -3,7 +3,6 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 
-<!-- <link rel="stylesheet" href="/css/admin/sales.css" > -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../include/ad_header.jsp" %>
@@ -40,11 +39,6 @@ section {
 	margin-bottom: 20px;
 }
  
-/* section.detail {
-	display: none;
-    max-height: 400px;
-    overflow-y: auto;
-} */
  
 .today {
 	display: flex;

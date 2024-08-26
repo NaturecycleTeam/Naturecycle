@@ -15,7 +15,7 @@
                     </c:if>
                   	<c:if test="${categoryList != null}">
                   		<c:forEach var="dto" items="${categoryList}">
-                    		<option value="${dto.code}">${dto.cat_name}[${dto.code}]</option>
+                    		<option value="${dto.cat_code}">${dto.cat_name}[${dto.cat_code}]</option>
                     	</c:forEach>
                     </c:if>
                                         

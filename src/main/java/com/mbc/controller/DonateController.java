@@ -28,22 +28,19 @@ public class DonateController {
 		return "donate/donation";
 	}
 
-	/*
-	 * // 기부하기
-	 * 
-	 * @PostMapping("donation.do") public String donation(MemberDTO dto) {
-	 * service.donation(dto); return "redirect:donation.do"; }
-	 */
-	// 기부하기
+
+	// 기부하기 @RequestParam("point") 
 	@PostMapping("donation.do")
-	public String donation(@RequestParam("point") int point, MemberDTO dto, Model model) {
+	public String donation(int point, MemberDTO dto, Model model) {
 		// Get the current points from the database
 		MemberDTO currentDto = service.donateInfo(dto.getId());
-		System.out.println("###dto.getId()" + dto.getId());
+//		System.out.println("###dto.getId()" + dto.getId());
 		int currentPoints = currentDto.getPoint();
 
 		// Get the donation points from the form
 		int donatedPoints = point;
+		
+		// 이 point와 날짜를 DB에 저장시켜야 함 (donation_point, donation_date) --> dto 추가를 oderDTO에 해줌
 
 		// Calculate the remaining points after donation
 		int remainingPoints = currentPoints - donatedPoints;

@@ -3,16 +3,7 @@
 <%@ include file="../include/ad_header.jsp"%>
 
 
-<%-- <aside class="question">
-	<ul>
-		<li><a href='<c:url value="myProfile.do"/>'>내 정보</a></li>
-		<li><a href='<c:url value="question.do"/>'>문의하기</a></li>
-		<li><a href='<c:url value="listQ.do?mid=${sessionScope.loginDTO.id}"/>'>문의사항 확인</a></li>
-		<li><a href='<c:url value="pwChange.do"/>'>비밀번호 변경</a></li>
-	</ul>
-</aside> --%>
-
-<div class="question_checkList">
+<div class="question_checkList container mt-3">
 	<h4>문의사항 확인</h4>
 
 	<table class="table">

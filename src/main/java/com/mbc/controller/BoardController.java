@@ -140,7 +140,8 @@ public class BoardController {
 	public String question(QuestionBoardDTO qDto, Model model, HttpSession session) {
 		service.question(qDto);		
 		
-		return "redirect:myProfile.do";
+		
+		return "redirect:listQ.do";
 	}
 	
 	// 유저 

@@ -39,7 +39,8 @@
            value="삭제" onclick="delMember(<%=dto.getId()%>)"/></td>                                                                 
    </tr>                                                                                                
 <%}%>
-<!----------------------------- Ajax 리스트 START --------------------------->
+
+	<!----------------------------- Ajax 리스트 START --------------------------->
 	<tr>
 		<td colspan="8">
 			<input type="button" value="Ajax회원리스트" class="btn btn-secondary" onclick="showList()"/>
@@ -50,14 +51,12 @@
 		</td>
 	</tr>
 
-<!------------------------------------------------------------------------->
-      <tr>                                                                                                    
-         <td colspan='8' class='text-center'><a href='memberRegister.do' 
-            class='btn btn-primary'>회원가입</a></td>
-      </tr>                                                                                               
+	<!------------------------------------------------------------------------->
+                                                                                           
     </tbody>                                                                                              
   </table>                                                                                                
 </div>
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>   
 <script>  
 	function showList(){

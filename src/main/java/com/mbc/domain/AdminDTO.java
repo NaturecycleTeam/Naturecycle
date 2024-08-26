@@ -10,4 +10,5 @@ public class AdminDTO {
 	private String ad_group;
 	private String ad_tel;
 	private String ad_email;
+	
 }

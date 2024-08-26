@@ -24,7 +24,7 @@
 	<hr>
 	<nav class="footer_navbar">		
 		<ul class="navbar-logo">
-			<li><img src="resources/imgs/footer_logo.png"></li>
+			<li><img src=""></li>
 		</ul>
 		<ul>		
 			<li class="footer_navbar-info"><a href="<c:url value="#"/>">회사명 : (주)서울문고</a>&nbsp;&nbsp;

@@ -27,7 +27,7 @@ public class CategoryController {
 	// 카테고리 등록 페이지 이동
 	@GetMapping("catInput.do")
 	public String categoryForm() {
-		return "admin/category_input";	
+		return "admin/ad_category_input";	
 	}
 		
 	// 카테고리 등록
@@ -43,7 +43,7 @@ public class CategoryController {
 	public String categoryList(Model model) {
 		List<CategoryDTO> categoryList = catService.categoryList();
 		model.addAttribute("categoryList", categoryList);
-		return "admin/category_list";
+		return "admin/ad_category_list";
 	}
 	
 	// 카테고리 삭제

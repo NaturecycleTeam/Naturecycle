@@ -4,15 +4,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp"%>
 
-<%-- <%
-	ReservationDTO rDto = (ReservationDTO)request.getAttribute("rDto");
-%> --%>
-
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
+<aside class="question">
+	<ul>
+		<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
+		<li><a href='<c:url value="reservationInfo.do?rid_fk=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
+		<li><a href='<c:url value="question.do"/>'>문의하기</a></li>
+		<li><a
+			href='<c:url value="listQ.do?mid=${sessionScope.loginDTO.id}"/>'>문의사항
+				확인</a></li>
+		<li><a href='<c:url value="pwChange.do"/>'>비밀번호 변경</a></li>
+	</ul>
+</aside>
 <div class="container w-50 mt-5 border shadow p-5">
 	<form action="reservation.do" method="post">
 		<h3 class="text-center">예약 시스템</h3>
@@ -26,15 +32,17 @@
 					<th>예약날짜</th>
 					<th>예약시간</th>
 					<th>요청사항</th>
+					<th>예약상태</th>					
 				</tr>			
 			</thead>
 			<tbody>
-				<c:forEach var="dto" items="${list}"> 
+				<c:forEach var="dto" items="${list}">
 					<tr>
-						<td>${dto.rid}</td>
+						<td>${dto.rid_fk}</td>
 						<td>${dto.date}</td>
 						<td>${dto.time}</td>
 						<td>${dto.contents}</td>
+						<td>${dto.reservationStatus.getValue()}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

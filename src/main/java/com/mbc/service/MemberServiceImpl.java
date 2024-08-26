@@ -186,7 +186,6 @@ public class MemberServiceImpl implements MemberService {
 		return n;
 	}
 
-<<<<<<< Updated upstream
 	// 카카오 로그인 api
 	@Override
 	public String getAccessToken(String authorize_code) {
@@ -325,11 +324,5 @@ public class MemberServiceImpl implements MemberService {
 		return view;
 
 	}
-=======
-	@Override
-	public MemberDTO myProfile(String id) {
-		
-		return mapper.myProfile(id);
-	}	
->>>>>>> Stashed changes
+
 }

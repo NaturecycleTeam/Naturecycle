@@ -32,11 +32,11 @@ public class CartController {
 	public String cartList(HttpSession session) {
 
 		MemberDTO dto = (MemberDTO) session.getAttribute("loginDTO");
-		String id = dto.getId();
+		String cid_kf = dto.getId();
 //		System.out.println("@@@@@@@@@dto : " + dto);
 //		System.out.println("@@@@@@@@@id : " + id);
 
-		ArrayList<CartDTO> cartList = cartService.cartList(id);
+		ArrayList<CartDTO> cartList = cartService.cartList(cid_kf);
 
 		for (CartDTO cdto : cartList) {
 			cdto.setTotal();
@@ -51,7 +51,7 @@ public class CartController {
 	@RequestMapping("addCart.do")
 	public String addCart(CartDTO dto, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("loginDTO");
-		dto.setId(mdto.getId());
+		dto.setCid_fk(mdto.getId());
 		CartDTO ckDTO = cartService.checkCart(dto);	
 		
 		
@@ -89,9 +89,9 @@ public class CartController {
 	public String checkOutFoam(Model model, HttpSession session, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("loginDTO");
-		String id = mdto.getId();
+		String cid_kf = mdto.getId();
 
-		MemberDTO mDto = memberService.memberInfo(id);
+		MemberDTO mDto = memberService.memberInfo(cid_kf);
 		model.addAttribute("mDto", mDto);
 		request.setAttribute("msg", "구매 페이지로 이동합니다.");
 
@@ -100,11 +100,11 @@ public class CartController {
 
 	// 구매리스트에서 삭제
 	@RequestMapping("deleteCheckout.do")
-	public String deleteCheckout(String pnum, String id, HttpSession session, HttpServletRequest request,
+	public String deleteCheckout(String pnum, String cid_kf, HttpSession session, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 
 		MemberDTO mdto = (MemberDTO) session.getAttribute("loginDTO");
-		id = mdto.getId();
+		cid_kf = mdto.getId();
 
 //		pnum = null;
 
@@ -121,9 +121,9 @@ public class CartController {
 				return "redirect:userMainForm.do";
 			}
 			// DB에서 리스트 삭제
-			cartService.deleteCheckout(Integer.valueOf(pnum), id); // cartDAO로 리턴
+			cartService.deleteCheckout(Integer.valueOf(pnum), cid_kf); // cartDAO로 리턴
 			// id를 세션으로 묵으면 결제하기페이지에서 소환가능
-			ArrayList<CartDTO> cartList = cartService.cartList(id);
+			ArrayList<CartDTO> cartList = cartService.cartList(cid_kf);
 			// 토탈 setTotal() 함수 호출하기 (합계구하는 함수)
 			for (CartDTO cDto : cartList) {
 				cDto.setTotal(); // 수량만큼 totPrice, totPoint 계산
@@ -139,11 +139,11 @@ public class CartController {
 		String[] numArr = pnums.split("/"); // 구분자로 값을 꺼내서 배열에 넣기 [5,7,6...]
 
 		for (int i = 0; i < numArr.length; i++) {
-			cartService.deleteCheckout(Integer.valueOf(numArr[i]), id); // cartDAO로 리턴
+			cartService.deleteCheckout(Integer.valueOf(numArr[i]), cid_kf); // cartDAO로 리턴
 		}
 
 		// id를 세션으로 묵으면 결제하기페이지에서 소환가능
-		ArrayList<CartDTO> cartList = cartService.cartList(id);
+		ArrayList<CartDTO> cartList = cartService.cartList(cid_kf);
 
 		// 토탈 setTotal() 함수 호출하기 (합계구하는 함수)
 		for (CartDTO cDto : cartList) {

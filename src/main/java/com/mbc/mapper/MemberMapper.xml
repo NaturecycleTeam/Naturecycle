@@ -35,7 +35,7 @@
 	<select id="myProfile" parameterType="String" resultType="MemberDTO">
 		SELECT * FROM tbl_member WHERE id = #{id}
 	</select>
-
+	
 	<update id="memberUpdate" parameterType="MemberDTO">
 		UPDATE tbl_member SET
 		age=#{age}, email=#{email}, tel=#{tel}
@@ -49,7 +49,8 @@
 
 	<!-- 멤버 로그인 -->
 	<select id="memberLogin" resultType="MemberDTO">
-		SELECT id, pw, name FROM
+		<!-- SELECT id, pw, name FROM -->
+		SELECT * FROM
 		tbl_member WHERE id = #{id}
 	</select>
 
@@ -67,7 +68,7 @@
 		UPDATE tbl_member SET pw=#{npw}
 		WHERE id = #{id} AND pw = #{pw}
 	</update>
-<<<<<<< Updated upstream
+
 
 	<!-- 카카오 로그인 api -->
 	<select id="findkakao" resultType="MemberDTO"
@@ -82,11 +83,5 @@
 		null, null, null, null, null, null, null, null, null, null)
 	</insert>
 
-=======
-	
-	<select id="myProfile" resultType="memberDTO">
-		SELECT * FROM tbl_member 
-		WHERE id = #{id}
-	</select>
->>>>>>> Stashed changes
+
 </mapper>
