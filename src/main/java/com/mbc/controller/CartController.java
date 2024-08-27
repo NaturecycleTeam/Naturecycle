@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mbc.domain.CartDTO;
@@ -27,6 +28,7 @@ public class CartController {
 	@Autowired
 	private MemberService memberService;
 
+	////////////////////// 장바구니 ////////////////////////
 	// 장바구니 이동
 	@GetMapping("cartList.do")
 	public String cartList(HttpSession session) {
@@ -84,6 +86,32 @@ public class CartController {
 		return "redirect:cartList.do";
 	}
 
+	// 장바구니 수량(실시간)
+	@GetMapping("shoppingCartCount.do")
+	@ResponseBody
+	public String shoppingCartCount(Model model, HttpSession session) {
+		// 세션에서 loginDTO 객체를 가져와서 id를 추출
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDTO");
+	    String cid_fk = dto != null ? dto.getId() : null;
+//		System.out.println("####장바구니 수량확인용 id : "+ cid_fk);
+		
+		String tot_pqty = "0";
+	    if (cid_fk != null) {
+	        // cid_fk가 null이 아닌 경우에만 장바구니 수량을 가져옵니다.
+	        tot_pqty = cartService.shoppingCartCount(cid_fk);
+//	        System.out.println("####장바구니 수량: " + tot_pqty);
+	    } else {
+	        System.out.println("####로그인된 사용자 정보가 없습니다.");
+	    }		
+		
+		return tot_pqty;
+	}	
+	
+	
+	
+	
+	
+	////////////////////// 구매페이지 ////////////////////////
 	// 구매페이지 이동
 	@GetMapping("checkout.do")
 	public String checkOutFoam(Model model, HttpSession session, HttpServletRequest request,

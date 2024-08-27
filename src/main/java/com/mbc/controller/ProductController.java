@@ -59,7 +59,7 @@ public class ProductController {
 	// 상품 등록
 	@PostMapping("prodRegisterOk.do")
 	public String insertProduct(MultipartHttpServletRequest mhr, 
-			HttpServletRequest request, RedirectAttributes redirectAttributes) throws IOException {	
+		HttpServletRequest request, RedirectAttributes redirectAttributes) throws IOException {	
 		
 		// 파일 저장할 경로
 		String repository = "resources/fileRepo";

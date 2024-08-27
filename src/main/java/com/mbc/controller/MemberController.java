@@ -1,6 +1,5 @@
 package com.mbc.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -313,9 +312,12 @@ public class MemberController {
 //		model.addAttribute("dto", dto);
 
 	@GetMapping("/myProfile.do")
-	public String myProfile(String id, Model model) {
-		MemberDTO dto = service.myProfile(id);
-		model.addAttribute("dto", dto);
+	public String myProfile(String id, Model model, HttpSession session) {
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDTO");
+		id = dto.getId();
+		
+		MemberDTO mDto = service.myProfile(id);
+		model.addAttribute("mDto", mDto);
 		
 		return "member/myProfile";
 	}

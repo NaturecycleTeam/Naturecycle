@@ -3,13 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 천단위로 변경 -->
+<style>
 
+.card-title a {
+	text-decoration: none; /* 밑줄 삭제 */
+	color : white;
+}
+</style>
 <!-- Card -->
 <div class="card">
 		
 			<!-- 사진업로드 -->
 		  <a href="UprodView.do?pnum=${pDto.pnum}&pSpec=${pDto.pspec}">
-			  <img class="card-img-top" src="<c:url value="/resources/fileRepo/${pDto.pimage}"/>" alt="Card image">
+			  <img class="card-img-top" src="<c:url value="/resources/fileRepo/${pDto.pimage}"/>" 
+			   class="img-fluid w-100" style="object-fit: cover; height: 100%;" alt="Card image">
 		  <!-- </a> -->
 		  <div class="card-body">
 		    <h6 class="card-title"><a href="UprodView.do?pnum=${pDto.pnum}&pSpec=${pDto.pspec}"><b>${pDto.pname}</b></a></h6>

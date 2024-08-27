@@ -67,7 +67,7 @@
 	<script type="text/javascript">
 		function question() {
 						
-				location.href = "<c:url value='question.do'/>";
+				location.href = "<c:url value='myQuestion.do'/>";
 		
 		}		
 		

@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css' rel='stylesheet'>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'></script>
-<link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" />
 
+<link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" />
 
 </head>
 
@@ -67,47 +67,57 @@ li>a {
 		</div>
 	</nav>
 	<nav class="navbar navbar-expand-sm sticky-top" style="z-index:2">
+	    <div class="container">
+	        <ul class="navbar-nav w-100">
+	            <!-- Logo and Home Link -->
+	            <li class="nav-item w-25">
+	                <a class="nav-link" href="<c:url value='/userMainForm.do'/>">
+	                    <span><h2 style="color:green">NATURE CYCLE</h2></span>
+	                    <!-- Optionally include logo -->
+	                    <!-- <img src="<c:url value='/resources/imgs/Naturecycle_logo.png'/>" alt="NatureCycle Logo"> -->
+	                </a>
+	            </li>
 	
-		<div class="container">
-			<ul class="navbar-nav w-100">
-				<li class="nav-item">
-					<%-- <a class="nav-link" href="<c:url value="userMainForm.do"/>" style="width:300px; color:green"><h2>NATURE CYCLE</h2></a> --%>
-					<a class="nav-link" href="<c:url value="userMainForm.do"/>" >
-						<img src="resources/imgs/Naturecycle_logo.gif" alt="Naturcycle Logo">
-					</a>
-				</li>
-				<li class="nav-item my-auto">
-					<form action="prodSearch.do" id="searchForm" method="post">
-					<div class="container d-flex ms-5">			
-						<input type="hidden" id="searchType" name="searchType" value="S">
-						<input type="text" id="keyword" name="keyword" placeholder="검색어입력" class="form-control search" value="${pDto.keyword}">
-						<button class="search_btn" id="search_btn"><i class="fa fa-search"></i></button>
-					</div>
-					</form>
-				</li>				
-				<li class="nav-item w-100 d-flex my-auto" style="position: relative">
-					<!-- 장바구니 수량  -->
-					<c:if test="${sessionScope.loginDTO.id == null}">
-						<p class="shoppingcart_count">0</p>
-						<a class="nav-link shoppingcart" href="javascript:alert('로그인이 필요합니다!!')"><i class="fas fa-shopping-cart ps-1"></i></a>&nbsp;&nbsp;				
-					</c:if>
-					<c:if test="${sessionScope.loginDTO.id != null}">
-						<c:if test="${sessionScope.cartPqty == null}">
-							<p class="shoppingcart_count">0</p>
-						</c:if>
-						<c:if test="${sessionScope.cartPqty != null}">
-							<p class="shoppingcart_count">${sessionScope.cartPqty}</p>
-						</c:if>
-						<a class="nav-link shoppingcart" href="<c:url value="cartList.do"/>"><i class="fas fa-shopping-cart ps-1"></i></a>&nbsp;&nbsp;
-					</c:if>
-					
-					<a class="nav-link myinfo" href="<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>"><i class="fas fa-user-edit ps-2"></i></a>&nbsp;&nbsp;			
-				</li>
-							
-			</ul>
-		</div>
+	            <!-- Search Form -->
+	            <li class="nav-item my-auto">
+	                <form action="<c:url value='/prodSearch.do'/>" id="searchForm" method="post" class="d-flex ms-5">
+	                    <input type="hidden" id="searchType" name="searchType" value="S">
+	                    <input type="text" id="keyword" name="keyword" placeholder="검색어 입력" class="form-control search" value="${pDto.keyword}">
+	                    <button class="search_btn" id="search_btn" type="submit">
+	                        <i class="fa fa-search"></i>
+	                    </button>
+	                </form>
+	            </li>
 	
-	</nav>	
+	            <!-- Cart and User Profile -->
+	            <li class="nav-item d-flex justify-content-end align-items-center" style="position: relative">
+	                <!-- Cart Logic -->
+	                <c:choose>
+	                    <c:when test="${sessionScope.loginDTO.id == null}">
+	                        <p class="shoppingcart_count">0</p>
+	                        <a class="nav-link shoppingcart" href="javascript:alert('로그인이 필요합니다!!')">
+	                            <i class="fas fa-shopping-cart ps-1"></i>
+	                        </a>
+	                    </c:when>
+	                    <c:otherwise>
+	                        <%-- <p class="shoppingcart_count">${sessionScope.cartPqty != null ? sessionScope.cartPqty : 0}</p> --%>
+	                        <p class="shoppingcart_count"><span id=tot_pqty></span></p>
+	                        <a class="nav-link shoppingcart" href="<c:url value='/cartList.do'/>">
+	                            <i class="fas fa-shopping-cart ps-1"></i>
+	                        </a>
+	                    </c:otherwise>
+	                </c:choose>
+	                
+	                <!-- User Profile Link -->
+	              <%--   <a class="nav-link myinfo" href="<c:url value='/myProfile.do?id=${sessionScope.loginDTO.id}'/>"> --%>
+	                <a class="nav-link myinfo" href="<c:url value='/myProfile.do?id=${sessionScope.loginDTO.id}'/>">
+	                    <i class="fas fa-user-edit ps-2"></i>
+	                </a>
+	            </li>
+	        </ul>
+	    </div>
+	</nav>
+
 	<nav class="navbar navbar-expand-sm">
 
 	 	<div class="container">
@@ -122,7 +132,7 @@ li>a {
 							<div class="d-flex">
 								<div class="mb-2">		
 									<c:set var="cnt" value="0" />								   
-									<!-- <h class="mt-1 mb-2 ms-2"><b>도서</b></h>	 -->								
+									<!-- <h class="mt-1 mb-2 ms-2"><b>도서</b></h> -->								
 									<c:forEach var="dto" items="${categoryList}">									
 										<c:set var="cnt" value="${cnt+1}" />
 										<li><a class="dropdown-item" href="UcatList.do?cat_num=${dto.cat_num}&code=${dto.cat_code}&cat_name=${dto.cat_name}">${dto.cat_name}</a></li>							   		
@@ -155,15 +165,35 @@ li>a {
 	</nav><hr>
 	
 	<script type="text/javascript">
-		function logout() {
-			location.href = "<c:url value='logout.do'/>";
-		}		
-	</script>	
+	    $(document).ready(function() {
+	        // 장바구니 카운트
+	        $.ajax({
+	            url: "shoppingCartCount.do",
+	            type: "GET",
+	            success: function(data) {
+	                if (data) {
+	                    $("#tot_pqty").text(data);
+	                    console.log("요청값@@@@ : ", data);
+	                } else {
+	                    $("#tot_pqty").text("Error");
+	                }
+	            },
+	            error: function(xhr, status, error) {
+	                console.error("AJAX 요청 에러:", error);
+	            }
+	        });
+	    });  // 여기에서 $(document).ready 함수가 닫힙니다.
+	    
+	    function logout() {
+	        location.href = "<c:url value='logout.do'/>";
+	    }        
+	</script>
+
 	
 
 	<main>
 		<!-- <div class="container mt-5 d-flex" id="main"> -->
-		<div class="wrap">
+		<div class="container d-flex justify-content-center">
 			<%-- <%@ include file="u_left.jsp"%> --%>
 
 			<!-- </header> -->

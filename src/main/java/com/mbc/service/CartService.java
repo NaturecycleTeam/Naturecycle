@@ -21,5 +21,7 @@ public interface CartService {
 
 	void deleteCheckout(int pnum, String id);
 
+	String shoppingCartCount(String cid_fk);
+
 	
 }

@@ -7,9 +7,9 @@
 	<ul>
 		<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
 		<li><a href='<c:url value="reservationInfo.do?rid=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
-		<li><a href='<c:url value="question.do"/>'>문의하기</a></li>
+		<li><a href='<c:url value="myQuestion.do"/>'>문의하기</a></li>
 		<li><a
-			href='<c:url value="listQ.do?mid=${sessionScope.loginDTO.id}"/>'>문의사항
+			href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항
 				확인</a></li>
 		<li><a href='<c:url value="pwChange.do"/>'>비밀번호 변경</a></li>
 	</ul>
@@ -28,14 +28,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%-- <c:forEach var="dto" items="${qList}"> --%>
+			<c:forEach var="dto" items="${questionPosts}">
 				<tr>
 					<td><c:out value="${dto.subject}" /></td>
 					<td>${dto.contents}</td>
 					<td>${dto.writer}</td>
 					<td>${dto.reg_date}</td>
 				</tr>
-			<%-- </c:forEach> --%>
+			</c:forEach>
 		</tbody>
 	</table>
 

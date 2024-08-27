@@ -54,8 +54,13 @@
 	
 	<interceptors>
 		<interceptor>
+			<mapping path="/donation.do" />
+			<mapping path="/register.do" />
+			<mapping path="/reservation.do" />
 			<mapping path="/myProfile.do" />
+			<mapping path="/reservationInfo.do" />		
 			<mapping path="/question.do" />
+			<mapping path="/myQuestionList.do" />
 			<mapping path="/view.do" />
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>		

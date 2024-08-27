@@ -29,7 +29,7 @@
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 	              <li><a class="dropdown-item" href="memberList.do">회원 리스트</a></li>
 				  <li><a class="dropdown-item" href="reservationList.do">예약관리</a></li>
-                  <li><a class="dropdown-item" href="listQT.do">문의사항</a></li>
+                  <li><a class="dropdown-item" href="adQuestionList.do">문의사항</a></li>
               </ul>
             </li>
 		</ul>	

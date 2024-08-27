@@ -21,4 +21,6 @@ public interface CartMapper {
 
 	void deleteCheckout(@Param("pnum") int pnum, @Param("id") String id);
 
+	String shoppingCartCount(String cid_fk);
+
 }

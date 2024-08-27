@@ -24,8 +24,10 @@ create table tbl_board(
     contents varchar(3000) not null,
     hit int default 0,
     writer varchar(50) not null,
-                     -- now() == oracle sysdate
-    reg_date datetime default now() not null
+    mid_fk varchar(20) not null,
+    reg_date datetime default now() not null,
+    
+    foreign key (mid_fk) references tbl_member(id)
 );
 
 select * from tbl_board;
