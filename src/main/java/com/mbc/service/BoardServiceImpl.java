@@ -80,21 +80,24 @@ public class BoardServiceImpl implements BoardService{
 	
 	// 일대일 게시글 불러오기(QUESTION)
 	@Override
-	public List<BoardDTO> getQuestionPosts(String mid_fk) {
+	public List<BoardDTO> getQuestionPosts(PageDTO pDto, String mid_fk) {
 		
-		return mapper.getPostsByType(mid_fk, "QUESTION");
+		return mapper.getPostsByType(pDto, mid_fk, "QUESTION");
 	}
-
+	
+	// 관리자 문의관리페이지 게시글 불러오기(QUESTION)
 	@Override
-	public List<BoardDTO> getListQT(BoardDTO dto) {
+	public List<BoardDTO> getListQT(PageDTO pDto) {
 		
-		return mapper.getListQT(dto);
+		return mapper.getListQT(pDto);
 	}
-
-
 	
-	
-
+	// 관리자 문의관리페이지 문의사항 상세보기
+	@Override
+	public BoardDTO questionView(int bid) {
+		
+		return mapper.questionView(bid);
+	}
 
 
 

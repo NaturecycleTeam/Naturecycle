@@ -9,7 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container  w-25 mt-5 border shadow p-5">
+<div class="container  w-50 mt-5 border shadow p-5">
 	<input type="hidden" name="moveUrl" value="${moveUrl}" size="80"/>
 	<h1>관리자 로그인</h1>
 	<form action="adminLogin.do" method="post">

@@ -102,14 +102,22 @@
 	
 	<!-- 일대일문의내역 확인하기 -->
 	<select id="getPostsByType" parameterType="map" resultType="BoardDTO">
-	    SELECT * FROM tbl_board 
-	    WHERE mid_fk = #{mid_fk} AND type = #{type}
-	    ORDER BY reg_date DESC
-	</select>
+            SELECT * FROM tbl_board 
+            WHERE mid_fk = #{mid_fk} AND type = #{type}
+            ORDER BY reg_date DESC
+        </select>
 
 	<!-- 관리자 문의관리페이지 문의내역 확인 -->
 	<select id="getListQT" resultType="boardDTO">
 		SELECT * FROM tbl_board
+		WHERE type = 'QUESTION'
+		ORDER BY reg_date DESC
+	</select>
+	
+	<!-- 관리자 문의관리페이지 문의내역 상세보기 -->
+	<select id="questionView" resultType="boardDTO">
+		SELECT * FROM tbl_board 
+		WHERE bid = #{bid} AND type = 'QUESTION'
 	</select>
 
 </mapper>

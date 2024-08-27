@@ -28,9 +28,13 @@ public interface BoardService {
 
 //	List<BoardDTO> myQuestionList(String mid_fk);
 	
-	List<BoardDTO> getQuestionPosts(String mid_fk);
+	List<BoardDTO> getQuestionPosts(PageDTO pDto, String mid_fk);
 
-	List<BoardDTO> getListQT(BoardDTO dto);
+//	List<BoardDTO> getQuestionPosts(PageDTO pDto);
+
+	List<BoardDTO> getListQT(PageDTO pDto);
+
+	BoardDTO questionView(int bid);
 
 
 	

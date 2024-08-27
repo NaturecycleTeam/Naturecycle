@@ -21,8 +21,9 @@
 	<table class="table">
 		<thead class="table-dark">
 			<tr>
+				<th>번호</th>
 				<th>제목</th>
-				<th>문의사항</th>
+				<th>조회수</th>
 				<th>글쓴이</th>
 				<th>등록일</th>
 			</tr>
@@ -30,8 +31,11 @@
 		<tbody>
 			<c:forEach var="dto" items="${questionPosts}">
 				<tr>
-					<td><c:out value="${dto.subject}" /></td>
-					<td>${dto.contents}</td>
+					<td>${dto.bid}</td>
+					<td><a href='<c:url value="view.do?bid=${dto.bid}
+						&viewPage=${pDto.viewPage}&searchType=${pDto.searchType}&keyword=${pDto.keyword}
+						&cntPerPage=${pDto.cntPerPage}"/>'><c:out value="${dto.subject}"/> <b>[${dto.replyCnt}]</b> </a></td>
+					<td>${dto.hit}</td>
 					<td>${dto.writer}</td>
 					<td>${dto.reg_date}</td>
 				</tr>

@@ -100,13 +100,12 @@ public class BoardController {
 	// 글상세보기
 	@GetMapping("/view.do")
 	public String view(int bid, PageDTO pDto, Model model, HttpSession session) {
-		 // 세션에서 로그인 ID를 가져옴
+		 // 세션에서 로그인 ID를 가져옴 (본인 조회 시 조회수 카운트 방지)
 	    MemberDTO loginDTO = (MemberDTO) session.getAttribute("loginDTO");
 	    if (loginDTO == null) {
 	        return "redirect:login.do"; // 로그인되지 않은 경우 리디렉션
 	    }
 	    String loginId = loginDTO.getId();
-		
 		
 		BoardDTO dto = service.view(bid, "v", loginId);
 		
@@ -185,14 +184,15 @@ public class BoardController {
 		// 게시글 타입 설정 (예: 일반 게시글)
 	    dto.setType("QUESTION");
 		
-		service.myQuestion(dto);		
+		service.myQuestion(dto);
+		
 		
 		return "redirect:myQuestionList.do";
 	}	
 	
-	// 일대일 문의내용 확인 
+	// 일대일 문의내용 게시글 불러오기
 	@RequestMapping("/myQuestionList.do")	
-	public String myQuestionList(String mid_fk, Model model, HttpSession session) {	
+	public String myQuestionList(PageDTO pDto, String mid_fk, Model model, HttpSession session) {	
 
         // 세션에서 로그인 ID를 가져옴
         if (mid_fk == null || mid_fk.isEmpty()) {
@@ -204,23 +204,45 @@ public class BoardController {
             }
         }
         
-		List<BoardDTO> questionPosts = service.getQuestionPosts(mid_fk);
+		List<BoardDTO> questionPosts = service.getQuestionPosts(pDto, mid_fk);
 		
 		model.addAttribute("questionPosts", questionPosts);
+		
+		// serviceImpl에서 셋팅된 pDto
+		model.addAttribute("pDto", pDto);
 	
 		return "board/myQuestionList";
 	}
 	
-	// 관리자 문의내용 관리
+	// 관리자 문의관리 페이지 게시글 불러오기
 	@RequestMapping("/adQuestionList.do")
-	public String listQT(BoardDTO dto, Model model) {		
-		List<BoardDTO> qList = service.getListQT(dto);
+	public String listQT(PageDTO pDto, Model model) {		
+		List<BoardDTO> qList = service.getListQT(pDto);
 		model.addAttribute("qList", qList);
 						
-		// serviceImpl에서 셋팅된 qDto
-		model.addAttribute("dto", dto);
+		// serviceImpl에서 셋팅된 pDto
+		model.addAttribute("pDto", pDto);
 		
 		return "admin/ad_question_list";
+	}
+	
+	// 관리자 일대일문의 상세페이지
+	@GetMapping("/questionView.do")
+	public String questionView(int bid, PageDTO pDto, Model model) {
+		 // 세션에서 로그인 ID를 가져옴
+//	    MemberDTO loginDTO = (MemberDTO) session.getAttribute("loginDTO");
+//	    if (loginDTO == null) {
+//	        return "redirect:login.do"; // 로그인되지 않은 경우 리디렉션
+//	    }
+//	    String loginId = loginDTO.getId();
+		
+		
+		BoardDTO dto = service.questionView(bid);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("pDto", pDto);
+		
+		return "admin/ad_questionView";
 	}
 	
 }

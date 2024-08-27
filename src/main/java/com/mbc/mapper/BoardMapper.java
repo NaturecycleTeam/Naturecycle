@@ -37,10 +37,12 @@ public interface BoardMapper {
 
 //	List<BoardDTO> myQuestionList(String mid_fk);
 
-	List<BoardDTO> getPostsByType(@Param("mid_fk") String mid_fk, @Param("type") String type);
+	List<BoardDTO> getPostsByType(PageDTO pDto, @Param("mid_fk") String mid_fk, @Param("type") String type);
 
-	List<BoardDTO> getListQT(BoardDTO dto);
+	List<BoardDTO> getListQT(PageDTO pDto);
 
-
+	BoardDTO questionView(int bid);
+	
+	
 	
 }

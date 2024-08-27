@@ -311,7 +311,8 @@ function buildCalendar() {
                 var reservationClass = '';
                 if (reservation.status === 'DONE') {
                     reservationClass = ' confirmed-reservation';
-                } else if (isPastDate) {
+                }
+                if (isPastDate) {
                     reservationClass = ' past-date';
                 }
                 
