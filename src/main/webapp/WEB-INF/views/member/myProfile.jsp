@@ -7,6 +7,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ include file="../include/header.jsp" %>  
 
+<!-- 주문 완료 메시지 알림 -->
+<c:if test="${requestScope.msg !=null}">
+	<script>
+		alert("${requestScope.msg}");
+	</script>
+</c:if>
+
 <aside class="question">
 	<ul>
 		<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
@@ -19,7 +26,7 @@
 	</ul>
 </aside>
 
-<div class="container w-50 mt-5 border shadow p-5">
+<div class="container w-50 mt-5 p-5">
 	<form action="memberUpdate.do" method="post" name="joinForm">
 		<h3 class="text-center">회원정보</h3>
 		<div class="mt-3 mb-2 text-end">

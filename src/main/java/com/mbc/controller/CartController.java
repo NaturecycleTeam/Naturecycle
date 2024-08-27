@@ -44,7 +44,8 @@ public class CartController {
 			cdto.setTotal();
 		}
 
-		session.setAttribute("dtos", cartList);		
+		session.setAttribute("dtos", cartList);	
+		System.out.println("cartList////// : " + cartList);
 
 		return "product/cart_list";
 	}
@@ -90,21 +91,23 @@ public class CartController {
 	@GetMapping("shoppingCartCount.do")
 	@ResponseBody
 	public String shoppingCartCount(Model model, HttpSession session) {
-		// 세션에서 loginDTO 객체를 가져와서 id를 추출
-		MemberDTO dto = (MemberDTO) session.getAttribute("loginDTO");
+		 // 세션에서 loginDTO 객체를 가져와서 id를 추출
+	    MemberDTO dto = (MemberDTO) session.getAttribute("loginDTO");
 	    String cid_fk = dto != null ? dto.getId() : null;
-//		System.out.println("####장바구니 수량확인용 id : "+ cid_fk);
-		
-		String tot_pqty = "0";
-	    if (cid_fk != null) {
-	        // cid_fk가 null이 아닌 경우에만 장바구니 수량을 가져옵니다.
-	        tot_pqty = cartService.shoppingCartCount(cid_fk);
-//	        System.out.println("####장바구니 수량: " + tot_pqty);
-	    } else {
+
+	    if (cid_fk == null) {
 	        System.out.println("####로그인된 사용자 정보가 없습니다.");
-	    }		
-		
-		return tot_pqty;
+	        return "0"; // 로그인 정보가 없으면 장바구니 수량을 0으로 설정
+	    }
+
+	    try {
+	        // 장바구니 수량을 가져옵니다.
+	        String tot_pqty = cartService.shoppingCartCount(cid_fk);
+	        return tot_pqty != null ? tot_pqty : "0"; // null 체크 후 0 반환
+	    } catch (Exception e) {
+	        e.printStackTrace(); // 예외 발생 시 로그 출력
+	        return "0"; // 예외 발생 시 장바구니 수량을 0으로 설정
+	    }
 	}	
 	
 	
@@ -115,7 +118,7 @@ public class CartController {
 	// 구매페이지 이동
 	@GetMapping("checkout.do")
 	public String checkOutFoam(Model model, HttpSession session, HttpServletRequest request,
-			RedirectAttributes redirectAttributes) {
+		RedirectAttributes redirectAttributes) {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("loginDTO");
 		String cid_kf = mdto.getId();
 
@@ -183,5 +186,6 @@ public class CartController {
 		redirectAttributes.addFlashAttribute("msg", "장바구니2 삭제 완료");
 		return "redirect:checkout.do";
 	}
+	
 
 }

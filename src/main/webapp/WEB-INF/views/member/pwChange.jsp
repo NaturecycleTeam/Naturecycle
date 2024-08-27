@@ -7,8 +7,8 @@
 <aside class="question">
 	<ul>
 		<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
-		<li><a href='<c:url value="reservationInfo.do?rid=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
-		<li><a href='<c:url value="myQuestion.do"/>'>문의하기</a></li>
+		<li><a href='<c:url value="reservationInfo.do?rid_fk=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
+		<li><a href='<c:url value="myQuestion.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의하기</a></li>
 		<li><a
 			href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항
 				확인</a></li>
@@ -16,20 +16,20 @@
 	</ul>
 </aside>
   
-   <div class="changePw">
-      <h4>비밀번호 변경</h4>
-      <input type="hidden" id="memberId" value="${sessionScope.loginDTO.id}"/>
-      <input type="hidden" value="${sessionScope.loginDTO.pw}"/>
-      
-      <p id="pwChkMsg" style="color:red; font-size:12px;"></p>
-      <input class="form-control mb-2" type="text" id="pw" name="pw" placeholder="현재비밀번호">
-      <input class="form-control mb-2" type="text" id="newPw" name="newPw" placeholder="새비밀번호">
-      <input class="form-control mb-2" type="text" id="confirmPw" name="confirmPw" placeholder="새비밀번호 확인">
-      
-      <div class="text-center">
-         <button id="pwChangeBtn" class="btn btn-sm btn-success">비밀번호 변경</button>
-      </div>
-   </div>                                       
+<div class="container w-50 mt-5 p-5 changePw">
+   <h4>비밀번호 변경</h4>
+   <input type="hidden" id="memberId" value="${sessionScope.loginDTO.id}"/>
+   <input type="hidden" value="${sessionScope.loginDTO.pw}"/>
+   
+   <p id="pwChkMsg" style="color:red; font-size:12px;"></p>
+   <input class="form-control mb-2" type="text" id="pw" name="pw" placeholder="현재비밀번호">
+   <input class="form-control mb-2" type="text" id="newPw" name="newPw" placeholder="새비밀번호">
+   <input class="form-control mb-2" type="text" id="confirmPw" name="confirmPw" placeholder="새비밀번호 확인">
+   
+   <div class="text-center">
+      <button id="pwChangeBtn" class="btn btn-sm btn-success">비밀번호 변경</button>
+   </div>
+</div>                                       
                                                         
 
 <script>

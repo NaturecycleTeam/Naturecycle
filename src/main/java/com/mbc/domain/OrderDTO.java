@@ -16,7 +16,8 @@ public class OrderDTO {
 	private Date order_date;
 	private int qty_ordered;
 	private int price_each;
-//	private Dlv_status dlv_status;
+	private int point;
+//	private Dlv_status dlv_status;  // 만들어야함
 	
 	
 //	private int order_num;

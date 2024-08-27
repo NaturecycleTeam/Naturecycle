@@ -79,17 +79,13 @@
 						<!-- 총액 합계 계산 -->
 						<c:set var="cartTotPrice" value="${cartTotPrice + dto.totPrice}"/>
 						<c:set var="cartTotPoint" value="${cartTotPoint + dto.totPoint}"/>
-						<c:set var="tot_pqty" value="${tot_pqty + dto.pqty}"/>
+						<%-- <c:set var="tot_pqty" value="${tot_pqty + dto.pqty}"/> --%>
 												
 					</tr>
 				</c:forEach>				
 			</c:if>
 		</tbody>
 		
-	<%
-		String cartPqty = String.valueOf(pageContext.getAttribute("tot_pqty"));
-		session.setAttribute("cartPqty", cartPqty);	
-	%>	
 	</table><br/>
 	<!-- 장바구니 총액표시 -->
 	<div class="text-end">
@@ -97,7 +93,7 @@
 		포인트 합계 : <fmt:formatNumber value="${cartTotPoint}"/> 포인트 <br>
 		
 	</div><br/>
-	<div class="text-center">
+	<div class="text-center mb-5">
 		<c:if test="${dtos.size() != 0}">	<!-- 장바구니 비어있지 않을때 구매하기 버튼 활성화 -->
 			<a href="checkout.do" class="btn btn-primary me-2">구매하기</a>
 		</c:if>

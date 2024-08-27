@@ -356,11 +356,4 @@ public class MemberController {
 		return chkResult;
 	}
 
-	
-	
-	/*
-	 * @GetMapping("calendar.do") public String calendarForm() { return
-	 * "/member/calendar"; }
-	 */
-
 }

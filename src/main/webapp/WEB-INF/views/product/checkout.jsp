@@ -46,10 +46,10 @@
 			<c:forEach var="dto" items="${sessionScope.dtos}">
 				<tr>
 					<td>
-						<input type="checkbox" name="chk" value="${dto.pnum}"/> <!-- 아래 체크박스들 -->
+						<input type="checkbox" name="chk" value="${dto.pnum_fk}"/> <!-- 아래 체크박스들 -->
 					</td>
 					<td>
-						<a href="UprodView.do?pnum=${dto.pnum}&pSpec=${dto.pspec}"> <!-- 클릭시 접속링크 -->
+						<a href="UprodView.do?pnum=${dto.pnum_fk}&pSpec=${dto.pspec}"> <!-- 클릭시 접속링크 -->
 						<img src="<c:url value="/resources/fileRepo/${dto.pimage}"/>"
 								width="60px"/>
 						</a>
@@ -66,7 +66,7 @@
 					</td>
 					<td>
 			    		<form action="deleteCheckout.do" method="post">
-							<input type="hidden" name="pnum" value="${dto.pnum}"/>
+							<input type="hidden" name="pnum_fk" value="${dto.pnum_fk}"/>
 							<input type="submit" value="삭제" class="btn btn-sm btn-danger"/>
 						</form>
 					</td>
@@ -227,8 +227,8 @@
          
 	<!--------------------------------------------------------------->
 	
-	<div class="text-center"><br>
-		<a href="#" class="btn btn-primary me-2">결제하기</a>
+	<div class="text-center mb-5"><br>
+		<a href="orderInsert.do" class="btn btn-primary me-2">결제하기</a>
 		<a href="<c:url value="/"/>" class="btn btn-outline-primary me-2">계속 쇼핑하기</a>
 	</div>
 </div>

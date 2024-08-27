@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ include file="../include/header.jsp"%>
+
+<c:if test="${requestScope.msg !=null}">
+	<script>
+		alert("${requestScope.msg}");
+	</script>
+</c:if>
 
 <div class="home_body w-100">
    <!-- 유효성검사 메인에서 뜨는 상품 인기,추천,신규상품이 없다면, 있다면 -->

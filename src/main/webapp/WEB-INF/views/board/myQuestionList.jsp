@@ -6,8 +6,8 @@
 <aside class="question">
 	<ul>
 		<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
-		<li><a href='<c:url value="reservationInfo.do?rid=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
-		<li><a href='<c:url value="myQuestion.do"/>'>문의하기</a></li>
+		<li><a href='<c:url value="reservationInfo.do?rid_fk=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
+		<li><a href='<c:url value="myQuestion.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의하기</a></li>
 		<li><a
 			href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항
 				확인</a></li>
@@ -15,7 +15,7 @@
 	</ul>
 </aside>
 
-<div class="question_checkList">
+<div class="container w-50 mt-5 p-5">
 	<h4>문의사항 확인</h4>
 
 	<table class="table">

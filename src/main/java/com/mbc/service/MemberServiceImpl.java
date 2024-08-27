@@ -133,7 +133,7 @@ public class MemberServiceImpl implements MemberService {
 
 			if (pwEncoder.matches(inputPw, dbPw) || inputPw.equals(dbPw)) { // 비번 일치
 				session.setAttribute("loginDTO", loginDTO);
-				session.setAttribute("mode", "user");
+//				session.setAttribute("mode", "user");
 				return true;
 			} else { // 비번 불일치
 				redirectAttributes.addFlashAttribute("loginErr", "pwdErr"); // 비번 불일치
@@ -151,7 +151,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-
 	public int findPw(String uid, String uEmail) {
 		// 임시 비밀번호 생성
 		String tempPw = UUID.randomUUID().toString().substring(0, 8);
