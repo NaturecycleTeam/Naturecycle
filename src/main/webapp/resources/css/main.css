@@ -16,9 +16,9 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 
 .nav-link:hover, .login:hover, .register:hover{color : orange;}
 
-.welcome {color : #9d4f00;}
+.welcome {color : #30622f;}
 
-.fa-user-circle{color : #9d4f00;}
+.fa-user-circle{color : #30622f;}
 
 
 /* header : 장바구니 */
@@ -30,7 +30,7 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 }
 
 .shoppingcart{
-	position: absolute; left: 280px; background:#808080; border-radius:100%; width:45px
+	position: absolute; left: 280px; background:#30622f; border-radius:100%; width:45px
 }
 
 .fa-shopping-cart {
@@ -51,13 +51,14 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 	background : white;
 	color : black;
 	border-style : none;
+	margin-top: 3px;
 }
 
 
 /* header : 마이프로필 */
 
 .myinfo{
-	position: absolute; left: 330px; background:#808080; border-radius:100%; width:45px;
+	position: absolute; left: 330px; background:#30622f; border-radius:100%; width:45px;
 }
 
 .fa-user-edit{
@@ -70,17 +71,17 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 
 /* header : 검색창 */
 .search {
-	border-right-style: none; border-color: #8f654e; width: 500px;
+	border-right-style: none; border-color: #30622f; width: 500px;
 	border-radius: 20px 0px 0px 20px;
 }
 
 .search_btn{
-	border-left-style: none; border-color: #8f654e; color: #8f654e;
+	border-left-style: none; border-color: #30622f; background:#30622f; color: white;
 	border-radius: 0px 30px 30px 0px;	
 }
 
 .search_btn:hover {
-	border-left-style: none; border-color: #8f654e; color: #8f654e;
+	border-left-style: none; border-color: #30622f; color: white;
 }
 
 /* ############################### */
@@ -217,13 +218,12 @@ ul.footer_navbar-menu{
 /* ############################### */
 /* card.jsp  */
 .home_card{
-	display : flex;
-	
+	display : flex;	
 }
 
 .card{
-	height:350px;
-	width:250px;
+	height:300px;
+	width:200px;
 	position : relative;
 	overflow:hidden;
 	margin-right : 25px;
@@ -244,7 +244,7 @@ ul.footer_navbar-menu{
     height: inherit;  
     background-color: rgba(0, 0, 0, .5);
     padding: 20px;
-    padding-top: 140px;
+    padding-top: 100px;
     color:white;
     position: absolute;    
     top: 0;
@@ -276,9 +276,9 @@ ul.footer_navbar-menu{
 
 /* ############################### */
 /* nav-tabs : home 상단에 있는 tab menu  */
-ul{list-style:none;}
+/* ul{list-style:none;}
 a{text-decoration:none; color:#333;}
-.wrap{padding:15px; letter-spacing:-0.5px; display:flex; padding : 0 100px;}
+.wrap{padding:15px; letter-spacing:-0.5px; display:flex; padding : 0 100px; margin-bottom: 30px;}
 .tab_menu{position:relative;}
 .tab_menu .list{overflow:hidden;}
 .tab_menu .list li{float:left; margin-right:14px;}
@@ -288,7 +288,7 @@ a{text-decoration:none; color:#333;}
 .tab_menu .cont_area .cont{display:none; background:#555; color:#fff; text-align:center; width:75%; height:50%; line-height:100px;}
 .home_body{padding : 0 100px;}
 
-#nature_day img {width:75%; height:50%}
+#nature_day img {width:75%; height:50%} */
 
 
 /* ############################### */

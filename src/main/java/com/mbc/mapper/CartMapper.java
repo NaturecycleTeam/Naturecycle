@@ -9,7 +9,7 @@ import com.mbc.domain.CartDTO;
 public interface CartMapper {
 	
 	// 카트 리스트
-	ArrayList<CartDTO> cartList(String id);
+	ArrayList<CartDTO> cartList(String cid_fk);
 
 	CartDTO checkCart(CartDTO dto);
 
@@ -20,5 +20,7 @@ public interface CartMapper {
 	void deleteCart(int cart_num);
 
 	void deleteCheckout(@Param("pnum") int pnum, @Param("id") String id);
+
+	String shoppingCartCount(String cid_fk);
 
 }

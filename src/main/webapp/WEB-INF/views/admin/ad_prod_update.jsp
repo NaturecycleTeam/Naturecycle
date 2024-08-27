@@ -23,7 +23,7 @@
                     <option value="a200">주방가전</option> -->
                   	<c:if test="${categoryList != null}">
                   		<c:forEach var="cDto" items="${categoryList}">
-                    		<option value="${cDto.code}" ${(cDto.code == dto.pcategory_fk) ? 'selected':''}>${cDto.cat_name}[${cDto.code}]</option>
+                    		<option value="${cDto.cat_code}" ${(cDto.cat_code == dto.pcategory_fk) ? 'selected':''}>${cDto.cat_name}[${cDto.cat_code}]</option>
                     	</c:forEach>
                     </c:if>
                                         
@@ -38,10 +38,10 @@
                <td>출판사</td>
                <td><input type="text" class="form-control form-control-sm" name="pcompany" value="${pDto.pcompany}"/></td>
             </tr>
-             <tr>
+             <%-- <tr>
                <td>작가</td>
                <td><input type="text" class="form-control form-control-sm" name="pcompany" value="${pDto.pwriter}"/></td>
-            </tr>
+            </tr> --%>
             <tr>
                <td>상품이미지</td>
                <td>

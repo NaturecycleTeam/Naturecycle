@@ -10,12 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mbc.domain.BoardDTO;
 import com.mbc.domain.MemberDTO;
 import com.mbc.domain.PageDTO;
-import com.mbc.domain.QuestionBoardDTO;
 import com.mbc.service.BoardService;
 
 @Controller
@@ -23,9 +21,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardService service;
-	
-	
-	
+		
 	
 	@GetMapping("/register.do")
 	public String register() {
@@ -34,8 +30,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("/register.do")
-	public String register(BoardDTO dto) {
-		
+	public String register(BoardDTO dto, HttpSession session) {
+
+		// 임의 게시글 123개 생성
 //		for(int i=1; i<=123; i++) {
 //			BoardDTO bDto = new BoardDTO();
 //			bDto.setSubject(i + "번째 제목입니다~~~");
@@ -44,6 +41,9 @@ public class BoardController {
 //			service.register(bDto);
 //		}
 		
+		// 게시글 타입 설정 (예: 일반 게시글)
+	    dto.setType("GENERAL");
+				
 		service.register(dto);
 		return "redirect:list.do";
 	}
@@ -70,21 +70,45 @@ public class BoardController {
 //		return "board/boardList";
 //	}
 	
+//	@RequestMapping("/list.do")
+//	public String list(PageDTO pDto, Model model) {		
+//		List<BoardDTO> list = service.getList(pDto);
+//		model.addAttribute("list", list);
+//						
+//		// serviceImpl에서 셋팅된 pDto
+//		model.addAttribute("pDto", pDto);
+//		
+//		return "board/boardList";
+//	}
+	
+	// 게시글 가져오기 (일반 게시글과 일대일문의 게시글 구분)
 	@RequestMapping("/list.do")
-	public String list(PageDTO pDto, Model model) {		
-		List<BoardDTO> list = service.getList(pDto);
-		model.addAttribute("list", list);
-						
-		// serviceImpl에서 셋팅된 pDto
-		model.addAttribute("pDto", pDto);
+	public String myBoardList(PageDTO pDto, Model model) {
 		
-		return "board/boardList";
-	}
+        // 일반 게시글 불러오기
+        List<BoardDTO> generalPosts = service.getList(pDto);
+
+        // 모델에 데이터 추가
+        model.addAttribute("generalPosts", generalPosts);
+        
+        // serviceImpl에서 셋팅된 pDto
+		model.addAttribute("pDto", pDto);
+
+        return "board/boardList";
+    }
 		
 	// 글상세보기
 	@GetMapping("/view.do")
-	public String view(int bid, PageDTO pDto, Model model) {
-		BoardDTO dto = service.view(bid, "v");
+	public String view(int bid, PageDTO pDto, Model model, HttpSession session) {
+		 // 세션에서 로그인 ID를 가져옴 (본인 조회 시 조회수 카운트 방지)
+	    MemberDTO loginDTO = (MemberDTO) session.getAttribute("loginDTO");
+	    if (loginDTO == null) {
+	        return "redirect:login.do"; // 로그인되지 않은 경우 리디렉션
+	    }
+	    String loginId = loginDTO.getId();
+		
+		BoardDTO dto = service.view(bid, "v", loginId);
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("pDto", pDto);
 		
@@ -95,7 +119,7 @@ public class BoardController {
 	@GetMapping("/modify.do")
 	public String modifyForm(PageDTO pDto, int bid, Model model) {
 		System.out.println("vp : " + pDto.getViewPage());
-		BoardDTO dto = service.view(bid, "m");
+		BoardDTO dto = service.view(bid, "m", "x");
 		model.addAttribute("dto", dto);
 		model.addAttribute("pDto", pDto);
 		System.out.println("vp2 : " + pDto.getViewPage());
@@ -103,6 +127,7 @@ public class BoardController {
 		return "board/modify";
 	}
 	
+	// 게시글 수정하기
 	@PostMapping("/modify.do")
 	public String modify(PageDTO pDto, BoardDTO dto, Model model) {
 		service.modify(dto);
@@ -128,43 +153,96 @@ public class BoardController {
 		return "redirect:list.do";
 	}
 	
-	//////////////////////  1:1 문의하기  //////////////////////////////
 	
-	@GetMapping("/question.do")	
+	
+	//////////////////////  1:1 문의하기  //////////////////////////////
+	// 일대일문의하기 페이지 이동
+	@GetMapping("/myQuestion.do")	
 	public String question() {		
 		
-		return "board/question";		
+		return "board/myQuestion";		
 	}	
 	
-	@PostMapping("/question.do")
-	public String question(QuestionBoardDTO qDto, Model model, HttpSession session) {
-		service.question(qDto);		
+	// 일대일 문의하기
+	@PostMapping("/myQuestion.do")
+	public String myQuestion(BoardDTO dto, HttpSession session) {
 		
-		return "redirect:myProfile.do";
+		 // 세션에서 사용자 정보를 가져올 때, loginDTO 객체에서 id를 가져옵니다.
+		MemberDTO loginDTO = (MemberDTO) session.getAttribute("loginDTO");
+
+	    // loginDTO가 null인지 확인
+	    if (loginDTO != null) {
+	        String mid_fk = loginDTO.getId();
+	        dto.setMid_fk(mid_fk);
+
+	        System.out.println("bbs_mid_fk : " + mid_fk);
+	    } else {
+	        // 로그인이 되어있지 않으면 로그인 페이지로 리디렉션
+	        return "redirect:login.do";
+	    }
+	    
+		// 게시글 타입 설정 (예: 일반 게시글)
+	    dto.setType("QUESTION");
+		
+		service.myQuestion(dto);
+		
+		
+		return "redirect:myQuestionList.do";
+	}	
+	
+	// 일대일 문의내용 게시글 불러오기
+	@RequestMapping("/myQuestionList.do")	
+	public String myQuestionList(PageDTO pDto, String mid_fk, Model model, HttpSession session) {	
+
+        // 세션에서 로그인 ID를 가져옴
+        if (mid_fk == null || mid_fk.isEmpty()) {
+            MemberDTO loginDTO = (MemberDTO) session.getAttribute("loginDTO");
+            if (loginDTO != null) {
+                mid_fk = loginDTO.getId();
+            } else {
+                return "redirect:login.do"; // 로그인이 되어 있지 않으면 로그인 페이지로 리디렉션
+            }
+        }
+        
+		List<BoardDTO> questionPosts = service.getQuestionPosts(pDto, mid_fk);
+		
+		model.addAttribute("questionPosts", questionPosts);
+		
+		// serviceImpl에서 셋팅된 pDto
+		model.addAttribute("pDto", pDto);
+	
+		return "board/myQuestionList";
 	}
 	
-	// 유저 
-	@RequestMapping("/listQ.do")
-	public String listQ(QuestionBoardDTO qDto, Model model, String mid, HttpSession session) {		
-		List<QuestionBoardDTO> qList = service.getListQ(qDto);
+	// 관리자 문의관리 페이지 게시글 불러오기
+	@RequestMapping("/adQuestionList.do")
+	public String listQT(PageDTO pDto, Model model) {		
+		List<BoardDTO> qList = service.getListQT(pDto);
 		model.addAttribute("qList", qList);
 						
-		// serviceImpl에서 셋팅된 qDto
-		model.addAttribute("qDto", qDto);
-		
-		return "board/question_list";
-	}
-	
-	// 관리자
-	@RequestMapping("/listQT.do")
-	public String listQT(QuestionBoardDTO qDto, Model model, String mid, HttpSession session) {		
-		List<QuestionBoardDTO> qList = service.getListQT(qDto);
-		model.addAttribute("qList", qList);
-						
-		// serviceImpl에서 셋팅된 qDto
-		model.addAttribute("qDto", qDto);
+		// serviceImpl에서 셋팅된 pDto
+		model.addAttribute("pDto", pDto);
 		
 		return "admin/ad_question_list";
+	}
+	
+	// 관리자 일대일문의 상세페이지
+	@GetMapping("/questionView.do")
+	public String questionView(int bid, PageDTO pDto, Model model) {
+		 // 세션에서 로그인 ID를 가져옴
+//	    MemberDTO loginDTO = (MemberDTO) session.getAttribute("loginDTO");
+//	    if (loginDTO == null) {
+//	        return "redirect:login.do"; // 로그인되지 않은 경우 리디렉션
+//	    }
+//	    String loginId = loginDTO.getId();
+		
+		
+		BoardDTO dto = service.questionView(bid);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("pDto", pDto);
+		
+		return "admin/ad_questionView";
 	}
 	
 }

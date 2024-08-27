@@ -20,7 +20,6 @@
 				<th>상품명</th>
 				<th>가격</th>
 				<th>출판사</th>
-				<th>작가</th>
 				<th>수량</th>
 				<th>수정/삭제</th>
 			</tr>
@@ -43,7 +42,6 @@
 					<td>${dto.pname}</td>
 					<td>${dto.price}</td>
 					<td>${dto.pcompany}</td>
-					<td>${dto.pwriter}</td>
 					<td>${dto.pqty}</td>
 					<td>
 						<a href="prodUpdate.do?pnum=${dto.pnum}" class="btn btn-sm btn-info">수정</a>

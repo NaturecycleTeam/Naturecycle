@@ -1,0 +1,15 @@
+drop table tbl_order;
+create table tbl_order(
+	order_num int AUTO_INCREMENT PRIMARY KEY,
+    pnum_fk int,
+    oid_fk varchar(20),
+    order_date datetime default now(),
+    qty_ordered int,
+    price_each int,
+    dlv_status varchar(20),
+    
+    foreign key(oid_fk) references tbl_member(id),
+	foreign key(pnum_fk) references tbl_product(pnum)    
+);
+
+select * from tbl_order;

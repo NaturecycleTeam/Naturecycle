@@ -6,9 +6,9 @@
 	
 	<form action="categoryOk.do" method="post" name="cat_inputForm">
 	  <div class="mb-3 mt-3">
-	    <label for="code" class="form-label">카테고리 코드</label>
-	    <input type="text" class="form-control" id="code" 
-	    	placeholder="카테고리 코드 입력하세요" name="code">
+	    <label for="cat_code" class="form-label">카테고리 코드</label>
+	    <input type="text" class="form-control" id="cat_code" 
+	    	placeholder="카테고리 코드 입력하세요" name="cat_code">
 	  </div>
 	  <div class="mb-3">
 	    <label for="cat_name" class="form-label">카테고리명</label>
@@ -24,7 +24,7 @@
 <script>
 	// 유효성 체크
 	function inputChk(){
-		if(!cat_inputForm.code.value){ //code값이 null이면 
+		if(!cat_inputForm.cat_code.value){ //code값이 null이면 
 			alert("카테고리 코드를 입력하세요!!!!");
 			cat_inputForm.code.focus();
 			return;

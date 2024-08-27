@@ -9,7 +9,7 @@
  <div class='container w-50 shadow mt-5 p-5 rounded-3 border'>                                                               
  <h2>회원 정보</h2>                                                                        
  <form action='memberUpdate.do' method='post'>          
-    <input type='text' name='id' value='<%=dto.getId()%>'>                                 
+    <%-- <input type='text' name='id' value='<%=dto.getId()%>'> --%>                                 
                                  
        <table class='table table-borderless'>
           <thead>
@@ -32,17 +32,17 @@
              <td><input class='form-control' type='text' name='name' value='<%=dto.getName()%>' disabled /></td>                                                                                  
           </tr>                                                                                        
           <tr>                                                                                         
-             <td>나이</td>                                                                            
-             <td><input class='form-control' type='text' name='age' value='<%=dto.getAge()%>'/></td>   
-          </tr>                                                                                        
-          <tr>                                                                                         
              <td>이메일</td>                                                                          
              <td><input class='form-control' type='text' name='email' value='<%=dto.getEmail()%>'/></td> 
           </tr>                                                                                          
           <tr>                                                                                        
              <td>전화번호</td>                                                                       
              <td><input class='form-control' type='text' name='tel' value='<%=dto.getTel()%>'/></td>  
-          </tr>                                                                                    
+          </tr>  
+          <tr>                                                                                        
+             <td>포인트</td>                                                                       
+             <td><input class='form-control' type='text' name='point' value='<%=dto.getPoint()%>'/></td>  
+          </tr>                                                                                  
           <tr>                                                                                     
              <td colspan='2' class='text-center p-4'>                                             
                 <input type='submit' value='수정하기' class='btn btn-primary'>                   

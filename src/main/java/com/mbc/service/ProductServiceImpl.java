@@ -73,9 +73,9 @@ public class ProductServiceImpl implements ProductService {
 	///////////////////////// 회원 모드 /////////////////////////
 	// 카테고리별 상품 리스트 
 	@Override
-	public ArrayList<ProductDTO> getProdByCategory(String code) {
+	public ArrayList<ProductDTO> getProdByCategory(String cat_code) {
 		
-		return mapper.getProdByCategory(code);
+		return mapper.getProdByCategory(cat_code);
 	}
 
 	// 스펙별 상품 리스트 
@@ -90,6 +90,13 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductDTO> prodSearch(ProductDTO pDto) {
 		
 		return mapper.prodSearch(pDto);
+	}
+	
+	// 전체 상품 리스트
+	@Override
+	public List<ProductDTO> uprodList() {
+		
+		return mapper.uprodList();
 	}
 
 }

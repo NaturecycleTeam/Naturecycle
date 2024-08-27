@@ -6,9 +6,12 @@
 
 <aside class="question">
 	<ul>
-		<%-- <li><a href='<c:url value="myProfile.do"/>'>내 정보</a></li> --%>
-		<li><a href='<c:url value="question.do"/>'>문의하기</a></li>
-		<li><a href='<c:url value="listQ.do?mid=${sessionScope.loginDTO.id}"/>'>문의사항 확인</a></li>
+		<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
+		<li><a href='<c:url value="reservationInfo.do?rid=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
+		<li><a href='<c:url value="myQuestion.do"/>'>문의하기</a></li>
+		<li><a
+			href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항
+				확인</a></li>
 		<li><a href='<c:url value="pwChange.do"/>'>비밀번호 변경</a></li>
 	</ul>
 </aside>

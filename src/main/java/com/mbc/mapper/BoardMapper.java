@@ -9,41 +9,40 @@ import com.mbc.domain.PageDTO;
 import com.mbc.domain.QuestionBoardDTO;
 
 public interface BoardMapper {
-	// 게시글 등록
+	
+	////////////////////// 전체게시판  //////////////////////////////
+
 	void insert(BoardDTO dto);
+
+//	List<BoardDTO> getList(PageDTO pDto, @Param("type") String type);
 	
-	// 게시글 리스트
-//	List<BoardDTO> getList();
 	List<BoardDTO> getList(PageDTO pDto);
-	
-	// 글 상세보기
+
 	BoardDTO view(int bid);
-	
-	// 글 수정하기
+
 	void update(BoardDTO dto);
 
-	// 글 삭제하기
 	void delete(int bid);
 	
-	// 조회수 추가하기
 	void hitAdd(int bid);
 	
-	// 전체 게시글 수
-//	int totalCnt();
-	// 검색이 있을 경우
 	int totalCnt(PageDTO pDto);
 	
 	// 댓글 추가/삭제시 replyCnt값 수정
 	void updateReplyCnt(@Param("bid") int bid, @Param("n") int n);
+	
+	
+	////////////////////// 일대일 문의하기 //////////////////////////////
+	void myQuestion(BoardDTO dto);
 
-	void question(QuestionBoardDTO qDto);
+//	List<BoardDTO> myQuestionList(String mid_fk);
 
-	List<QuestionBoardDTO> getListQ(QuestionBoardDTO qDto);
+	List<BoardDTO> getPostsByType(PageDTO pDto, @Param("mid_fk") String mid_fk, @Param("type") String type);
 
-	List<QuestionBoardDTO> getListQT(QuestionBoardDTO qDto);
+	List<BoardDTO> getListQT(PageDTO pDto);
 
-
-
+	BoardDTO questionView(int bid);
+	
 	
 	
 }

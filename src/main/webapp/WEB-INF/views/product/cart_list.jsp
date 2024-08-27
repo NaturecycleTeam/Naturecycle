@@ -47,7 +47,7 @@
 				<c:forEach var="dto" items="${dtos}"> 
 					<tr>
 						<td>
-							<a href="UprodView.do?pnum=${dto.pnum}&pSpec=${dto.pspec}"> <!-- 클릭시 접속링크 -->
+							<a href="UprodView.do?pnum=${dto.pnum_fk}&pSpec=${dto.pspec}"> <!-- 클릭시 접속링크 -->
 							<img src="<c:url value="/resources/fileRepo/${dto.pimage}"/>"
 									width="60px"/>
 							</a>

@@ -17,49 +17,48 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardMapper mapper;
 	
+
+	////////////////////// 전체게시판  //////////////////////////////
+	
+	// 게시글 등록
 	@Override
 	public void register(BoardDTO dto) {
-		mapper.insert(dto);
-		
+		mapper.insert(dto);		
 	}
-
+		
+	// 일반 게시글 불러오기(GENERAL)
 	@Override
-//	public List<BoardDTO> getList() {
-	@Transactional
 	public List<BoardDTO> getList(PageDTO pDto) {
 		
-//		int totalCnt = mapper.totalCnt();
-		
-		// 검색이 되는 경우
-		// xml에 searchType, keyword를 전달해야 WHERE절 처리가 됨
-		// 즉, pDto를 전달해야 함
 		int totalCnt = mapper.totalCnt(pDto);
 		
 		// setValue호출시 startIndex 셋팅됨 		
 		pDto.setValue(totalCnt, pDto.getCntPerPage());
 		
-//		List<BoardDTO> list = mapper.getList();
-//		return list;
-		
 		return mapper.getList(pDto);
 	}
-
+	
+	// 게시글 상세보기
 	@Override
-	public BoardDTO view(int bid, String mode) {
+	public BoardDTO view(int bid, String mode, String loginId) {
 		
-		if(mode.equals("v")) {
+		BoardDTO dto = mapper.view(bid);
+		
+		if(mode.equals("v") && !loginId.equals(dto.getMid_fk())) {
 			// 조회수 추가
 			mapper.hitAdd(bid);
 		}
 		
 		return mapper.view(bid);
 	}
-
+	
+	// 게시글 수정
 	@Override
 	public void modify(BoardDTO dto) {		
 		mapper.update(dto);
 	}
-
+	
+	// 게시글 삭제
 	@Override
 	public void remove(int bid) {
 		mapper.delete(bid);
@@ -69,22 +68,42 @@ public class BoardServiceImpl implements BoardService{
 	
 	//////////////////////1:1 문의하기  //////////////////////////////
 	@Override
-	public void question(QuestionBoardDTO qDto) {
-		mapper.question(qDto);		
+	public void myQuestion(BoardDTO dto) {
+		mapper.myQuestion(dto);		
 	}
 
-	@Override
-	public List<QuestionBoardDTO> getListQ(QuestionBoardDTO qDto) {
-		
-		return mapper.getListQ(qDto);
-	}
-
-	@Override
-	public List<QuestionBoardDTO> getListQT(QuestionBoardDTO qDto) {
-		
-		return mapper.getListQT(qDto);
-	}
-
+//	@Override
+//	public List<BoardDTO> myQuestionList(String mid_fk) {
+//		
+//		return mapper.myQuestionList(mid_fk);
+//	}
 	
+	// 일대일 게시글 불러오기(QUESTION)
+	@Override
+	public List<BoardDTO> getQuestionPosts(PageDTO pDto, String mid_fk) {
+		
+		return mapper.getPostsByType(pDto, mid_fk, "QUESTION");
+	}
+	
+	// 관리자 문의관리페이지 게시글 불러오기(QUESTION)
+	@Override
+	public List<BoardDTO> getListQT(PageDTO pDto) {
+		
+		return mapper.getListQT(pDto);
+	}
+	
+	// 관리자 문의관리페이지 문의사항 상세보기
+	@Override
+	public BoardDTO questionView(int bid) {
+		
+		return mapper.questionView(bid);
+	}
+
+
+
+
+
+
+
 	
 }

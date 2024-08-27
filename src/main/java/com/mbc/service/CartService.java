@@ -7,7 +7,7 @@ import com.mbc.domain.CartDTO;
 public interface CartService {
 	
 	// 카트 전체 리스트 가져오기
-	ArrayList<CartDTO> cartList(String id);
+	ArrayList<CartDTO> cartList(String cid_fk);
 	
 	//////  카트 추가  ///////
 	// 카트 리스트 체크(상품이 있는지 없는지)
@@ -20,6 +20,8 @@ public interface CartService {
 	void deleteCart(int cart_num);
 
 	void deleteCheckout(int pnum, String id);
+
+	String shoppingCartCount(String cid_fk);
 
 	
 }

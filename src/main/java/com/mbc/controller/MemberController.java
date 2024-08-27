@@ -1,6 +1,5 @@
 package com.mbc.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,10 +54,10 @@ public class MemberController {
 	////////////// 관리자 모드 ////////////////////
 	// 회원 리스트
 	@RequestMapping("memberList.do")
-	public String memberList(Model model) {
-		List<MemberDTO> memberList = service.memberList();
+	public String memberList(Model model, String id) {
+		List<MemberDTO> memberList = service.memberList(id);
 		model.addAttribute("list", memberList);
-		return "admin/memberList";
+		return "admin/ad_memberList";
 	}
 
 	// 회원 상세정보
@@ -66,7 +65,7 @@ public class MemberController {
 	public String memberInfo(String id, Model model) {
 		MemberDTO dto = service.memberInfo(id);
 		model.addAttribute("dto", dto);
-		return "admin/memberInfo";
+		return "admin/ad_memberInfo";
 	}
 
 	// 회원 수정
@@ -79,16 +78,16 @@ public class MemberController {
 
 	// 회원 삭제
 	@RequestMapping("memberDelete.do")
-	public String memberDelete(int no) {
-		service.memberRemove(no);
+	public String memberDelete(String id) {
+		service.memberRemove(id);
 
 		return "redirect:memberList.do";
 	}
 
 	// 회원리스트 Ajax요청 처리
 	@RequestMapping("memberAjaxList.do")
-	public @ResponseBody List<MemberDTO> memberAjaxList() {
-		List<MemberDTO> memberList = service.memberList();
+	public @ResponseBody List<MemberDTO> memberAjaxList(String id) {
+		List<MemberDTO> memberList = service.memberList(id);
 
 		return memberList;
 	}
@@ -155,6 +154,20 @@ public class MemberController {
 		return "yes";
 	}
 
+	// 회원 등록폼에서 전화번호 중복체크 ajax
+		@RequestMapping("/memberTelCheck.do")
+		@ResponseBody
+		public String memberTelCheck(@RequestParam("utel") String utel) {
+			MemberDTO dto = service.memberTelCheck(utel);
+
+	//아이디가 중복되거나 || 빈값이 넘어왔을때
+			if (dto != null || "".equals(utel.trim())) {
+				return "no";
+			}
+	// 아이디 중복이 아닌경우 (dto.uid가 null 인 경우)
+			return "yes"; // 바로 View -> 자바스크립트로 yes 데이터가 넘어감
+		}
+	
 	// 이메일 체크
 	@RequestMapping("memberEmailCheck.do")
 	@ResponseBody
@@ -220,6 +233,28 @@ public class MemberController {
 		}
 		return "redirect:userMainForm.do";
 	}
+	
+	// 카카오 로그인 기능이 처리되는 페이지
+	@RequestMapping("login/loginForm/getKakaoAuthUrl")
+	public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
+
+	    String reqUrl =
+	            "https://kauth.kakao.com/oauth/authorize?client_id=97ec31a3e4c1ac77764914d0f6bbf209&redirect_uri=http://localhost:8090/oauth&response_type=code";
+
+	    return reqUrl;
+	}
+	
+	@RequestMapping("/oauth")
+	public String oauthKakao(
+	        @RequestParam("code") String code
+	        , HttpSession session, RedirectAttributes rttr) throws Exception {
+
+		System.out.println("#######" + code);
+	    String access_Token = service.getAccessToken(code);
+	    String view = service.getuserinfo(access_Token, session, rttr);
+	    
+	    return view;
+	}
 
 	// 로그아웃
 	@GetMapping("logout.do")
@@ -270,8 +305,20 @@ public class MemberController {
 
 	/////////////////// 마이 프로필 /////////////////////
 	// 마이 프로필 이동
+
+//	@RequestMapping("/myProfile.do")
+//	public String myProfile(@RequestParam String id, Model model) {
+//		MemberDTO dto = service.myProfile(id);
+//		model.addAttribute("dto", dto);
+
 	@GetMapping("/myProfile.do")
-	public String myProfile() {
+	public String myProfile(String id, Model model, HttpSession session) {
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDTO");
+		id = dto.getId();
+		
+		MemberDTO mDto = service.myProfile(id);
+		model.addAttribute("mDto", mDto);
+		
 		return "member/myProfile";
 	}
 	

@@ -90,7 +90,7 @@
 			<c:out /> 를 사용하여 입력된 스크립트 태그를 브라우저가 인식하지 못하도록 문자열로 변환시켜 방어를 함
 			--%>
 		
-			<c:forEach var="dto" items="${list}">
+			<c:forEach var="dto" items="${generalPosts}">
 				<tr>
 					<td>${dto.bid}</td>
 					<td><a href='<c:url value="view.do?bid=${dto.bid}

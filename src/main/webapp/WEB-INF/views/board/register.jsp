@@ -6,6 +6,9 @@
 	<form action="register.do" method="post">
 		<h4>글쓰기</h4>
 		<input type="text" class="form-control" 
+			id="id" name="mid_fk" value="${sessionScope.loginDTO.id}" readonly/>
+			
+		<input type="text" class="form-control" 
 			id="subject" name="subject" placeholder="글제목" autofocus />
 			
 		<textarea class="form-control mt-2" name="contents" id="contents"

@@ -1,14 +1,18 @@
--- 관리자 테이블 admin(관리자 등록)
-drop table admin_info;
-create table admin_info(
-    id varchar(20) not null,
-    password varchar(20) not null,
-    name varchar(20) not null,
-    email varchar(50) not null    
+-- 관리자 테이블
+drop table ad_member;
+create table ad_member (
+	ad_id       varchar(20) primary key not null,
+    ad_password varchar(20),
+    ad_name     varchar(20),
+    ad_group    varchar(20),
+    ad_tel      varchar(20),
+    ad_email    varchar(50)
 );
 
-insert into admin_info values('test','test','정형인','test@gmail.com');
-select * from admin_info;
+insert into ad_member(ad_id, ad_password, ad_name, ad_group, ad_tel, ad_email)
+values('test', '1212', '1조', '운영자', '010-1234-4321', 'group1@test.com');
+
+select * from ad_member;
 commit;
 
 
@@ -20,8 +24,10 @@ create table tbl_board(
     contents varchar(3000) not null,
     hit int default 0,
     writer varchar(50) not null,
-                     -- now() == oracle sysdate
-    reg_date datetime default now() not null
+    mid_fk varchar(20) not null,
+    reg_date datetime default now() not null,
+    
+    foreign key (mid_fk) references tbl_member(id)
 );
 
 select * from tbl_board;
@@ -47,25 +53,26 @@ update tbl_board set replyCnt = (select count(rno)
 drop table tbl_cart;
 create table tbl_cart(
 	cart_num int primary key auto_increment,
-    id varchar(20),
-    pnum int,
+    cid_fk varchar(20),
+    pnum_fk int,
     pqty int default 1,
     indate timestamp default now(),
     
-    foreign key (id) references tbl_member(id),
-    foreign key (pnum) references product_info(pnum)
+    foreign key (cid_fk) references tbl_member(id),
+    foreign key (pnum_fk) references tbl_product(pnum)
  );
  
  select * from tbl_cart;
  
+ 
 -- 카테고리 테이블
-drop table category_info;
-create table category_info(
+drop table tbl_category;
+create table tbl_category(
     cat_num int auto_increment primary key,
-    code varchar(10) not null,
+    cat_code varchar(10) unique not null,
     cat_name varchar(20) not null
 );
-select * from category_info;
+select * from tbl_category;
 
 -- 회원 테이블
 drop table tbl_member;
@@ -73,35 +80,40 @@ create table tbl_member(
     id varchar(20) unique not null, -- 외래키로 사용되기 때문에 unique 제약조건 추가
     pw varchar(200) not null,
     name varchar(50) not null,
-    tel varchar(20) not null,
     email varchar(50) not null,
+    tel varchar(20) not null,
     -- addr varchar(100) not null,
     zipcode varchar(5),
     road_addr varchar(100),
     detail_addr varchar(100),
-    rdate timestamp not null
+    rdate timestamp default now(),
+    point int default 0
 );
 
-insert into tbl_member values('test', '1234', '김길동', '1111', 'test@gmail.com', '7733', '서울', '강서구 화곡동', now());
+insert into tbl_member values('test', '1234', '김길동', 'test@gmail.com', '1111', '7733', '서울', '강서구 화곡동', now(), 1000);
 select * from tbl_member;
 commit;
 
 -- 상품 테이블
-drop table product_info;
-create table product_info(
+drop table tbl_product;
+create table tbl_product(
     pnum int auto_increment primary key,    -- 상품번호
     pname varchar(50) not null,    -- 상품명
     pcategory_fk varchar(20) not null, -- 카테고리
     pcompany varchar(50),     -- 제조회사
-    pwriter varchar(20),   -- 작가
     pimage varchar(50),        -- 상품이미지
     pqty int default 0,    -- 수량
     price int default 0, -- 가격
     pspec varchar(20),         -- 상품사양(인기, 추천, 신규)
     pcontent varchar(300),     -- 상품상세  
     point int default 0,  -- 상품별 포인트
-    pinput_date datetime default now()   -- 등록 날짜
+    pinput_date datetime default now(),   -- 등록 날짜
+    
+    foreign key (pcategory_fk) references tbl_category(cat_code)
+    
 );
+
+select * from tbl_product;
 
 -- 일대일　문의　게시판 테이블
 select * from product_info;
@@ -135,4 +147,52 @@ create table tbl_reply(
 insert into tbl_reply(bid, r_contents, replyer)
 values(125, '댓글 테스트', '홍길동');
 
-select * from tbl_reply;                                 
+select * from tbl_reply;
+
+-- 예약 테이블
+drop table tbl_reservation;
+create table tbl_reservation(
+    rno INT AUTO_INCREMENT PRIMARY KEY,
+    rid_fk VARCHAR(20) NOT NULL,
+    date VARCHAR(20) NOT NULL,
+    time VARCHAR(20) NOT NULL,
+    contents VARCHAR(255),
+    -- reservationStatus ENUM('DONE', 'PENDING', 'CANCEL') DEFAULT 'PENDING',
+    reservationStatus VARCHAR(20),
+    
+    foreign key(rid_fk) references tbl_member(id)
+);
+
+select * from tbl_reservation;    
+
+
+-- 도네이션 테이블
+drop table tbl_donation;
+create table tbl_donation(
+	donation_num int AUTO_INCREMENT PRIMARY KEY,
+    did_fk VARCHAR(20) NOT NULL,
+    donation_amount int,
+    donation_date datetime default now(),
+    
+	foreign key(did_fk) references tbl_member(id)
+);
+
+select * from tbl_donation;
+
+-- 주문 테이블
+drop table tbl_order;
+create table tbl_order(
+	order_num int AUTO_INCREMENT PRIMARY KEY,
+    pnum_fk int,
+    oid_fk varchar(20),
+    order_date datetime default now(),
+    qty_ordered int,
+    price_each int,
+    dlv_status varchar(20),
+    
+    foreign key(oid_fk) references tbl_member(id),
+	foreign key(pnum_fk) references tbl_product(pnum)    
+);
+
+select * from tbl_order;
+                         

@@ -34,12 +34,14 @@ public interface ProductMapper {
 	
 	//////////////////////////// 회원 ///////////////////////////
 	// 카테고리별 상품 리스트 (뷰 단에 뿌리기)
-	ArrayList<ProductDTO> getProdByCategory(String code);
+	ArrayList<ProductDTO> getProdByCategory(String cat_code);
 	
 	// 스펙별 상품 리스트 (뷰 단에 뿌리기)
 	ArrayList<ProductDTO> getProdBySpec(String pSpec);
 
 	List<ProductDTO> prodSearch(ProductDTO pDto);
+
+	List<ProductDTO> uprodList();
 
 	
 	

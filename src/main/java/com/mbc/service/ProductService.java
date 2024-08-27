@@ -36,6 +36,8 @@ public interface ProductService {
 	ArrayList<ProductDTO> getProdBySpec(String pSpec);
 
 	List<ProductDTO> prodSearch(ProductDTO pDto);
+
+	List<ProductDTO> uprodList();
 	
 	// 상품 검색
 	

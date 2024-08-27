@@ -1,0 +1,16 @@
+-- 예약 테이블
+drop table tbl_reservation;
+create table tbl_reservation(
+    rno INT AUTO_INCREMENT PRIMARY KEY,
+    rid_fk VARCHAR(20) NOT NULL,
+    date VARCHAR(20) NOT NULL,
+    time VARCHAR(20) NOT NULL,
+    contents VARCHAR(255),
+    -- reservationStatus ENUM('DONE', 'PENDING', 'CANCEL') DEFAULT 'PENDING',
+    reservationStatus VARCHAR(20),
+    
+    foreign key(rid_fk) references tbl_member(id)
+);
+
+select * from tbl_reservation;
+

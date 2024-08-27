@@ -21,12 +21,14 @@ public class CartServiceImpl implements CartService{
 	
 	@Autowired	// 암호화를위해서 root 추가한 pwEncoder에서 주입받음
 	private BCryptPasswordEncoder pwEncoder;
+
 	
+	////////////////////// 장바구니 ////////////////////////
 	// 카트 전체 리스트 가져오기
 	@Override
-	public ArrayList<CartDTO> cartList(String id) {
+	public ArrayList<CartDTO> cartList(String cid_fk) {
 		
-		return cartMapper.cartList(id);
+		return cartMapper.cartList(cid_fk);
 	}
 	
 	//// 카트 리스트 체크(상품이 있는지 없는지)
@@ -52,12 +54,25 @@ public class CartServiceImpl implements CartService{
 	public void deleteCart(int cart_num) {
 		cartMapper.deleteCart(cart_num);		
 	}
+	
+	// 장바구니 총수량(실시간)
+	@Override
+	public String shoppingCartCount(String cid_fk) {
+		
+		return cartMapper.shoppingCartCount(cid_fk);
+	}
 
+	
+	
+	
+	////////////////////// 구매페이지 ////////////////////////	
 	@Override
 	public void deleteCheckout(int pnum, String id) {
 		cartMapper.deleteCheckout(pnum, id);
 		
 	}
+
+
 	
 	
 	

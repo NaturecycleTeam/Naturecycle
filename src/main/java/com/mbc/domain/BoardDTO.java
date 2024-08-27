@@ -1,6 +1,6 @@
 package com.mbc.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -12,56 +12,12 @@ public class BoardDTO {
 	private int hit;
 	private String writer;
 	private Date reg_date;
+	private String mid_fk;
+	
+	// 일반 게시글과 일대일문의 게시글 구분
+	private String type; // 일반 게시글: "GENERAL", 일대일 문의: "QUESTION"
+	
 	private int replyCnt; // 댓글 카운트
 	
-	//getter/setter	
-	public int getReplyCnt() {
-		return replyCnt;
-	}
-	public void setReplyCnt(int replyCnt) {
-		this.replyCnt = replyCnt;
-	}
-	public int getBid() {
-		return bid;
-	}
-	public void setBid(int bid) {
-		this.bid = bid;
-	}
-	public String getSubject() {
-		return subject;
-	}
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-	public String getContents() {
-		return contents;
-	}
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
-	public int getHit() {
-		return hit;
-	}
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-	public Date getReg_date() {
-		return reg_date;
-	}
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
-	}
-	@Override
-	public String toString() {
-		return "BoardDTO [bid=" + bid + ", subject=" + subject + ", contents=" + contents + ", hit=" + hit + ", writer="
-				+ writer + ", reg_date=" + reg_date + "]";
-	}
-	
-	
+
 }

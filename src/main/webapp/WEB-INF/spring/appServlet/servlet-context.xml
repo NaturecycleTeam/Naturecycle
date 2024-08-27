@@ -49,14 +49,18 @@
 	</beans:bean>
 	
 	<!-- 인터셉터 bean 설정 -->
-	<!-- 방법1 -->
 	
 	<beans:bean id="loginInterceptor" class="com.mbc.homepage.LoginInterceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
+			<mapping path="/donation.do" />
+			<mapping path="/register.do" />
+			<mapping path="/reservation.do" />
 			<mapping path="/myProfile.do" />
+			<mapping path="/reservationInfo.do" />		
 			<mapping path="/question.do" />
+			<mapping path="/myQuestionList.do" />
 			<mapping path="/view.do" />
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>		
@@ -71,6 +75,7 @@
 			<mapping path="/admin/prodInput.do" />
 			<mapping path="/admin/prodList.do" />
 			<mapping path="/admin/memberList.do" />
+			<mapping path="/admin/adminMain.do" />
 			<beans:ref bean="adminLoginInterceptor" />
 		</interceptor>		
 	</interceptors>

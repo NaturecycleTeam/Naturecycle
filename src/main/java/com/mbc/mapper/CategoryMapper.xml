@@ -6,18 +6,18 @@
 	
 	<!-- 카테고리 등록 -->
 	<insert id="categoryInsert">
-		INSERT INTO category_info
-		VALUES(#{cat_num}, #{code}, #{cat_name})
+		INSERT INTO tbl_category
+		VALUES(#{cat_num}, #{cat_code}, #{cat_name})
 	</insert>
 	
 	<!-- 카테고리 전체 리스트 -->
 	<select id="categoryList" resultType="categoryDTO">
-		select * from category_info order by cat_num ASC
+		select * from tbl_category order by cat_num ASC
 	</select>
 	
 	<!-- 카테고리 삭제 -->
 	<delete id="categoryDelete">
-		DELETE FROM category_info WHERE cat_num = #{cat_num}
+		DELETE FROM tbl_category WHERE cat_num = #{cat_num}
 	</delete>
 
 </mapper>

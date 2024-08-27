@@ -5,14 +5,15 @@
  <configuration>
  	<typeAliases>
  		<typeAlias type="com.mbc.domain.AdminDTO" alias="adminDTO"/>
- 		<typeAlias type="com.mbc.domain.DataDTO" alias="dataDTO"/>
+ 		<typeAlias type="com.mbc.domain.OrderDTO" alias="orderDTO"/>
  		<typeAlias type="com.mbc.domain.CategoryDTO" alias="categoryDTO"/>
  		<typeAlias type="com.mbc.domain.ProductDTO" alias="productDTO"/>
  		<typeAlias type="com.mbc.domain.BoardDTO" alias="boardDTO"/>
- 		<typeAlias type="com.mbc.domain.QuestionBoardDTO" alias="questionBoardDTO"/>
+ 		<!-- <typeAlias type="com.mbc.domain.QuestionBoardDTO" alias="questionBoardDTO"/> -->
  		<typeAlias type="com.mbc.domain.MemberDTO" alias="memberDTO"/>
  		<typeAlias type="com.mbc.domain.ReplyDTO" alias="replyDTO"/>
  		<typeAlias type="com.mbc.domain.CartDTO" alias="cartDTO"/>
+ 		<typeAlias type="com.mbc.domain.ReservationDTO" alias="reservationDTO"/>
  	</typeAliases>
  </configuration>
   

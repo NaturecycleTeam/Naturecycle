@@ -15,7 +15,7 @@
                     </c:if>
                   	<c:if test="${categoryList != null}">
                   		<c:forEach var="dto" items="${categoryList}">
-                    		<option value="${dto.code}">${dto.cat_name}[${dto.code}]</option>
+                    		<option value="${dto.cat_code}">${dto.cat_name}[${dto.cat_code}]</option>
                     	</c:forEach>
                     </c:if>
                                         
@@ -27,12 +27,8 @@
                <td><input type="text" class="form-control form-control-sm" name="pname"/></td>
             </tr>
             <tr>
-               <td>출판사</td>
+               <td>제조사</td>
                <td><input type="text" class="form-control form-control-sm" name="pcompany"/></td>
-            </tr>
-            <tr>
-               <td>작가</td>
-               <td><input type="text" class="form-control form-control-sm" name="pwriter"/></td>
             </tr>
             <tr>
                <td>상품이미지</td>

@@ -2,13 +2,13 @@
 drop table tbl_cart;
 create table tbl_cart(
 	cart_num int primary key auto_increment,
-    id varchar(20),
-    pnum int,
+    cid_fk varchar(20),
+    pnum_fk int,
     pqty int default 1,
     indate timestamp default now(),
     
-    foreign key (id) references tbl_member(id),
-    foreign key (pnum) references product_info(pnum)
+    foreign key (cid_fk) references tbl_member(id),
+    foreign key (pnum_fk) references tbl_product(pnum)
  );
  
  select * from tbl_cart;
