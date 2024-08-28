@@ -42,7 +42,7 @@ public class SalesController {
 		List<OrderDTO> orderDto = service.salesInfo(pDto);
 		
 		model.addAttribute("orderDto", orderDto);
-//			System.out.println("###orderDto#### : " + orderDto);
+		System.out.println("###orderDto#### : " + orderDto);
 		
 		// serviceImpl에서 셋팅된 pDto
 		model.addAttribute("pDto", pDto);
@@ -55,6 +55,7 @@ public class SalesController {
 	@ResponseBody
 	public List<OrderDTO> todayAjaxList(){
 		List<OrderDTO> todayList = service.todayAjaxList();
+		System.out.println("todayAjsxList : " + todayList);
 		
 		return todayList;
 	}
@@ -88,7 +89,7 @@ public class SalesController {
 			JsonObject object = new JsonObject();
 			
 			String date = sd.format(dto.getOrder_date());						
-			String sum = dto.getPurchase_amount();
+			String sum = dto.getPURCHASE_AMOUNT();
 //				System.out.println(sum);
 			
 			object.addProperty("date", date);

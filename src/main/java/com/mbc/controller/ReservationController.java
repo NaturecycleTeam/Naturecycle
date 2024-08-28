@@ -127,6 +127,13 @@ public class ReservationController {
 	
 	/////////////////// 유저 //////////////////////
 	
+	// 리사이클 페이지 이동
+	@GetMapping("recycle.do")
+	public String recycle() {
+      
+      return "member/recycle";
+	}
+
 	// 예약페이지 이동
 	@GetMapping("reservation.do")
 	public String reservation() {

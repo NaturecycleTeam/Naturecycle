@@ -83,9 +83,9 @@
 			WHERE A.LEVEL <![CDATA[<]]> DATEDIFF("2024-12-31", "2024-01-01")
 			),
 			DAILY_PURCHASE AS (
-				SELECT order_date, SUM(qty_ordered * price_each) AS PURCHASE_AMOUNT
+				SELECT DATE_FORMAT(order_date, "%Y-%m-%d") AS order_date, SUM(qty_ordered * price_each) AS PURCHASE_AMOUNT
 				FROM tbl_order
-				GROUP BY order_date
+				GROUP BY DATE_FORMAT(order_date, "%Y-%m-%d")
 			)
 		SELECT 
 			DATE_FORMAT(DATE_SEQ.date, "%Y-%m-%d") AS order_date,
@@ -127,7 +127,7 @@
 			FROM tbl_order
 			GROUP BY YY, MM
 		   )      
-		SELECT CONCAT(YY, '-', MM) AS order_month,
+		SELECT CONCAT(YY, '-', MM) AS ORDER_MONTH,
 			   PURCHASE_AMOUNT    
 		FROM MONTHLY_PURCHASE 
 		ORDER BY order_month;         	
@@ -149,11 +149,11 @@
 		       cat_name
 		FROM PROD_PURCHASE
 		GROUP BY cat_name; -->  
-		SELECT SUM(A.qty_ordered) AS totPQTY, C.cat_name
+		SELECT SUM(A.qty_ordered) AS TOT_PQTY, C.cat_name
 		FROM tbl_order A             
-		LEFT JOIN tbl_product B ON A.pnum_fk = B.pcategory_fk 
+		LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
 		LEFT JOIN tbl_category C ON B.pcategory_fk  = C.cat_code
-		GROUP BY C.cat_name;		 
+		GROUP BY C.cat_name;	 
 	</select>	
 	
 	

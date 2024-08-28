@@ -14,7 +14,7 @@
 
 </style>
 
-<div class="container w-50 mt-5 border shadow p-5">
+<div class="container w-50 m-5 border shadow p-5">
 	<section>
 		<div>
 	    	<input type="button" value="예약확인" class="btn btn-secondary" onclick="toggleList()"/>

@@ -16,9 +16,18 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 
 .nav-link:hover, .login:hover, .register:hover{color : orange;}
 
+.mainTitle:hover {color: #9d4f00;}
+
 .welcome {color : #30622f;}
 
 .fa-user-circle{color : #30622f;}
+
+.fa-recycle {color: #00a600;}
+
+.fa-tree {color: #00a600;}
+
+.fa-store {color: #00a600;}
+
 
 
 /* header : 장바구니 */
@@ -167,6 +176,16 @@ ul.footer_navbar-menu{
 	color:yellow;	
 }
 
+mypageTitle {
+   color: #006c00;
+   margin-left: 73px;
+}
+
+.mypageTitle:hover {
+   color: #008c00;
+}
+
+
 /* ############################### */
 /* 인증코드 타이머 */
 
@@ -292,7 +311,7 @@ a{text-decoration:none; color:#333;}
 
 
 /* ############################### */
-aside.question{
+/* aside.myprofile{
 	width: 300px;
 	height : 500px;
 	text-align : center;
@@ -301,14 +320,190 @@ aside.question{
 	border-right-style : solid;
 	border-color : #eee;
 	margin-bottom : 10px;
-}
+} */
 
-.question_checkList {
+/* .question_checkList {
 	width : 800px;
 	margin : 40px;
-}
+} */
 
 .changePw{
 	width : 400px;
 	margin : 40px;
 }
+
+/********* recycle.jsp *********/
+* {
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+.sectionTitle {
+   text-align: center;
+}
+
+.centered_content {
+   margin-bottom: 6.5rem;
+   margin-top: 50px;
+}
+
+.fa-feather {
+   position: relative;
+    right: 81px;
+    top: 30px;
+    color: #3e7b2e;
+}
+
+.centered_title {
+   color: #3e7b2e;
+   line-height: normal;
+   font-size: 25px;
+   margin-bottom: 1.8rem;
+   margin-top: 0;
+   font-weight: 700;
+   text-align: center;
+}
+
+.centered_subline {
+   text-align: center;
+   font-size: 17px;
+   color: #269360;
+   font-weight: 600;
+}
+
+.recycle_container {
+   display: flex;
+   justify-content: center;
+}
+
+.recycle_reservation, .recycle_donation {
+    flex: 0 0 auto; 
+    width: 380px;
+}
+
+.recycle_row {
+   margin-top: -2rem;
+   margin-bottom: -2rem;
+}
+
+.slick-slider .slick-list {
+   transform: translateZ(0);
+}
+
+.slick-slider>* {
+   padding: 0;
+}
+
+.slick-track {
+   display: flex;
+   left: 0;
+   margin-left: auto;
+   margin-right: auto;
+   position: relative;
+   top: 0;
+}
+
+.slick-initialized .slick-slide {
+   display: flex;
+   -webkit-box-align: center;
+   align-items: center;
+   -webkit-box-pack: center;
+   justify-content: center;
+   height: auto;
+   padding: 0 1.6rem;
+}
+
+.slick-slide {
+   float: left;
+   min-height: 1px;
+}
+
+.recycle_item {
+   height: 100%;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+}
+
+.recycle_block {
+   overflow: hidden;
+   background-color: #ffffff;
+   border-radius: 2rem;
+   transition: 0.15s ease-in-out;
+   box-shadow: 0 0.5rem 1.5rem 0 rgba(0, 0, 0, 0.1);
+   display: flex;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   flex-direction: column;
+   -webkit-box-pack: justify;
+   justify-content: space-between;
+   height: 100%;
+}
+
+.recycle_blockLink {
+   display: flex;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   flex-direction: column;
+   height: 100%;
+   font-weight: 400;
+}
+
+.recycle_img {
+   height: 20rem;
+   width: 100%;
+   background-position: center;
+   background-size: cover;
+}
+
+.recycle_content {
+   -webkit-box-flex: 1;
+   flex-grow: 1;
+   padding: 2rem 2.2rem;
+}
+
+.recycle_block .recycle_title {
+   color: #055f30;
+   display: -webkit-box !important;
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   font-weight: 700;
+}
+
+.recycle_title {
+   font-size: 15px;
+}
+
+.recycle_text {
+   display: -webkit-box !important;
+   -webkit-line-clamp: 4;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   font-size: 12px;
+   color: #13220f;
+}
+
+.recycle_text p:last-of-type {
+   margin-bottom: 0;
+   margin-top: 0;
+}
+
+a {
+   color: #1b8158;
+   text-decoration: none;
+   transition: 0.15s ease-in-out;
+}
+
+.reservation_link {
+   padding: 1rem;
+   font-size: 16px;
+   position: relative;
+   display: block;
+   color: #ffffff;
+   font-weight: 700;
+   line-height: normal;
+   text-align: center;
+   background-color: #1b8158;
+   transition: 0.15s ease-in-out;
+}
+/**********************************/

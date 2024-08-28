@@ -25,6 +25,14 @@ ul {
 li>a {
 	text-decoration: none; /* 밑줄 삭제 */
 }
+
+.fa-seedling {
+   position: relative;
+    top: 21px;
+    color: yellowgreen;
+    
+}
+
 </style>
 
 <body>
@@ -70,11 +78,10 @@ li>a {
 	    <div class="container">
 	        <ul class="navbar-nav w-100">
 	            <!-- Logo and Home Link -->
+	            <i class="fa fa-seedling"></i>
 	            <li class="nav-item w-25">
 	                <a class="nav-link" href="<c:url value='/userMainForm.do'/>">
-	                    <span><h2 style="color:green">NATURE CYCLE</h2></span>
-	                    <!-- Optionally include logo -->
-	                    <!-- <img src="<c:url value='/resources/imgs/Naturecycle_logo.png'/>" alt="NatureCycle Logo"> -->
+	                    <span><b><h2 style="color:green">NATURE CYCLE</h2></b></span>
 	                </a>
 	            </li>
 	
@@ -152,13 +159,13 @@ li>a {
 				</div>&nbsp;&nbsp;&nbsp; 	  
 			  
 			    <li class="nav-item">
-			      <a class="nav-link" href="UprodList.do"><b>제품</b></a>
+			      <a class="nav-link" href="UprodList.do"><i class="fa fa-store"></i><b> 제품</b></a>
 			    </li>&nbsp;&nbsp;&nbsp; 
 			   <li class="nav-item">
-			      <a class="nav-link" href="reservation.do"><b>리사이클</b></a>
+			      <a class="nav-link" href="recycle.do"><i class="fa fa-recycle"></i><b> 리사이클</b></a>
 			    </li>&nbsp;&nbsp;&nbsp; 
 			    <li class="nav-item">
-			      <a class="nav-link" href="donation.do?id=${sessionScope.loginDTO.id}"><b>캠페인</b></a>
+			      <a class="nav-link" href="donation.do?id=${sessionScope.loginDTO.id}"><i class="fa fa-tree"></i><b> 캠페인</b></a>
 			    </li>
 		  </ul>
 	  </div>	
@@ -193,7 +200,8 @@ li>a {
 
 	<main>
 		<!-- <div class="container mt-5 d-flex" id="main"> -->
-		<div class="container d-flex justify-content-center">
+		<!-- <div class="container d-flex justify-content-center"> -->
+		<div class="container">
 			<%-- <%@ include file="u_left.jsp"%> --%>
 
 			<!-- </header> -->

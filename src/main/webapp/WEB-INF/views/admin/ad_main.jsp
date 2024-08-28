@@ -185,7 +185,7 @@ $(document).ready(function() {
 		    }
 		});
 	
-	// 두번째 그래프(상품 총 판매량)
+	// 두번째 그래프(카테고리별 상품 총 판매량)
 	var cumulPQTY = [];
 	var category_name = [];
 
@@ -210,7 +210,7 @@ $(document).ready(function() {
 	            data: {
 	                labels: category_name,
 	                datasets: [{
-	                    label: '상품 누적 판매량',
+	                    label: '카테고리별 상품 누적 판매량',
 	                    data: cumulPQTY,
 	                    backgroundColor: [
 	                        'rgb(255, 99, 132)',
@@ -228,7 +228,7 @@ $(document).ready(function() {
 	                plugins: {
 	                    title: {
 	                        display: true, // 제목을 표시하도록 설정
-	                        text: '상품 판매량', // 제목 텍스트
+	                        text: '카테고리별 상품 판매량', // 제목 텍스트
 	                        font: {
 	                            size: 14 // 제목 텍스트 크기
 	                        },

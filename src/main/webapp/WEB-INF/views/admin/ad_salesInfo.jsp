@@ -149,14 +149,14 @@ main .graph_box .graph_date {
 </style> 
     
 <main>
-	<section>
-		<div class="today">
+	<section class="w-50">
+		<div class="today m-2">
 			<span>
 				<span>오늘 매출</span>
 				<span id="today"></span>
 			</span>
 			
-			<input type="button" value="상세보기" class="btn btn-secondary" onclick="toggleList()"/>
+			<input type="button" value="상세보기" class="btn btn-secondary btn-sm" onclick="toggleList()"/>
 			
 		</div>
 		<div><span id="ajaxList"></span></div>
@@ -180,7 +180,7 @@ main .graph_box .graph_date {
 	<div class="container mt-5">
 		<h4>매출 테이블</h4>
 		<!-- 검색 -->
-		<div class="d-flex">
+		<div class="d-flex justify-content-between align-items-center">
 			<form action="salesInfo.do" id="searchForm" method="get">
 			    <div class="d-flex">
 			        <!-- 게시글 개수를 먼저 선택하고 검색할 경우 선택된 게시글 수 넘겨줌 -->
@@ -256,6 +256,7 @@ main .graph_box .graph_date {
 			<thead class="table-dark">
 				<tr>
 					<th>주문번호</th>
+					<th>회원아이디</th>
 					<th>주문일</th>
 					<th>상품명</th>
 					<th>주문수량</th>
@@ -266,6 +267,7 @@ main .graph_box .graph_date {
 				<c:forEach var="dto" items="${orderDto}">
 					 <tr>
 				        <td>${dto.order_num}</td>
+				        <td>${dto.oid_fk}</td>
 				        <td><fmt:formatDate value="${dto.order_date}" pattern="yyyy-MM-dd"/></td>
 				        <td>${dto.pname}</td>
 				        <td>${dto.qty_ordered}</td>
@@ -333,55 +335,60 @@ main .graph_box .graph_date {
 		});
 	} */
 	
-	// 오늘매출 상세데이터 불러오기(ajax)
+	  // 오늘매출 상세데이터 불러오기(ajax)
 	 function toggleList() {
-        let $ajaxList = $("#ajaxList");
-        
-        if ($ajaxList.is(':visible')) {
-            $ajaxList.hide(); // Hide the list if it's visible
-        } else {
-            showList(); // Fetch and show the list if it's hidden
-        }
-    }
+       let $ajaxList = $("#ajaxList");
+       
+       if ($ajaxList.is(':visible')) {
+           $ajaxList.hide(); // Hide the list if it's visible
+       } else {
+           showList(); // Fetch and show the list if it's hidden
+       }
+   }
 
-    function showList() {
-        $.ajax({
-            url: "<c:url value='todayAjaxList.do'/>",  // 요청주소 (URL for the request)
-            type: "get",  // 전송방식 (Request method)
-            dataType: "json",  // 서버에서 응답하는 데이터 형식 (Response data format)
-            success: function(data) {
-                let html = "<table class='table'>";
-                html += "   <thead class='table-dark'>";
-                html += "     <tr>";
-                html += "       <th>주문번호</th>";  // Order Number
-                html += "       <th>주문날짜</th>";  // Order Date
-                html += "       <th>상품명</th>";    // Product Name
-                html += "       <th>주문수량</th>";  // Quantity Ordered
-                html += "       <th>가격</th>";      // Price
-                html += "     </tr>";
-                html += "   </thead>";
-                html += "   <tbody>";
+   function showList() {
+       $.ajax({
+           url: "<c:url value='todayAjaxList.do'/>",  // 요청주소 (URL for the request)
+           type: "get",  // 전송방식 (Request method)
+           dataType: "json",  // 서버에서 응답하는 데이터 형식 (Response data format)
+           success: function(data) {
+               let html = "<table class='table'>";
+               html += "   <thead class='table-dark'>";
+               html += "     <tr>";
+               html += "       <th>주문번호</th>";  // Order Number
+               /* html += "       <th>주문날짜</th>"; */  // Order Date
+               html += "       <th>상품명</th>";    // Product Name
+               html += "       <th>주문수량</th>";  // Quantity Ordered
+               html += "       <th>가격</th>";      // Price
+               html += "     </tr>";
+               html += "   </thead>";
+               html += "   <tbody>";
 
-                $.each(data, function(index, obj) {
-                    html += "<tr>";
-                    html += "<td>" + obj.order_num + "</td>";
-                    html += "<td>" + new Date(obj.order_date).toLocaleDateString() + "</td>";
-                    html += "<td>" + obj.pname + "</td>";
-                    html += "<td>" + obj.qty_ordered + "</td>";
-                    html += "<td>" + obj.price_each.toLocaleString() + "</td>";
-                    html += "</tr>";
-                });
+               $.each(data, function(index, obj) {
+               	 // 서버에서 'order_date'가 'yyyy-MM-dd' 형식으로 오는 것을 가정
+                   /* let orderDate = new Date(obj.order_date);
+                   let formattedDate = orderDate.toLocaleDateString('ko-KR'); */ // 한국 날짜 형식으로 변환
+                   
+                   html += "<tr>";
+                   html += "<td>" + obj.order_num + "</td>";
+                  /*  html += "<td>" + formattedDate + "</td>"; */
+                   html += "<td>" + obj.pname + "</td>";
+                   html += "<td>" + obj.qty_ordered + "</td>";
+                   html += "<td>" + obj.price_each.toLocaleString() + "</td>";
+                   html += "</tr>";
+               });
 
-                html += "</tbody>";
-                html += "</table>";
+               html += "</tbody>";
+               html += "</table>";
 
-                $("#ajaxList").html(html).show();  // Populate and show the list
-            },
-            error: function() {
-                alert("Error occurred while fetching data.");  // Handle error
-            }
-        });
-    }
+               $("#ajaxList").html(html).show();  // Populate and show the list
+           },
+           error: function() {
+               alert("Error occurred while fetching data.");  // Handle error
+           }
+       });
+   }
+  
 	
 	// datepicker
 	$(function() {
@@ -507,9 +514,8 @@ main .graph_box .graph_date {
 	           console.error("AJAX 요청 에러:", error);
 	           $("#today").text("Error");
 	       }
-	   });  
-		
-		
+	   });  	   
+	   
 		// 일매출 그래프(30일 해당월기준)
 		var order_date = [];
 		var daily_purchase = [];

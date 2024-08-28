@@ -9,6 +9,82 @@
 	</script>
 </c:if>
 
+<style>
+div.carousel-item {
+   height: 100vh;
+    
+    > img {
+       width: 100vw;
+        height: 50%;
+    }
+}
+</style>
+
+<!-- Start carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel" style="height: 400px;">
+   <!-- Indicators/dots -->
+   <div class="carousel-indicators">
+     <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+     <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+     <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+     <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+     <button type="button" data-bs-target="#demo" data-bs-slide-to="4"></button>
+   </div>
+   
+   <!-- The slideshow/carousel -->
+   <div class="carousel-inner">
+      <div class="carousel-item active">
+         <img src="resources/imgs/1.jpg" alt="Recycling" class="d-block w-100">
+         <div class="carousel-caption">
+               <h3></h3>
+               <p></p>
+         </div>
+        </div>
+        
+      <div class="carousel-item">
+           <img src="resources/imgs/2.jpg" alt="Recycle" class="d-block w-100">
+         <div class="carousel-caption">
+              <h3></h3>
+              <p></p>
+         </div>
+      </div>
+      
+      <div class="carousel-item">
+         <img src="resources/imgs/3.jpg" alt="Nature" class="d-block w-100">
+         <div class="carousel-caption">
+              <h3></h3>
+              <p></p>
+         </div>
+      </div>
+      
+      <div class="carousel-item">
+         <img src="resources/imgs/4.jpg" alt="recycleDay" class="d-block w-100">
+         <div class="carousel-caption">
+              <h3></h3>
+              <p></p>
+         </div>
+      </div>
+      
+      <div class="carousel-item">
+         <img src="resources/imgs/5.jpg" alt="recycleDay" class="d-block w-100">
+         <div class="carousel-caption">
+              <h3></h3>
+              <p></p>
+         </div>
+      </div>
+   </div>
+
+   <!-- Left and right controls/icons -->
+   <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev" style="margin-bottom: 500px;">
+      <span class="carousel-control-prev-icon"></span>
+   </button>
+   
+   <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next" style="margin-bottom: 500px;">
+      <span class="carousel-control-next-icon"></span>
+   </button>
+</div> <!-- End of carousel -->
+
+
 <div class="home_body w-100">
    <!-- 유효성검사 메인에서 뜨는 상품 인기,추천,신규상품이 없다면, 있다면 -->
    <c:forEach var="key" items="${key}">

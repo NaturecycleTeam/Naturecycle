@@ -14,83 +14,98 @@
 	</script>
 </c:if>
 
-<aside class="question">
-	<ul>
-		<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
-		<li><a href='<c:url value="reservationInfo.do?rid_fk=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
-		<li><a href='<c:url value="myQuestion.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의하기</a></li>
-		<li><a
-			href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항
-				확인</a></li>
-		<li><a href='<c:url value="pwChange.do"/>'>비밀번호 변경</a></li>
-	</ul>
-</aside>
+<style>
+.myprofileInfo li {
+    display: inline; /* Aligns list items in a row */
+    margin-right: 20px; /* Adds space between list items */
+}
 
-<div class="container w-50 mt-5 p-5">
-	<form action="memberUpdate.do" method="post" name="joinForm">
-		<h3 class="text-center">회원정보</h3>
-		<div class="mt-3 mb-2 text-end">
-			<b>${mDto.getName()} 님의 회원정보</b>
-		</div>
-		<div class="mb-2">
-			<lable for="id">아이디 (수정불가)</lable>
-			<input type="text" class="form-control" id="id" name="id" value="${mDto.getId()}" readonly/>
-		</div>
-		<%-- <div class="mb-2">
-			<lable for="pw">비밀번호</lable>
-			<input type="password" class="form-control" id="pw" name="pw" value="${mDto.getPw()}"/>
-		</div>
-		<div class="mb-2">
-			<lable for="pwConfirm">비밀번호 확인</lable>
-			<input type="password" class="form-control" id="pwConfirm" name="pwConfirm" value="${mDto.getPw()}"/>
-		</div> --%>
-		<div class="mb-2">
-			<lable for="name">이름</lable>
-			<input type="text" class="form-control" id="name" name="name" value="${mDto.getName()}"/>
-		</div>
-		<%-- <div class="mb-2">
-			<lable for="name">나이</lable>
-			<input type="text" class="form-control" id="age" name="age"
-				value="${dto.age}" />
-		</div> --%>
-		<div class="mb-2">
-			<lable for="email">이메일 (수정불가)</lable>
-			<input type="text" class="form-control" id="email" name="email" value="${mDto.getEmail()}" readonly/>
-		</div>
-		<div class="mb-2">
-			<lable for="tel">전화번호</lable>
-			<input type="text" class="form-control" id="tel" name="tel" value="${mDto.getTel()}"/>
-		</div>
+/* .myprofile li:hover{
+	color: white;
+	background: #30622f;
+}
+ */
+</style>
+
+<div class="container w-75 p-5">
+	<div class="myprofileInfo">
+		<ul>
+			<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
+			<li><a href='<c:url value="reservationInfo.do?rid_fk=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
+			<li><a href='<c:url value="myQuestion.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의하기</a></li>
+			<li><a
+				href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항
+					확인</a></li>
+			<li><a href='<c:url value="pwChange.do"/>'>비밀번호 변경</a></li>
+		</ul>
+	</div><hr>
+	
+	<div class="container w-75 p-5">
+		<form action="memberUpdate.do" method="post" name="joinForm">
+			<h3 class="text-center">회원정보</h3>
+			<div class="mt-3 mb-2 text-end">
+				<b>${mDto.getName()} 님의 회원정보</b>
+			</div>
+			<div class="mb-2">
+				<lable for="id">아이디 (수정불가)</lable>
+				<input type="text" class="form-control" id="id" name="id" value="${mDto.getId()}" readonly/>
+			</div>
+			<%-- <div class="mb-2">
+				<lable for="pw">비밀번호</lable>
+				<input type="password" class="form-control" id="pw" name="pw" value="${mDto.getPw()}"/>
+			</div>
+			<div class="mb-2">
+				<lable for="pwConfirm">비밀번호 확인</lable>
+				<input type="password" class="form-control" id="pwConfirm" name="pwConfirm" value="${mDto.getPw()}"/>
+			</div> --%>
+			<div class="mb-2">
+				<lable for="name">이름</lable>
+				<input type="text" class="form-control" id="name" name="name" value="${mDto.getName()}"/>
+			</div>
+			<%-- <div class="mb-2">
+				<lable for="name">나이</lable>
+				<input type="text" class="form-control" id="age" name="age"
+					value="${dto.age}" />
+			</div> --%>
+			<div class="mb-2">
+				<lable for="email">이메일 (수정불가)</lable>
+				<input type="text" class="form-control" id="email" name="email" value="${mDto.getEmail()}" readonly/>
+			</div>
+			<div class="mb-2">
+				<lable for="tel">전화번호</lable>
+				<input type="text" class="form-control" id="tel" name="tel" value="${mDto.getTel()}"/>
+			</div>
+				
+	
+			<!----------------------------------- 주소 ----------------------------------->
+			<div class="row mb-2">
+				<lable for="addr">주소</lable><br>
+				<div class="col-md-6">
+					<input class="form-control mb-1" type="text" id="sample6_postcode" name="zipcode" value="${mDto.getZipcode()}" readonly/>
+				</div>
+				<div class="col-md-6">
+					<input class="btn btn-secondary mb-1" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+				</div>
+			</div>
+					<input class="form-control mb-2" type="text" id="sample6_address" name="road_addr" value="${mDto.getRoad_addr()}" readonly/>
+					<input class="form-control mb-2" type="text" id="sample6_detailAddress" name="detail_addr" value="${mDto.getDetail_addr()}"/>
+	
+									<!-- 위에는 뷰 // 아래는 로직 -->
+			<!-- 포인트 -->
+			<div class="mb-2">
+				<lable for="point">포인트</lable>
+				<input type="text" class="form-control" id="point" name="point" value="${mDto.getPoint()}"/>
+			</div>
+			<!----------->
 			
-
-		<!----------------------------------- 주소 ----------------------------------->
-		<div class="row mb-2">
-			<lable for="addr">주소</lable><br>
-			<div class="col-md-6">
-				<input class="form-control mb-1" type="text" id="sample6_postcode" name="zipcode" value="${mDto.getZipcode()}" readonly/>
+			<div class="text-center mt-3">
+				<br> <input type="button" class="btn btn-sm btn-primary" value="회원정보 수정" onclick="inputChk()" /> 
+					<input type="reset" class="btn btn-sm btn-warning" value="취소" /> 
+					<%-- <a href="memberList.do" class="btn btn-sm btn-info">회원 리스트</a>
+					<a href="donation.do?id=${sessionScope.loginDTO.id}" class="btn btn-sm btn-info">기부금</a> --%>
 			</div>
-			<div class="col-md-6">
-				<input class="btn btn-secondary mb-1" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-			</div>
-		</div>
-				<input class="form-control mb-2" type="text" id="sample6_address" name="road_addr" value="${mDto.getRoad_addr()}" readonly/>
-				<input class="form-control mb-2" type="text" id="sample6_detailAddress" name="detail_addr" value="${mDto.getDetail_addr()}"/>
-
-								<!-- 위에는 뷰 // 아래는 로직 -->
-		<!-- 포인트 -->
-		<div class="mb-2">
-			<lable for="point">포인트</lable>
-			<input type="text" class="form-control" id="point" name="point" value="${mDto.getPoint()}"/>
-		</div>
-		<!----------->
-		
-		<div class="text-center mt-3">
-			<br> <input type="button" class="btn btn-sm btn-primary" value="회원정보 수정" onclick="inputChk()" /> 
-				<input type="reset" class="btn btn-sm btn-warning" value="취소" /> 
-				<a href="memberList.do" class="btn btn-sm btn-info">회원 리스트</a>
-				<a href="donation.do?id=${sessionScope.loginDTO.id}" class="btn btn-sm btn-info">기부금</a>
-		</div>
-	</form>
+		</form>
+	</div>
 </div>
 <%@ include file="../include/footer.jsp"%>
 

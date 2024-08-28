@@ -47,11 +47,11 @@
 		ORDER BY A.order_date
 		LIMIT #{startIndex}, #{cntPerPage} -->
 		
-		SELECT A.order_num, A.order_date, A.qty_ordered, A.price_each, B.pname				
+		SELECT A.order_num, A.order_date, A.qty_ordered, A.price_each, A.oid_fk, B.pname				
 		FROM tbl_order A
 		LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
 		<include refid="criteria"></include>
-		ORDER BY A.order_date
+		ORDER BY A.order_date DESC
 		LIMIT #{startIndex}, #{cntPerPage}
 	</select>
 	
@@ -94,10 +94,10 @@
 		WHERE DATE_FORMAT(A.order_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d') -->
 	
 		SELECT A.order_num, A.order_date, A.qty_ordered, A.price_each, B.pname,
-		SUM(A.qty_ordered*A.price_each) AS TODAY_PURCHASE_AMOUNT				
+		A.qty_ordered*A.price_each AS TODAY_PURCHASE_AMOUNT				
 		FROM tbl_order A
 		LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
-		WHERE DATE_FORMAT(A.order_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d')
+		WHERE DATE_FORMAT(A.order_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d');
 	</select>
 	
 	<!-- 매출관리페이지 - 일매출 차트(한달단위) -->
@@ -110,9 +110,9 @@
 		    WHERE A.LEVEL <![CDATA[<]]> DAY(LAST_DAY(NOW())) - 1
 			),
 			DAILY_PURCHASE AS (
-			    SELECT A.order_date, SUM(A.qty_ordered * A.price_each) AS PURCHASE_AMOUNT
-			    FROM tbl_order A
-			    GROUP BY A.order_date
+			    SELECT DATE_FORMAT(order_date, "%Y-%m-%d") AS order_date, SUM(qty_ordered * price_each) AS PURCHASE_AMOUNT
+				FROM tbl_order
+				GROUP BY DATE_FORMAT(order_date, "%Y-%m-%d")
 			)
 		SELECT DATE_FORMAT(DATE_SEQ.date, "%Y-%m-%d") AS order_date,
 		    IFNULL(DP.PURCHASE_AMOUNT, 0) AS purchase_amount

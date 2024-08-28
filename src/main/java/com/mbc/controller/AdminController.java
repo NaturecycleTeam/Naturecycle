@@ -162,8 +162,7 @@ public class AdminController {
 			JsonObject object = new JsonObject();
 			
 			String date = sd.format(dto.getOrder_date());						
-			String sum = dto.getPurchase_amount();
-//			System.out.println(sum);
+			String sum = dto.getPURCHASE_AMOUNT();
 			
 			object.addProperty("date", date);
 			object.addProperty("sum", sum);
@@ -191,9 +190,9 @@ public class AdminController {
 			OrderDTO dto = it.next();
 			JsonObject object = new JsonObject();
 			
-			String date = dto.getOrder_month();
+			String date = dto.getORDER_MONTH();
 						
-			String sum = dto.getPurchase_amount();
+			String sum = dto.getPURCHASE_AMOUNT();
 //			System.out.println(sum);
 			
 			object.addProperty("date", date);
@@ -223,7 +222,7 @@ public class AdminController {
 				OrderDTO dto = it.next();
 				JsonObject object = new JsonObject();
 
-				String totPQTY = dto.getTotPQTY();							
+				String totPQTY = dto.getTOT_PQTY();							
 				String cat_name = dto.getCat_name();				
 				
 				object.addProperty("totPQTY", totPQTY);
