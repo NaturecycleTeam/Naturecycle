@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mbc.domain.AdminDTO;
+import com.mbc.domain.DonationDTO;
 import com.mbc.domain.OrderDTO;
 import com.mbc.domain.PageDTO;
 import com.mbc.mapper.AdminMapper;
@@ -33,6 +34,8 @@ public interface AdminService {
 	String totalPurchase();
 	// 오늘 매출
 	String todayPurchase();
+	// 기부금
+	List<DonationDTO> monthlyDonation();
 	
 	
 	

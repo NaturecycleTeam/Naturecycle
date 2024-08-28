@@ -33,10 +33,7 @@
 			<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
 			<li><a href='<c:url value="reservationInfo.do?rid_fk=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
 			<li><a href='<c:url value="myQuestion.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의하기</a></li>
-			<li><a
-				href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항
-					확인</a></li>
-			<li><a href='<c:url value="pwChange.do"/>'>비밀번호 변경</a></li>
+			<li><a href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항 확인</a></li>
 		</ul>
 	</div><hr>
 	
@@ -47,14 +44,19 @@
 				<b>${mDto.getName()} 님의 회원정보</b>
 			</div>
 			<div class="mb-2">
-				<lable for="id">아이디 (수정불가)</lable>
+				<lable for="id">아이디</lable>
 				<input type="text" class="form-control" id="id" name="id" value="${mDto.getId()}" readonly/>
 			</div>
-			<%-- <div class="mb-2">
+			<div class="row mb-2">
 				<lable for="pw">비밀번호</lable>
-				<input type="password" class="form-control" id="pw" name="pw" value="${mDto.getPw()}"/>
+				<div class="col-md-6">
+					<input type="password" class="form-control" id="pw" name="pw" value="${mDto.getPw()}" readonly/>
+				</div>
+				<div class="col-md-6">
+					<input class="btn btn-secondary mb-1" type="button" id="pwChange" onclick="pwChange()" value="비밀번호변경">
+				</div>				
 			</div>
-			<div class="mb-2">
+			<%-- <div class="mb-2">
 				<lable for="pwConfirm">비밀번호 확인</lable>
 				<input type="password" class="form-control" id="pwConfirm" name="pwConfirm" value="${mDto.getPw()}"/>
 			</div> --%>
@@ -68,7 +70,7 @@
 					value="${dto.age}" />
 			</div> --%>
 			<div class="mb-2">
-				<lable for="email">이메일 (수정불가)</lable>
+				<lable for="email">이메일</lable>
 				<input type="text" class="form-control" id="email" name="email" value="${mDto.getEmail()}" readonly/>
 			</div>
 			<div class="mb-2">
@@ -94,15 +96,15 @@
 			<!-- 포인트 -->
 			<div class="mb-2">
 				<lable for="point">포인트</lable>
-				<input type="text" class="form-control" id="point" name="point" value="${mDto.getPoint()}"/>
+				<input type="text" class="form-control" id="point" name="point" value="${mDto.getPoint()}"/ readonly>
 			</div>
 			<!----------->
 			
 			<div class="text-center mt-3">
 				<br> <input type="button" class="btn btn-sm btn-primary" value="회원정보 수정" onclick="inputChk()" /> 
 					<input type="reset" class="btn btn-sm btn-warning" value="취소" /> 
-					<%-- <a href="memberList.do" class="btn btn-sm btn-info">회원 리스트</a>
-					<a href="donation.do?id=${sessionScope.loginDTO.id}" class="btn btn-sm btn-info">기부금</a> --%>
+					<!-- <a href="memberList.do" class="btn btn-sm btn-info">비밀번호 변경</a> -->
+					<%-- <a href="donation.do?id=${sessionScope.loginDTO.id}" class="btn btn-sm btn-info">기부금</a> --%>
 			</div>
 		</form>
 	</div>
@@ -111,6 +113,11 @@
 
 <script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+	$("#pwChange").click(function() {
+	    location.href = "<c:url value='pwChange.do'/>";
+	});
+
 	function sample6_execDaumPostcode() {
 		new daum.Postcode(
 				{

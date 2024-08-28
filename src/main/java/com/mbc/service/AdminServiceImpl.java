@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mbc.domain.AdminDTO;
+import com.mbc.domain.DonationDTO;
 import com.mbc.domain.OrderDTO;
 import com.mbc.domain.PageDTO;
 import com.mbc.mapper.AdminMapper;
@@ -97,6 +98,13 @@ public class AdminServiceImpl implements AdminService {
 	public List<OrderDTO> prod_purchase() {
 		
 		return adMapper.prod_purchase();
+	}
+	
+	// 관리자홈 기부금 내역
+	@Override
+	public List<DonationDTO> monthlyDonation() {
+		
+		return adMapper.monthlyDonation();
 	}		
 	
 	

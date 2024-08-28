@@ -13,6 +13,7 @@
  		<typeAlias type="com.mbc.domain.ReplyDTO" alias="replyDTO"/>
  		<typeAlias type="com.mbc.domain.CartDTO" alias="cartDTO"/>
  		<typeAlias type="com.mbc.domain.ReservationDTO" alias="reservationDTO"/>
+ 		<typeAlias type="com.mbc.domain.DonationDTO" alias="donationDTO"/>
  	</typeAliases>
  </configuration>
   

@@ -339,53 +339,50 @@ $(document).ready(function() {
 
 	
 	// 4번쨰 그래프 (월 기부금)
-	var order_month = [];
-	var monthly_purchase = [];
+	var donation_month = [];
+	var monthly_amount = [];
+
 	$.ajax({
-		url: "monthlyPurchase.do",
-		async: true,
-		type: "GET",
-		dataType: "json",
-		contentType: "application/json; charset=utf-8",
-		success: function(data) {
-			/* $.each(data, function() {
-				saleQty.push(this["tqty"]);
-				saleName.push(this["tname"]);
-			}); */
-			
-			for(let i = 0; i < data.length; i++){
-				order_month.push(data[i].date);
-				monthly_purchase.push(data[i].sum);
-			}
-			console.log(order_month);
-			console.log(monthly_purchase);
-			
-			const ctx1 = document.getElementById('myChart4').getContext('2d');
-			new Chart(ctx1, {
-	            type: 'bar', // 기본 차트 타입을 bar로 설정
+	    url: "monthlyDonation.do",
+	    async: true,
+	    type: "GET",
+	    dataType: "json",
+	    contentType: "application/json; charset=utf-8",
+	    success: function(data) {
+	        // Extract data from the response
+	        for (let i = 0; i < data.length; i++) {
+	            donation_month.push(data[i].date);  // Assuming 'date' is the month
+	            monthly_amount.push(data[i].sum);   // Assuming 'sum' is the amount
+	        }
+	        console.log(donation_month);
+	        console.log(monthly_amount);
+	        
+	        // Get the context of the canvas element
+	        const ctx1 = document.getElementById('myChart4').getContext('2d');
+	        new Chart(ctx1, {
+	            type: 'bar', // Chart type
 	            data: {
-	                labels: order_month,
+	                labels: donation_month, // x-axis labels (e.g., months)
 	                datasets: [{
-	                        label: '기부금 현황', // bar 차트의 레이블
-	                        data: monthly_purchase,
-	                        backgroundColor: 'lightblue',
-	                        borderColor: 'lightblue',
-	                        borderWidth: 1,
-	                        type: 'bar' // 이 데이터 세트는 bar 차트로 표시
-                    }]
+	                    label: '기부금 현황', // Label for the dataset
+	                    data: monthly_amount, // Data for each label
+	                    backgroundColor: 'lightblue', // Background color of bars
+	                    borderColor: 'lightblue', // Border color of bars
+	                    borderWidth: 1 // Width of border
+	                }]
 	            },
 	            options: {
 	                plugins: {
 	                    legend: {
-	                        display: true, // 전체 범례를 표시	                    
+	                        display: true // Display legend
 	                    }
 	                },
 	                scales: {
 	                    x: {
-	                        beginAtZero: true
+	                        beginAtZero: true // Start x-axis at zero
 	                    },
 	                    y: {
-	                        beginAtZero: true
+	                        beginAtZero: true // Start y-axis at zero
 	                    }
 	                }
 	            }
@@ -396,6 +393,7 @@ $(document).ready(function() {
 	        alert("데이터를 불러오는 중 문제가 발생했습니다.");
 	    }
 	});
+
 });
 </script>
 

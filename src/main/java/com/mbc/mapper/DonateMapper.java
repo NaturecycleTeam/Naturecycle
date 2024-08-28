@@ -2,6 +2,7 @@ package com.mbc.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mbc.domain.DonationDTO;
 import com.mbc.domain.MemberDTO;
 
 @Mapper
@@ -11,4 +12,6 @@ public interface DonateMapper {
 	/* void donation(MemberDTO dto); */
 	
 	void updatePoints(MemberDTO dto);
+
+	void donationAmount(DonationDTO dDto);
 }

@@ -14,6 +14,10 @@
         UPDATE tbl_member SET point = #{point} WHERE id = #{id}
     </update>
     
+    <insert id="donationAmount">
+    	INSERT INTO tbl_donation (did_fk, donation_amount)
+    	VALUES (#{did_fk}, #{donation_amount})
+    </insert>
     
     
 </mapper>

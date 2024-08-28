@@ -21,6 +21,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mbc.domain.AdminDTO;
+import com.mbc.domain.DonationDTO;
 import com.mbc.domain.OrderDTO;
 import com.mbc.service.AdminService;
 
@@ -235,39 +236,40 @@ public class AdminController {
 			
 			return json;
 		}
+		
+		// 그래프 4 : 기부금 현황
+		@RequestMapping("monthlyDonation.do")
+		@ResponseBody
+		public String monthlyDonation(Model model) {
+			
+			List<DonationDTO> list =adService.monthlyDonation();
+			
+			Gson gson = new GsonBuilder().create();	
+			JsonArray jArray = new JsonArray();		
+		
+			Iterator<DonationDTO> it = list.iterator();
+			while(it.hasNext()) {
+				DonationDTO dto = it.next();
+				JsonObject object = new JsonObject();
+				
+				String date = dto.getDonation_month().toString();
+							
+				String sum = dto.getMonthlyAmount().toString();
+//				System.out.println(sum);
+				
+				object.addProperty("date", date);
+				object.addProperty("sum", sum);
+				jArray.add(object);			
+			}
+			
+			
+			String json = gson.toJson(jArray);
+			System.out.println("json 도네이션 월데이터값" + json);	
+			
+			return json;
+		}
 }
 		
-//		// 그래프 4 : 기부금 현황
-//		@RequestMapping("monthlyDonation.do")
-//		@ResponseBody
-//		public String monthlyDonation(Model model) {
-//			
-//			List<OrderDTO> list =adService.monthlyDonation();
-//			
-//			Gson gson = new GsonBuilder().create();	
-//			JsonArray jArray = new JsonArray();		
-//		
-//			Iterator<OrderDTO> it = list.iterator();
-//			while(it.hasNext()) {
-//				OrderDTO dto = it.next();
-//				JsonObject object = new JsonObject();
-//				
-//				String date = dto.getOrder_month();
-//							
-//				String sum = dto.getPurchase_amount();
-////				System.out.println(sum);
-//				
-//				object.addProperty("date", date);
-//				object.addProperty("sum", sum);
-//				jArray.add(object);			
-//			}
-//			
-//			
-//			String json = gson.toJson(jArray);
-////			System.out.println("json 월데이터값" + json);	
-//			
-//			return json;
-//		}
 		
 		
 		

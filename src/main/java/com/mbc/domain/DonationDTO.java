@@ -1,5 +1,6 @@
 package com.mbc.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import lombok.Data;
@@ -11,5 +12,9 @@ public class DonationDTO {
 	private String did_fk;
 	private int donation_amount;
 	private Date donation_Date;
+	
+	// 관리자홈 기부금 차트
+	private LocalDate donation_month;
+	private String monthlyAmount;
 	
 }

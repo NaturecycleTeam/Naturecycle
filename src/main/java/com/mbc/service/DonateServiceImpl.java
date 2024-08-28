@@ -2,6 +2,8 @@ package com.mbc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.mbc.domain.DonationDTO;
 import com.mbc.domain.MemberDTO;
 import com.mbc.mapper.DonateMapper;
 
@@ -21,6 +23,13 @@ public class DonateServiceImpl implements DonateService {
 		mapper.donation(dto);
 	}*/
 	public void donation(MemberDTO dto) {
+		
         mapper.updatePoints(dto);
     }
+
+	@Override
+	public void donationAmount(DonationDTO dDto) {
+		
+		mapper.donationAmount(dDto);
+	}
 }

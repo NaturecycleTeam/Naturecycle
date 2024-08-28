@@ -54,6 +54,7 @@
 	
 	<interceptors>
 		<interceptor>
+			<mapping path="/recycle.do" />
 			<mapping path="/donation.do" />
 			<mapping path="/register.do" />
 			<mapping path="/reservation.do" />

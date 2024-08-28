@@ -1,12 +1,11 @@
 package com.mbc.mapper;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 
 import com.mbc.domain.AdminDTO;
+import com.mbc.domain.DonationDTO;
 import com.mbc.domain.OrderDTO;
-import com.mbc.domain.PageDTO;
 
 public interface AdminMapper {
 
@@ -26,7 +25,7 @@ public interface AdminMapper {
 
 	String todayPurchase();
 	
-	
+	List<DonationDTO> monthlyDonation();
 	
 //	
 //	////////////매출관리 페이지 ////////////////////

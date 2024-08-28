@@ -1,15 +1,15 @@
 package com.mbc.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mbc.domain.DonationDTO;
 import com.mbc.domain.MemberDTO;
 import com.mbc.service.DonateService;
 
@@ -29,7 +29,7 @@ public class DonateController {
 	}
 
 
-	// 기부하기 @RequestParam("point") 
+	// 기부하기 및 기부테이블 내역 저장 
 	@PostMapping("donation.do")
 	public String donation(int point, MemberDTO dto, Model model) {
 		// Get the current points from the database
@@ -50,8 +50,20 @@ public class DonateController {
 
 		// Update the points in the database
 		service.donation(dto);
-
+		
+		// 기부금 내역 (관리자페이지)
+		DonationDTO dDto = new DonationDTO();
+		
+		dDto.setDid_fk(currentDto.getId());
+		dDto.setDonation_amount(donatedPoints);
+		
+		System.out.println("dDto : " + dDto);
+		service.donationAmount(dDto);
+		
+		
 		// Redirect to the donation page with updated points
 		return "redirect:donation.do?id=" + dto.getId();
 	}
+	
+	
 }

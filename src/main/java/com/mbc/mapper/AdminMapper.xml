@@ -156,7 +156,22 @@
 		GROUP BY C.cat_name;	 
 	</select>	
 	
-	
+	<!-- 관리자 홈 - 기부금 차트 -->
+	<select id="monthlyDonation" resultType="donationDTO">
+		WITH MONTHLY_DONATION AS(
+				SELECT donation_date,
+				SUBSTR(donation_date,1,4) AS YY,
+				SUBSTR(donation_date,6,2) AS MM,
+				SUBSTR(donation_date,9,2) AS DD,
+				SUM(donation_amount) AS monthlyAmount
+				FROM tbl_donation
+				GROUP BY YY, MM
+			   )      
+		SELECT DATE_FORMAT(donation_date, '%y-%m-%d') AS donation_month,
+			   monthlyAmount    
+		FROM MONTHLY_DONATION 
+		ORDER BY donation_month;   
+	</select>
 	
 <!-- 	
 	
