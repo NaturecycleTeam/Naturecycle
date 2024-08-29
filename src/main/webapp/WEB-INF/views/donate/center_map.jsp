@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp"%>
 
+ 
 <section class="container w-100 m-5">
     <div id="map" style="width: 600px; height: 400px; margin-left: auto; margin-right: auto;"></div>
     <div class="search-container" style="text-align: center; margin-top: 20px;">
@@ -20,15 +21,15 @@
       var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
       mapOption = {
          center : new kakao.maps.LatLng(37.5665, 126.9780), 
-         level : 7
+         level : 10
       // 지도의 확대 레벨
       };
-
+		
       var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-      
+     
       // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
       var positions = [ {
-         content : '<div>구로자원순환센터</div>',
+         content : '<div>구로자원순환센터</div>'+'<div> 서울시 구로구 구로동</div>',
          latlng : new kakao.maps.LatLng(37.4833788, 126.8268809)
       }, {
          content : '<div>마포자원회수시설</div>',
@@ -163,9 +164,10 @@
          content : '<div>칠곡재활용센터</div>',
          latlng : new kakao.maps.LatLng(35.9216233, 128.5462818)
       } ];
-
-   // 마커 및 인포윈도우 생성
-      var markers = []; // 마커를 저장할 배열
+	
+       
+    // 마커 및 인포윈도우 생성
+    var markers = []; // 마커를 저장할 배열
       for (var i = 0; i < positions.length; i++) {
           var marker = new kakao.maps.Marker({
               map: map,
