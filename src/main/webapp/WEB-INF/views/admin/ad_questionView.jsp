@@ -29,9 +29,9 @@
 
 	<!---------------------- 댓글 UI ----------------------->
 	<div class="mt-5 mb-3 d-flex justify-content-between">
-		<h6><i class="fa fa-comments-o"></i> 댓글	</h6>
+		<h6><i class="fa fa-comments-o"></i> 답변	</h6>
 		<button id="btn-addreply" class="btn btn-sm btn-outline-secondary"
-			data-bs-target="#replyModal" data-bs-toggle="modal">새댓글</button>
+			data-bs-target="#replyModal" data-bs-toggle="modal">재답변</button>
 	</div>
 	<!-- 댓글 리스트 영역 -->
 	<ul class="p-0 replyArea" style="list-style: none;"></ul>

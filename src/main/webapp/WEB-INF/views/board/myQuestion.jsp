@@ -8,11 +8,11 @@
     margin-right: 20px; /* Adds space between list items */
 }
 
-/* .myprofile li:hover{
-	color: white;
-	background: #30622f;
+.readonly {
+	background: #eee;
 }
- */
+
+
 </style>
 <div class="container w-75 p-5">
 	<div class="myQuestion">
@@ -30,14 +30,14 @@
 			<input type="text" class="form-control" 
 				id="subject" name="subject" placeholder="글제목" autofocus />
 				
-			<textarea class="form-control mt-2" name="contents" id="contents"
+			<textarea class="form-control mt-2" rows="7" cols="50" name="contents" id="contents"
 				 placeholder="글내용"></textarea>
 				 
-			<input type="text" class="form-control mt-2" 
-				id="writer" name="writer" value="${sessionScope.loginDTO.name}"/>	
+			<input type="text" class="form-control mt-2 readonly" 
+				id="writer" name="writer" value="${sessionScope.loginDTO.name}" style="width: 150px;"readonly/>	
 						
-			<input type="text" class="form-control mt-2" 
-				id="id" name="mid_fk" value="${sessionScope.loginDTO.id}"/>		
+			<input type="text" class="form-control mt-2 readonly" 
+				id="id" name="mid_fk" value="${sessionScope.loginDTO.id}" style="width: 150px;" readonly/>		
 					
 			<div class="text-cener mt-3">
 				<button class="btn btn-primary">문의하기</button>			

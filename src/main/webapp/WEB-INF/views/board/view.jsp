@@ -24,37 +24,21 @@
 	</div>
 
 	<div class="text-center mt-3">
-		<button id="btn-modify" class="btn btn-primary me-2">수정하기</button>
-		<button id="btn-list" class="btn btn-primary">리스트</button>
+		<button id="btn-list" class="btn btn-primary">리스트</button> 
 	</div>
 
 	<!---------------------- 댓글 UI ----------------------->
 	<div class="mt-5 mb-3 d-flex justify-content-between">
-		<h6><i class="fa fa-comments-o"></i> 댓글	</h6>
+		<h6><i class="fa fa-comments-o"></i> 답변	</h6>
 		<button id="btn-addreply" class="btn btn-sm btn-outline-secondary"
-			data-bs-target="#replyModal" data-bs-toggle="modal">새댓글</button>
+			data-bs-target="#replyModal" data-bs-toggle="modal">댓글</button>
 	</div>
+	
 	<!-- 댓글 리스트 영역 -->
 	<ul class="p-0 replyArea" style="list-style: none;">
-		<!-- <li class="mb-2">
-			<div class="form-control">
-				<div class="d-flex justify-content-between">
-					<h6>홍길동</h6>
-					<span>2023-12-05</span>
-				</div>
-				<p>댓글 테스트.................</p>
-			</div>
-		</li>
-		<li class="mb-2">
-			<div class="form-control">
-				<div class="d-flex justify-content-between">
-					<h6>홍길동</h6>
-					<span>2023-12-05</span>
-				</div>
-				<p>댓글 테스트.................</p>
-			</div>
-		</li> -->
+		<!-- 댓글 영역 -->
 	</ul>
+	
 	<!-------------------- Pagenation Area -------------------->
 	<ul class="pagination justify-content-center my-5">
       <li class="page-item">
@@ -317,7 +301,7 @@
 
 <script type="text/javascript">			
 	$("#btn-list").click(()=>{
-		location.href="<c:url value='list.do?viewPage=${pDto.viewPage}&searchType=${pDto.searchType}&keyword=${pDto.keyword}&cntPerPage=${pDto.cntPerPage}'/>";
+		location.href="<c:url value='myQuestionList.do?viewPage=${pDto.viewPage}&searchType=${pDto.searchType}&keyword=${pDto.keyword}&cntPerPage=${pDto.cntPerPage}'/>";
 	});
 	
 	$("#btn-modify").click(()=>{

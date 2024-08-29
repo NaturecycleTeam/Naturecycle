@@ -98,7 +98,7 @@ public class SalesController {
 		}
 				
 		String json = gson.toJson(jArray);
-		System.out.println("json 일데이터값@@@@@" + json);	
+//		System.out.println("json 일데이터값@@@@@" + json);	
 		
 		return json;
 	}

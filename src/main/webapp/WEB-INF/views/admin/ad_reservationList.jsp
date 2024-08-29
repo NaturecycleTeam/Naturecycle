@@ -121,9 +121,9 @@
 	<table id="calendar" style="width:60%;">
 	    <!-- Row for year and month header -->
 	    <tr id="calendarTitleRow">
-	        <td align="center"><button onclick="prevCalendar()">◀</button></td>
+	        <td align="center"><button onclick="prevCalendar()"><</button></td>
 	        <td colspan="5" id="calendarTitle" class="calendar-header"></td>
-	        <td align="center"><button onclick="nextCalendar()">▶</button></td>
+	        <td align="center"><button onclick="nextCalendar()">></button></td>
 	    </tr>
 	    <!-- Row for weekday names -->
 	    <tr class="weekday-header">

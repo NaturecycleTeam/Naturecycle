@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mbc.domain.CartDTO;
+import com.mbc.domain.MemberDTO;
 import com.mbc.domain.OrderDTO;
 import com.mbc.service.CartService;
 import com.mbc.service.OrderService;
@@ -44,7 +45,7 @@ public class OrderController {
 	    // 각 장바구니 항목을 OrderDTO로 변환하여 DB에 저장
 	    for (CartDTO cartItem : cartList) {
 	        OrderDTO dto = new OrderDTO();
-	        
+
 	        // OrderDTO에 필요한 값 설정
 	        dto.setPnum_fk(cartItem.getPnum_fk()); // 상품 번호 설정
 	        dto.setOid_fk(cartItem.getCid_fk()); // 주문자 아이디 설정
@@ -52,11 +53,20 @@ public class OrderController {
 	        dto.setPrice_each(cartItem.getPrice()); // 개별 가격 설정
 	        dto.setPoint(cartItem.getPoint()); // 포인트 설정
 	        
-	        // 주문 정보를 DB에 저장
+	        // 주문 정보를 OrderDTO로 DB에 저장
 	        service.orderInsert(dto);
+	        
+	        // 포인트는 별도로 memberDTO에 저장
+	        MemberDTO mdto = new MemberDTO();
+	        
+	        mdto.setId(cartItem.getCid_fk()); // 아이디 저장
+	        mdto.setPoint(cartItem.getPoint()*cartItem.getPqty()); // 포인트 설정
+	        
+	        // 포인트는 MemberDTO로 저장
+	        service.pointInsert(mdto);
 	    }
 	    
-	    // 주문이 완료된 후 세션에서 dtos 제거
+	    // 주문이 완료된 후 장바구니에서 dtos 제거
 	    for (CartDTO cart : cartList) {	    	
 	    	cartService.deleteCart(cart.getCart_num());
 	    }

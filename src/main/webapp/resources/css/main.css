@@ -100,7 +100,6 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 	display : flex;
 	justify-content : space-between;
 	align-items : center;		
-	padding : 0 300px;
 	padding-top : 10px;
 }
 
@@ -133,7 +132,7 @@ ul.footer_navbar-menu{
 }
 
 .question_btn {
-	background : #8f654e;
+	background : #30622f;
 	border-style : none;
 	color : white;
 }

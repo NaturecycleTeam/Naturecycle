@@ -351,7 +351,7 @@ $(document).ready(function() {
 	    success: function(data) {
 	        // Extract data from the response
 	        for (let i = 0; i < data.length; i++) {
-	            donation_month.push(data[i].date);  // Assuming 'date' is the month
+	            donation_month.push(data[i].date).toString();  // Assuming 'date' is the month
 	            monthly_amount.push(data[i].sum);   // Assuming 'sum' is the amount
 	        }
 	        console.log(donation_month);

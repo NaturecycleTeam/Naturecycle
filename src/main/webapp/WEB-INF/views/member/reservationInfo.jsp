@@ -54,7 +54,20 @@
 							<td>${dto.date}</td>
 							<td>${dto.time}</td>
 							<td>${dto.contents}</td>
-							<td>${dto.reservationStatus.getValue()}</td>
+							<td>
+				            	<c:choose>
+							        <c:when test="${dto.reservationStatus.getValue() == '예약확정'}">
+							            <span style="color: blue;">${dto.reservationStatus.getValue()}</span>
+							        </c:when>
+							        <c:when test="${dto.reservationStatus.getValue() == '예약대기'}">
+							            <span style="color: red;">${dto.reservationStatus.getValue()}</span></a>
+							        </c:when>
+							        <c:otherwise>
+							            <span>${dto.reservationStatus.getValue()}</span>
+							        </c:otherwise>
+							    </c:choose>
+				            </td>            
+							<%-- <td>${dto.reservationStatus.getValue()}</td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -167,7 +167,7 @@
 				FROM tbl_donation
 				GROUP BY YY, MM
 			   )      
-		SELECT DATE_FORMAT(donation_date, '%y-%m-%d') AS donation_month,
+		SELECT CONCAT(YY, '-', MM) AS donation_month,
 			   monthlyAmount    
 		FROM MONTHLY_DONATION 
 		ORDER BY donation_month;   

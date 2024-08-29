@@ -1,8 +1,5 @@
 package com.mbc.controller;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +15,23 @@ public class DonateController {
 
 	@Autowired
 	private DonateService service;
+	
+	
+	// 캠페인 페이지 이동
+	@GetMapping("campaign.do")
+	public String campaignForm() {
 
+		return "donate/campaign";
+	}
+	
+	// 수거센터 맵페이지 이동
+	@GetMapping("getMap.do")
+	public String centerMap() {
+
+		return "donate/center_map";
+	}
+	
+	
 	// 기부페이지 이동
 	@GetMapping("donation.do")
 	public String donateInfo(String id, Model model) {

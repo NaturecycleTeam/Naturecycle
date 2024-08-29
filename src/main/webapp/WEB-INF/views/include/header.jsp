@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,11 @@
 </head>
 
 <style>
+
+body {
+	margin: 50px 100px 50px 100px; /* top right bottom left */
+}
+
 ul {
 	list-style: none; /* - 삭제 */
 }
@@ -165,7 +171,7 @@ li>a {
 			      <a class="nav-link" href="recycle.do"><i class="fa fa-recycle"></i><b> 리사이클</b></a>
 			    </li>&nbsp;&nbsp;&nbsp; 
 			    <li class="nav-item">
-			      <a class="nav-link" href="donation.do?id=${sessionScope.loginDTO.id}"><i class="fa fa-tree"></i><b> 캠페인</b></a>
+			      <a class="nav-link" href="campaign.do"><i class="fa fa-tree"></i><b> 캠페인</b></a>
 			    </li>
 		  </ul>
 	  </div>	
@@ -201,7 +207,7 @@ li>a {
 	<main>
 		<!-- <div class="container mt-5 d-flex" id="main"> -->
 		<!-- <div class="container d-flex justify-content-center"> -->
-		<div class="container">
+		<div class="container" >
 			<%-- <%@ include file="u_left.jsp"%> --%>
 
 			<!-- </header> -->

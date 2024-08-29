@@ -9,4 +9,9 @@
 		VALUES (#{pnum_fk}, #{oid_fk}, #{qty_ordered}, #{price_each}, #{point})
 	</insert>
 	
+	<update id="pointInsert">
+		UPDATE tbl_member SET point = point + #{point}
+		WHERE id = #{id}
+	</update>
+	
 </mapper>

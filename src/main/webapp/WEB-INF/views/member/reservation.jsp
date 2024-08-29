@@ -24,17 +24,17 @@
 	
 	<form action="reservation.do" method="post">
 		<h3 class="text-center">예약하기</h3>
-		<div class="mb-3">
-			<p for="rid">아이디</p> 
+		<div class="mt-3">
+			<p class="m-0" for="rid">아이디</p> 
 			<input type="text" class="form-control" id="id" name="rid_fk" value="${sessionScope.loginDTO.id}" />
 		</div>
-		<div class="mb-3">
-			<p for="date">예약날짜</p> 
+		<div class="mt-3">
+			<p class="m-0" for="date">예약날짜</p> 
 			<input type="text" id="datepicker" name="date" style="width: 150px;" placeholder="예약일 선택" />
 		</div>
 
-		<div class="mb-3">
-			<p for="time">예약시간</p>
+		<div class="mt-3">
+			<p class="m-0" for="time">예약시간</p>
 			<table>
 				<tr>
 					<td><input type="text" class="form-control time-select"
@@ -57,14 +57,18 @@
 						id="time8" value="17:00" readonly /></td>
 				</tr>
 			</table>
-			<!-- 선택된 시간이 여기에 표시됩니다. -->
-			<input type="text" class="form-control" id="selectedTime" name="time"/>	
 			
 		</div>
+		
+		<div class="mt-3">	
+			<!-- 선택된 시간이 여기에 표시됩니다. -->
+			<p class="m-0" for="contents">선택 시간</p>
+			<input type="text" class="form-control" id="selectedTime" name="time" style="width:300px;"/>				
+		</div>
 
-		<div class="mb-2">
-			<p for="contents">요청사항</p>
-			<textarea rows="5" cols="50" name="contents"
+		<div class="mt-3">
+			<p class="m-0" for="contents">요청사항</p>
+			<textarea rows="5" cols="60" name="contents"
 				placeholder="추가 요청사항을 입력하세요"></textarea>
 		</div>
 

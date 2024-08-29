@@ -14,7 +14,7 @@ public class DonationDTO {
 	private Date donation_Date;
 	
 	// 관리자홈 기부금 차트
-	private LocalDate donation_month;
+	private String donation_month;
 	private String monthlyAmount;
 	
 }

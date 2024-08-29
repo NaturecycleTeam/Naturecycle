@@ -5,7 +5,7 @@
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
-<div class="container w-50 mt-5 p-5 shadow rounded"
+<div class="container w-50 m-5 p-5 shadow rounded"
 	style="height: 400px">
 	<form action="<c:url value="login.do"/>" method="post">
 		<input type="hidden" name="moveUrl" value="${moveUrl}" size="80" />

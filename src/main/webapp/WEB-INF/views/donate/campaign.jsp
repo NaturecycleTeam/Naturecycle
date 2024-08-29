@@ -27,31 +27,32 @@
    <!-- Start recycle_container -->
    <div class="recycle_container">
    
-      <!-- Start recycle_reservation -->
-       <div class="recycle_reservation">
+     <div class="recycle_donation">
            <div class="recycle_row recycle_slider slick-initialized slick-slider">
-               <div class="slick-list draggable" >
+              <div class="slick-list draggable" >
                    <div class="slick-track" style="opacity: 1; width: 760px; transform: translate3d(0px, 0px, 0px); margin-bottom: 50px;">
                        <div class="slick-slide slick-active" data-slick-index="0" aria-hidden="false" style="width: 380px;">
                            <div class="recycle_item">
                                <div class="recycle_block">
                                    <a class="recycle_blockLink" href="<c:url value='reservation.do'/>">
-                                       <span class="recycle_img" style="background-image: url('https://dva1blx501zrw.cloudfront.net/uploaded_images/kr/images/12525/original/분바스틱.jpg')" role="img" aria-label></span>
+                                       <span class="recycle_img" role="img" aria-label>
+                                          <img src="resources/imgs/recycle_donation.jpg" alt="recycle_donation" style="width: 329px; height: 320px;">
+                                       </span>
                                        <div class="recycle_content">
-                                           <h5 class="recycle_title">공병 수거 예약하기</h5>
+                                           <h5 class="recycle_title">기부 캠페인에 참여해보세요!</h5>
                                            <div class="recycle_text">
-                                               <p>재활용 프로그램을 진행하고 있습니다. 지금 바로 다 쓴 재활용품을 NatureCycle로 보내주세요.</p>
+                                               <p>기부 캠페인을 진행하고 있습니다. NatureCycle과 함께하세요!</p>
                                            </div>
                                        </div>
                                    </a>
-                                   <a class="reservation_link" href="<c:url value='reservation.do'/>">예약 신청하러 가기</a>
+                                   <a class="reservation_link" href="donation.do?id=${sessionScope.loginDTO.id}">NatureCycle과 함께하는 캠페인</a>
                                </div>
                            </div>
                        </div>
                    </div>
                </div>    
            </div>    
-       </div> <!-- End of recycle_reservation -->
+       </div> <!-- End of recycle_donation -->
        
        <!-- Start recycle_donation -->
        <div class="recycle_donation">
@@ -63,16 +64,16 @@
                                <div class="recycle_block">
                                    <a class="recycle_blockLink" href="<c:url value='reservation.do'/>">
                                        <span class="recycle_img" role="img" aria-label>
-                                          <img src="resources/imgs/recycling.png" alt="recycle_donation" style="width: 329px; height: 320px;">
+                                          <img src="resources/imgs/recycle_donation.jpg" alt="recycle_donation" style="width: 329px; height: 320px;">
                                        </span>
                                        <div class="recycle_content">
-                                           <h5 class="recycle_title">지구센터 위치보기</h5>
+                                           <h5 class="recycle_title">환경 보호 캠페인에 참여해보세요!</h5>
                                            <div class="recycle_text">
-                                               <p>재활용 프로그램을 진행하고 있습니다. 지구센터에 직접 방문해주세요.</p>
+                                               <p>Coming Soon!!!</p><br/>
                                            </div>
                                        </div>
                                    </a>
-                                   <a class="reservation_link" href="getMap.do">위치 확인하러 가기</a>
+                                   <a class="reservation_link" href="#">NatureCycle과 함께하는 캠페인</a>
                                </div>
                            </div>
                        </div>

@@ -197,6 +197,7 @@ main .graph_box .graph_date {
 			        <button class="btn rounded-0 rounded-end" style="background:#1384aa; color:white">
 			            <i class="fa fa-search"></i>
 			        </button>
+			        <button type="button" id="resetButton" class="btn btn-secondary ms-2">리셋</button>
 			    </div>
 			</form>
 			<form action="salesInfoPeriod.do" id="searchForm" method="get">
@@ -268,7 +269,8 @@ main .graph_box .graph_date {
 					 <tr>
 				        <td>${dto.order_num}</td>
 				        <td>${dto.oid_fk}</td>
-				        <td><fmt:formatDate value="${dto.order_date}" pattern="yyyy-MM-dd"/></td>
+				        <%-- <td><fmt:formatDate value="${dto.order_date}" pattern="yyyy-MM-dd"/></td> --%>
+				        <td>${dto.order_date}</td>
 				        <td>${dto.pname}</td>
 				        <td>${dto.qty_ordered}</td>
 				        <td><fmt:formatNumber value="${dto.price_each}" type="currency"/></td>						
@@ -389,7 +391,12 @@ main .graph_box .graph_date {
        });
    }
   
-	
+   $("#resetButton").click(()=>{
+	   document.getElementById('searchForm').reset();
+	   location.href = "salesInfo.do";
+	});
+   
+   
 	// datepicker
 	$(function() {
         $("#datepicker1,#datepicker2").datepicker({
@@ -488,9 +495,7 @@ main .graph_box .graph_date {
 	            }
 	        });
 	    }
-	
-	
-	
+    
 	// 바로 작동
 	$(document).ready(function() {
 		

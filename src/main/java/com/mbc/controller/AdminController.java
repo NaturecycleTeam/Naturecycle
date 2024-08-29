@@ -1,6 +1,8 @@
 package com.mbc.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -252,7 +254,7 @@ public class AdminController {
 				DonationDTO dto = it.next();
 				JsonObject object = new JsonObject();
 				
-				String date = dto.getDonation_month().toString();
+				String date = dto.getDonation_month();
 							
 				String sum = dto.getMonthlyAmount().toString();
 //				System.out.println(sum);

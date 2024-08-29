@@ -34,7 +34,7 @@
 	        <!-- 주문일 -->
 	        <if test="searchType == 'W'.toString()">
 	           <!--  A.order_date LIKE CONCAT('%', #{keyword}, '%') -->
-	            A.order_date = #{keyword}
+	            DATE_FORMAT(A.order_date, '%Y-%m-%d') = #{keyword}
 	        </if>
 	    </where>
 	</sql>	
@@ -65,7 +65,7 @@
 	    ORDER BY A.order_date -->
 	    <!-- LIMIT #{startIndex}, #{cntPerPage} -->
 	    
-	    SELECT A.order_num, A.order_date, A.qty_ordered, A.price_each, B.pname				
+	    SELECT A.order_num, A.oid_fk, A.order_date, A.qty_ordered, A.price_each, B.pname				
 	    FROM tbl_order A
 	    LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
 	    WHERE A.order_date BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1 DAY)
@@ -76,11 +76,11 @@
 	 <!-- 검색어 있을 때 전체 게시글 수 -->
 	  <select id="totalCnt" resultType="Integer">
 	  	SELECT count(*) 
-	  	FROM tbl_order
-		<!-- LEFT JOIN orderDetail B ON A.order_num = B.order_num -->
+	  	FROM tbl_order A
+		LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
 		<!-- LEFT JOIN product_info C ON B.pcode = C.pcategory_fk -->
 		<include refid="criteria"></include>
-		ORDER BY order_date	  	
+		ORDER BY A.order_date	  	
 	  	<!-- <include refid="criteria"></include> -->
 	  </select>
 	
@@ -124,14 +124,14 @@
 	</select>
 	
 	<!-- 매출관리페이지 월선택 30일 매출데이터  -->
-	<select id="getSalesDataForPeriod" resultType="orderDTO">
-	    <!-- SELECT DATE(order_date) AS date, SUM(price_each * qty_ordered) AS sales -->
+	<!-- <select id="getSalesDataForPeriod" resultType="orderDTO">
+	    SELECT DATE(order_date) AS date, SUM(price_each * qty_ordered) AS sales
 	    SELECT A.order_date, SUM(A.qty_ordered * A.price_each) AS PURCHASE_AMOUNT
 	    FROM tbl_order A
 	    WHERE A.order_date BETWEEN #{startDate} AND #{endDate}
 	    GROUP BY DATE(order_date)
 	    ORDER BY DATE(order_date)
-	</select>
+	</select> -->
 	
 	<!-- 매출관리페이지 - 오늘매출 상세정보 -->
 	<!-- <select id="todayPurchaseInfo" resultType="orderDTO">
