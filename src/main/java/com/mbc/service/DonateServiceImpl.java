@@ -1,5 +1,7 @@
 package com.mbc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +33,12 @@ public class DonateServiceImpl implements DonateService {
 	public void donationAmount(DonationDTO dDto) {
 		
 		mapper.donationAmount(dDto);
+	}
+	
+	// 도네이션 리스트
+	@Override
+	public List<DonationDTO> donationList() {
+		
+		return mapper.donationList();
 	}
 }

@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mbc.domain.BoardDTO;
 import com.mbc.domain.PageDTO;
-import com.mbc.domain.QuestionBoardDTO;
 import com.mbc.mapper.BoardMapper;
 
 @Service

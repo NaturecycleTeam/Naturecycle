@@ -1,5 +1,7 @@
 package com.mbc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,28 +23,31 @@ public class DonateController {
 	@GetMapping("campaign.do")
 	public String campaignForm() {
 
-		return "donate/campaign";
+		return "donate/donate_campaign";
 	}
 	
-	// 수거센터 맵페이지 이동
-	@GetMapping("getMap.do")
-	public String centerMap() {
-
-		return "donate/center_map";
-	}
-	
+	// 캠페인 리스트 페이지 이동
+	   @GetMapping("campaignInfo.do")
+	   public String campaignInfo() {
+	      
+	      return "donate/donate_campaignInfo";
+	   }
 	
 	// 기부페이지 이동
 	@GetMapping("donation.do")
 	public String donateInfo(String id, Model model) {
+		
+		List<DonationDTO> dDto = service.donationList();
+		model.addAttribute("dDto", dDto);
+		
 		MemberDTO dto = service.donateInfo(id);
 		model.addAttribute("dto", dto);
 //		System.out.println("dto = " + dto);
-		return "donate/donation";
+		return "donate/donate_donation";
 	}
 
 
-	// 기부하기 및 기부테이블 내역 저장 
+	// 기부하기 
 	@PostMapping("donation.do")
 	public String donation(int point, MemberDTO dto, Model model) {
 		// Get the current points from the database
@@ -78,5 +83,18 @@ public class DonateController {
 		return "redirect:donation.do?id=" + dto.getId();
 	}
 	
+	// 기부내역 확인 페이지 이동
+	@GetMapping("mydonationInfo.do")
+	public String mydonationInfo() {
+		
+		return "donate/donate/donationInfo";
+	}
 	
+	// 기부등급
+	@PostMapping("upgradeLevel.do")
+	public String upgradeLevel() {
+		
+		
+		return "donate/donate_donationInfo";
+	}
 }

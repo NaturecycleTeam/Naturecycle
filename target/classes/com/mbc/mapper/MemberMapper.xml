@@ -77,11 +77,16 @@
 		name=#{mnickname}
 	</select>
 
-	<insert id="kakaoinsert">
+<!-- 	<insert id="kakaoinsert">
 		insert into tbl_member
 		values (null, #{mid}, null, #{mmail}, null, null, null, null, #{mnickname},
 		null, null, null, null, null, null, null, null, null, null)
-	</insert>
-
+	</insert> -->
+	
+	<update id="updatePoint">
+		UPDATE tbl_member
+        SET point = #{param2}
+        WHERE id = #{param1}
+	</update>
 
 </mapper>

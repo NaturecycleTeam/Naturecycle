@@ -4,35 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mbc.mapper.ReservationMapper">
 
-	<!-- 관리자 -->
-	
-	<!-- 예약리스트 -->
-	<!-- <sql id="criteria">
-	    <where>
-	        <if test="searchType == 'S'.toString()">
-	            AND reservationStatus = 'PENDING'
-	        </if>
-	        <if test="searchType == 'C'.toString()">
-	            AND reservationStatus = 'DONE'
-	        </if>
-	        <if test="searchType == 'W'.toString()">
-	            AND reservationStatus = 'CANCEL'
-	        </if>
-	    </where>
-	</sql>
-	<select id="reservationList" resultType="reservationDTO">
-	    SELECT * FROM tbl_reservation
-	    <include refid="criteria" />
-	    ORDER BY rno DESC
-	    LIMIT #{startIndex}, #{cntPerPage}
-	</select> -->
-	
-	<!-- 전체 게시글 수 -->
-	 <!-- <select id="totalCnt" resultType="Integer">
-	  	SELECT count(*) FROM tbl_reservation
-	  	<include refid="criteria"></include>
-	  </select> -->
-  
+	<!-- 관리자 -->  
 	<!-- 예약확정 -->
 	<update id="reservationConfirmed">
 		UPDATE tbl_reservation
@@ -58,17 +30,21 @@
     	ORDER BY time
     </select>
 
+
+
+
 	<!-- 유저 -->
 	
 	<!-- 예약하기 -->
 	<insert id="reservation" parameterType="reservationDTO">
-		INSERT INTO tbl_reservation (rno, rid_fk, date, time, contents, reservationStatus)
-		VALUES (#{rno}, #{rid_fk}, #{date}, #{time}, #{contents}, #{reservationStatus})
+		INSERT INTO tbl_reservation (rno, rid_fk, date, time, contents, reservationStatus, amount)
+		VALUES (#{rno}, #{rid_fk}, #{date}, #{time}, #{contents}, #{reservationStatus}, #{amount})
 	</insert>
 	
 	<!-- 예약정보 확인하기 -->
 	<select id="reservationInfo" resultType="reservationDTO"> 
 		SELECT * FROM tbl_reservation WHERE rid_fk = #{rid_fk}
+		ORDER BY date DESC
 	</select>
 	
 	<!-- 예약시간 중복체크 -->
@@ -78,5 +54,10 @@
         WHERE date = #{date}
     </select>
     
+    <!-- 예약확정시 유저정보 불러오기 -->
+    <select id="getInfo" resultType="reservationDTO">
+    	SELECT * from tbl_reservation
+    	WHERE rno = #{rno}
+    </select>
 	
 </mapper>

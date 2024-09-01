@@ -9,49 +9,48 @@
 <div class="container w-50 mt-5 p-5 shadow">
    <form action="memberInsert.do" method="post" name="joinForm" onSubmit="return submitCheck()">
       <h4>회원가입</h4>
-      <div class="row">
-      	<!-- <div class="col-md-8 pe-0">            
-     	 	<input class="form-control mb-2" type="text" name="id" id="id" placeholder="아이디" autofocus>    
-     	</div>
-     	<div class="col-md-4">            
-     		<a class="btn btn-outline-info w-100" onclick="idCheck()">중복체크</a> 
-     	</div>   -->  
-      </div>
       
       <div class="mt-2 mb-2">
-         <lable for="id">아이디</lable>
+         <label for="id">아이디</label>
 	       <input class="form-control mb-2" type="text" id="id" name="id" placeholder="아이디" onkeyup="idCheck()">
 	     	 	<p id="chkMsg" class="mb-2"></p>
 	       <input type="hidden" id="isIdCheck" value="no"> <!-- 아이디 중복체크 submit 기본값 no, 자바스크립트에서 활용 -->
 	  </div>
+	  
       <div class="mb-2">
-         <lable for="pw">비밀번호</lable>
+         <label for="pw">비밀번호</label>
       	 	<input class="form-control mb-2" type="password" id="pw" name="pw" placeholder="비밀번호" onkeyup="pwCheck()">
       	 	<p id="chkMsg2" class="mb-2"></p>
       </div>
+      
       <div class="mb-2">
-         <lable for="pwConfirm">비밀번호 확인</lable>
+         <label for="pwConfirm">비밀번호 확인</label>
         	<input class="form-control mb-2" type="password" id="pwConfirm" name="pwConfirm" placeholder="비밀번호 확인" onkeyup="pwCheck()"/>
          	<p id="chkMsg3" class="mb-2"></p>
          	<input type="hidden" id="isPwCheck" value="no">
       </div>
+      
       <div class="mb-2">
-         <lable for="name">이름</lable>
+         <label for="name">이름</label>
       	 	<input class="form-control mb-2" type="text" id="name" name="name" placeholder="이름">
+      	 	<input type="hidden" id="isPwCheck" value="no">
+      	 	<input type="hidden" id="isNameCheck" value="no">
       </div>
+      
       <!-- <div class="mb-2">
          <lable for="age">나이</lable>
       		<input class="form-control mb-2" type="text" id="age" name="age" placeholder="나이">
       </div> -->
+      
       <div class="mb-2">
-         <lable for="tel">전화번호</lable>
+         <label for="tel">전화번호</label>
       		<input class="form-control mb-2" type="text"id="tel" name="tel" placeholder="전화번호" onkeyup="telCheck()">
       			<p id="chkMsg4" class="mb-2"></p>
 	        <input type="hidden" id="isTelCheck" value="no"> <!-- 아이디 중복체크 submit 기본값 no, 자바스크립트에서 활용 -->
       </div>
       
       <!-- 이메일 인증을 보내기 위한 내용 // 부트스트랩은 12개의 row로 나뉘어 있음 -->
-         <lable for="email">이메일</lable>
+         <label for="email">이메일</label>
 	      <div class="row">
 	      	<div class="col-md-8 pe-0"> <!-- pe-0 안쪽여백 제로 -->
 	      		<input class="form-control" type="text" id="email" name="email" placeholder="이메일">
@@ -64,17 +63,6 @@
 	      
 	      <!-- 이메일 인증을 확인하기 위한 내용 -->
 	      <div class="row" id="confirmEmail"> 
-		      	<!-- div 내용은 밑에 자바 스크립트 html('')에 붙여넣기 함, 다시 돌리고 style display:block none 사용 -->
-	<!-- 	주석은 폼컨트롤 이용, 밑에는 CSS 이용	      	
-				<div class="col-md-6 pe-0">
-		      		<input class="input-code form-control mb-2" type="text" id="confirmUUID" placeholder="인증코드 입력">
-		      	</div>
-		      	<div class="col-md-2 pe-0">	
-		      		<input class="time form-control" value="03:00" readonly>
-		      	</div>
-		        <div class="col-md-4">
-		      		<span class="btn btn-outline-secondary w-100" onclick="emailConfirm()">인증코드 확인</span>
-		      	</div> -->
 		      	<div class="col-md-8 pe-0">
 		      		<input class="input-code" type="text" id="confirmUUID" placeholder="인증코드 입력"><input class="time" value="" readonly>
 		      	</div>
@@ -84,13 +72,10 @@
 		      		<p class="code-msg mt-1 mb-2"></p>
 	      </div>
       
- <!----------------------------------- 주소 ----------------------------------->
-<!--  <div class="mb-3">
-         <lable for="addr">주소</lable>
-         <input type="text" class="form-control" id="addr" placeholder="주소" name="addr"/>
-      </div> -->
+ 		<!----------------------------------- 주소 ----------------------------------->
+
       	<div class="row mb-1">
-      		<lable for="addr">주소</lable><br>
+      		<label for="addr">주소</label><br>
     		<div class="col-md-6">
     			<input class="form-control mb-1" type="text" id="sample6_postcode" name="zipcode" placeholder="우편번호" readonly>
     		</div>
@@ -98,11 +83,11 @@
 				<input class="btn btn-secondary mb-1" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 			</div>
 		</div>
-				<input class="form-control mb-2" type="text" id="sample6_address" name="road_addr" placeholder="주소" readonly>
-				<input class="form-control mb-2" type="text" id="sample6_detailAddress" name="detail_addr" placeholder="상세주소">
-				<input class="form-control mb-2" type="text" id="sample6_extraAddress" name="plus_addr" placeholder="참고항목" readonly>
+		<input class="form-control mb-2" type="text" id="sample6_address" name="road_addr" placeholder="주소" readonly>
+		<input class="form-control mb-2" type="text" id="sample6_detailAddress" name="detail_addr" placeholder="상세주소">
+		<input class="form-control mb-2" type="text" id="sample6_extraAddress" name="plus_addr" placeholder="참고항목" readonly>
       
-      						<!-- 위에는 뷰 // 아래는 로직 -->
+		<!-- 위에는 뷰 // 아래는 로직 -->
       	
 	    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
@@ -299,7 +284,7 @@
 	function timer_start(){
 		timer_stop();
 		
-		let count = 20;
+		let count = 180;
 		time_display = $('.time');
 		time_display.val("03:00");
 		
@@ -433,6 +418,7 @@
 	function submitChk(){
 		let isIdCheck = $("#isIdCheck").val();
 		let isPwCheck = $("#isPwCheck").val();
+		let isNameCheck = $("#isNameCheck").val();
 		let isTelCheck = $("#isTelCheck").val();
 
 		if(isIdCheck == "no" || isPwCheck == "no"){
@@ -442,7 +428,7 @@
 		}
 		
 		if(isTelCheck == "no"){
-			alert("전화번호 중복체크를 확인해주세요!!")
+			alert("전화번호를 입력해주세요!!")
 			$("#tel").select();
 			return false;
 		}
@@ -457,6 +443,20 @@
 			$("#email").select();
 			return false;
 		}
+		
+		if(!isEmailCheck){
+			alert("이메일 인증을 해주세요!!");
+			$("#email").select();
+			return false;
+		}
+		
+
+		if(!isNameCheck){
+			alert("이름을 입력해주세요!!");
+			$("#name").select();
+			return false;
+		}
+		
 		alert("회원가입 완료~ 로그인을 진행해주세요!!");
 		return true;
 	}

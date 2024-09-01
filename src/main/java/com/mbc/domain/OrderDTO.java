@@ -21,7 +21,7 @@ public class OrderDTO {
 	private int point;
 //	private Dlv_status dlv_status;  // 만들어야함
 	
-		
+	
 	////////// 관리자홈 ////////
 	private String TODAY_PURCHASE_AMOUNT;	// 당일 매출 
 	private String TOT_PURCHASE_AMOUNT; // 누적 총매출 
@@ -42,6 +42,10 @@ public class OrderDTO {
 	private int startIndex;
     private int cntPerPage;
 
-    
+    // 주문 목록확인(고객 마이페이지)
+    private String order_count;
+    private String pimage;
+    private String TotPrice;
+    private String TotPoint;
 	
 }

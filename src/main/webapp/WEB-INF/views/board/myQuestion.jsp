@@ -5,26 +5,34 @@
 <style>
 .myQuestion li {
     display: inline; /* Aligns list items in a row */
-    margin-right: 20px; /* Adds space between list items */
+    margin-right: 30px; /* Adds space between list items */
+    margin-bottom: 0;
 }
 
 .readonly {
 	background: #eee;
 }
-
-
 </style>
+
+
 <div class="container w-75 p-5">
 	<div class="myQuestion">
 		<ul>
-			<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
-			<li><a href='<c:url value="reservationInfo.do?rid_fk=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
-			<li><a href='<c:url value="myQuestion.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의하기</a></li>
-			<li><a href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항 확인</a></li>
+			<%-- <li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'><b>내 정보</b></a></li> --%>
+			<%-- <li><a href='<c:url value="reservationInfo.do?rid_fk=${sessionScope.loginDTO.id}"/>'><b>예약 정보</b></a></li> --%>
+			<%-- <li><a href='<c:url value="myQuestion.do?mid_fk=${sessionScope.loginDTO.id}"/>'><b>문의하기</b></a></li> --%>
+			<li><a href='<c:url value="myProfile.do"/>'><b>내 정보</b></a></li>
+			<li><a href='<c:url value="myOrderInfo.do"/>'><b>주문 정보</b></a></li>
+			<li><a href='<c:url value="reservationInfo.do"/>'><b>예약 정보</b></a></li>
+			<li><a href='<c:url value="#"/>'><b>캠페인</b></a></li>
+			<li><a href='<c:url value="myQuestion.do"/>'><b>문의하기</b></a></li>
 		</ul>
 	</div><hr>
 	
 	<div class="container w-75 p-5">
+		<div class="mb-5">
+			<button id="question-ckeck" class="btn" style="background:#00a600;">내 문의내역 확인</button>
+		</div>
 		<form action="myQuestion.do" method="post" >
 			<h4>1:1 문의하기</h4>
 			<input type="text" class="form-control" 
@@ -45,10 +53,11 @@
 		</form>
 	</div>
 </div>
-<!-- <script type="text/javascript">			
-	$("#question_check").click(()=>{
-		location.href='<c:url value="listQ.do?mid=${sessionScope.loginDTO.id}"/>';		
+
+<script type="text/javascript">			
+	$("#question-ckeck").click(()=>{
+		location.href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>';		
 	});
-</script> -->
+</script>
 
 <%@ include file="../include/footer.jsp" %>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.mbc.domain.BoardDTO;
 import com.mbc.domain.PageDTO;
-import com.mbc.domain.QuestionBoardDTO;
 
 public interface BoardService {
 	

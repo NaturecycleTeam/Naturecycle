@@ -41,7 +41,7 @@
 				<!-- 총액 합계초기화 -->
 				<c:set var="cartTotPrice" value="0"/>
 				<c:set var="cartTotPoint" value="0"/>
-				<c:set var="tot_pqty" value="0"/>
+				<%-- <c:set var="tot_pqty" value="0"/> --%>
 				
 				<!-- 카트리스트 커맨드에서 바인딩된 dtos를 dto-var변수에 넣는다  -->
 				<c:forEach var="dto" items="${dtos}"> 

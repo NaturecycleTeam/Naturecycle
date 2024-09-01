@@ -1,10 +1,5 @@
 package com.mbc.controller;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +7,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mbc.domain.CartDTO;
@@ -31,6 +27,7 @@ public class OrderController {
 	@Autowired
 	private CartService cartService;
 	
+	// 주문하기
 	@GetMapping("orderInsert.do")
 	public String orderComplete(HttpSession session, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		
@@ -57,7 +54,7 @@ public class OrderController {
 	        service.orderInsert(dto);
 	        
 	        // 포인트는 별도로 memberDTO에 저장
-	        MemberDTO mdto = new MemberDTO();
+			MemberDTO mdto = new MemberDTO();
 	        
 	        mdto.setId(cartItem.getCid_fk()); // 아이디 저장
 	        mdto.setPoint(cartItem.getPoint()*cartItem.getPqty()); // 포인트 설정
@@ -72,12 +69,49 @@ public class OrderController {
 	    }
 	    
 	    // 주문 완료 후 세션에서 'dtos' 속성을 제거
-	    // session.removeAttribute("dtos");	    
+	    // session.removeAttribute("dtos");	   --> NullPointerException 에러 발생 (
 	    
 	    redirectAttributes.addFlashAttribute("msg", "주문이 완료되었습니다!!");
 	    // 모든 주문 정보가 저장된 후 메인 페이지로 리디렉션
 	    
-	    return "redirect:myProfile.do";
+	    return "redirect:myOrderInfo.do";
 	}
+	
+	// 내 구매정보 불러오기
+	@GetMapping("myOrderInfo.do")
+	public String orderInfo(String id, Model model, HttpSession session) {
+		MemberDTO dto = (MemberDTO)session.getAttribute("loginDTO");
+		
+		// 로그인하지 않은 경우 또는 로그인 DTO가 없는 경우 처리
+	    if (dto == null) {
+	        // 예: 로그인 페이지로 리다이렉트
+	        return "redirect:/login";
+	    }
+	    
+	    // 세션에서 로그인 ID를 가져온다
+	    id = dto.getId();
+//	    System.out.println("idddddddddddddd : " + id);
+	    
+	    // 서비스 메서드를 호출하여 주문 정보를 조회한다
+	    List<OrderDTO> list = service.myOrderList(id);
+	    
+	    // 조회된 정보를 모델에 추가
+	    model.addAttribute("list", list);
+//	    System.out.println("listtttttttttttttt : " + list);
+	    
+	    // 뷰 이름을 반환
+	    return "member/member_orderInfo";
+	}
+	
+	// 내 주문정보 상세보기
+	@GetMapping("myOrderDetail.do")
+	public String myOrderDetail(int order_num, Model model) {
+		
+		List<OrderDTO> list = service.myOrderDetail(order_num);
+		model.addAttribute("list", list);
+		
+		return "member/member_orderView";
+	}
+	
 	
 }

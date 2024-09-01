@@ -19,5 +19,6 @@ public class BoardDTO {
 	
 	private int replyCnt; // 댓글 카운트
 	
+	
 
 }

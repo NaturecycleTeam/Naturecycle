@@ -23,13 +23,13 @@ public class BoardController {
 	private BoardService service;
 		
 	
-	@GetMapping("/register.do")
+	@GetMapping("/registerBoard.do")
 	public String register() {
 		
-		return "board/register";
+		return "board/boardRegister";
 	}
 	
-	@PostMapping("/register.do")
+	@PostMapping("/registerBoard.do")
 	public String register(BoardDTO dto, HttpSession session) {
 
 		// 임의 게시글 123개 생성
@@ -47,39 +47,6 @@ public class BoardController {
 		service.register(dto);
 		return "redirect:list.do";
 	}
-	
-	
-//	@GetMapping("/list.do")
-//	public String list(Model model) {
-//		List<BoardDTO> list = service.getList();
-//		model.addAttribute("list", list);
-//		
-//		return "board/boardList";
-//	}
-	
-	// 게시글 리스트 페이징 처리 
-//	@GetMapping("/list.do")
-////	public String list(@RequestParam(name="viewPage", defaultValue="1") int viewPage, Model model) {
-//	public String list(PageDTO pDto, Model model) {		
-//		List<BoardDTO> list = service.getList(pDto);
-//		model.addAttribute("list", list);
-//		
-//		// serviceImpl에서 셋팅된 pDto
-//		model.addAttribute("pDto", pDto);
-//		
-//		return "board/boardList";
-//	}
-	
-//	@RequestMapping("/list.do")
-//	public String list(PageDTO pDto, Model model) {		
-//		List<BoardDTO> list = service.getList(pDto);
-//		model.addAttribute("list", list);
-//						
-//		// serviceImpl에서 셋팅된 pDto
-//		model.addAttribute("pDto", pDto);
-//		
-//		return "board/boardList";
-//	}
 	
 	// 게시글 가져오기 (일반 게시글과 일대일문의 게시글 구분)
 	@RequestMapping("/list.do")
@@ -112,7 +79,7 @@ public class BoardController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("pDto", pDto);
 		
-		return "board/view";
+		return "board/boardView";
 	}
 	
 	// 수정페이지 이동
@@ -124,7 +91,7 @@ public class BoardController {
 		model.addAttribute("pDto", pDto);
 		System.out.println("vp2 : " + pDto.getViewPage());
 		
-		return "board/modify";
+		return "board/boardModify";
 	}
 	
 	// 게시글 수정하기

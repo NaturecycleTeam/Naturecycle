@@ -23,7 +23,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="id">비밀번호</label>
-			<input type="text" class="form-control" id="password" placeholder="비밀번호"
+			<input type="password" class="form-control" id="password" placeholder="비밀번호"
 				name="ad_password">
 			<c:if test="${requestScope.loginErr == 'pwdErr'}">
 				<p class="text-danger">비밀번호를 확인하세요!!</p>

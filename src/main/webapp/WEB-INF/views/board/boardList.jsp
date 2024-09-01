@@ -3,7 +3,7 @@
 <%@ include file="../include/header.jsp" %>
 
 <div class="container mt-5">
-	<h4>스프링 게시판</h4>
+	<h4>공지사항</h4>
 	<!-- 검색 -->
 	<div>
 		<form action="list.do" id="searchForm" method="post">
@@ -128,7 +128,7 @@
 	<script type="text/javascript">
 		// $("#btn-write").click(function(){})
 		$("#btn-write").click(()=>{
-			location.href="<c:url value='register.do'/>";
+			location.href="<c:url value='registerBoard.do'/>";
 		});
 		
 		$("#cntPerPage").change(()=>{

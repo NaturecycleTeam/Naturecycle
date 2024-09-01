@@ -5,7 +5,7 @@
 </div>
 </main>
 <!-- footer -->
-<footer class="border-top">
+<footer class="border-top mt-5">
 	<nav class="footer_navbar">		
 		<ul class="footer_navbar-menu">
 			<li><a href="<c:url value="#"/>">회사소개</a><li>

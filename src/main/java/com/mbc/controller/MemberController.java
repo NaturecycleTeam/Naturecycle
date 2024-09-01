@@ -127,7 +127,7 @@ public class MemberController {
 	@RequestMapping("memberRegister.do")
 	public String memberRegister() {
 
-		return "member/register";
+		return "member/member_register";
 	}
 
 	// 회원 가입
@@ -235,26 +235,26 @@ public class MemberController {
 	}
 	
 	// 카카오 로그인 기능이 처리되는 페이지
-	@RequestMapping("login/loginForm/getKakaoAuthUrl")
-	public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
-
-	    String reqUrl =
-	            "https://kauth.kakao.com/oauth/authorize?client_id=97ec31a3e4c1ac77764914d0f6bbf209&redirect_uri=http://localhost:8090/oauth&response_type=code";
-
-	    return reqUrl;
-	}
-	
-	@RequestMapping("/oauth")
-	public String oauthKakao(
-	        @RequestParam("code") String code
-	        , HttpSession session, RedirectAttributes rttr) throws Exception {
-
-		System.out.println("#######" + code);
-	    String access_Token = service.getAccessToken(code);
-	    String view = service.getuserinfo(access_Token, session, rttr);
-	    
-	    return view;
-	}
+	/*
+	 * @RequestMapping("login/loginForm/getKakaoAuthUrl") public @ResponseBody
+	 * String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
+	 * 
+	 * String reqUrl =
+	 * "https://kauth.kakao.com/oauth/authorize?client_id=97ec31a3e4c1ac77764914d0f6bbf209&redirect_uri=http://localhost:8090/oauth&response_type=code";
+	 * 
+	 * return reqUrl; }
+	 * 
+	 * @RequestMapping("/oauth") public String oauthKakao(
+	 * 
+	 * @RequestParam("code") String code , HttpSession session, RedirectAttributes
+	 * rttr) throws Exception {
+	 * 
+	 * System.out.println("#######" + code); String access_Token =
+	 * service.getAccessToken(code); String view = service.getuserinfo(access_Token,
+	 * session, rttr);
+	 * 
+	 * return view; }
+	 */
 
 	// 로그아웃
 	@GetMapping("logout.do")
@@ -319,14 +319,14 @@ public class MemberController {
 		MemberDTO mDto = service.myProfile(id);
 		model.addAttribute("mDto", mDto);
 		
-		return "member/myProfile";
+		return "member/member_myProfile";
 	}
 	
 	
 	// 비밀번호 변경페이지 이동
 	@GetMapping("/pwChange.do")
 	public String pwChange() {
-		return "member/pwChange";
+		return "member/member_pwChange";
 	}
 
 	// 비밀번호 변경

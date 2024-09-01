@@ -1,5 +1,7 @@
 package com.mbc.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mbc.domain.DonationDTO;
@@ -14,4 +16,6 @@ public interface DonateMapper {
 	void updatePoints(MemberDTO dto);
 
 	void donationAmount(DonationDTO dDto);
+
+	List<DonationDTO> donationList();
 }

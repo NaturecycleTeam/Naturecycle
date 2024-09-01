@@ -17,6 +17,7 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -323,5 +324,19 @@ public class MemberServiceImpl implements MemberService {
 		return view;
 
 	}
+	
+	// 예약확정시 공병수량에 따른 포인트 지급
+	@Override
+	public void addPoint(String id, int point) {
+		
+		mapper.addPoint(id, point);
+	}
+
+	@Override
+	public void updatePoint(@Param("memberId") String id, @Param("newPoints") int point) {
+		
+		mapper.updatePoint(id, point);
+	}
+
 
 }

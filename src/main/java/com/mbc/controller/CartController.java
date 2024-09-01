@@ -87,12 +87,22 @@ public class CartController {
 		return "redirect:cartList.do";
 	}
 
-	// 장바구니 수량(실시간)
+	// 장바구니 수량 표시(실시간)
 	@GetMapping("shoppingCartCount.do")
 	@ResponseBody
 	public String shoppingCartCount(Model model, HttpSession session) {
 		 // 세션에서 loginDTO 객체를 가져와서 id를 추출
 	    MemberDTO dto = (MemberDTO) session.getAttribute("loginDTO");
+	    
+//	    String cid_fk = dto.getId();
+//	    
+//	    String tot_pqty = "0";
+//        if (cid_fk != null) {
+//            // cid_fk가 null이 아닌 경우에만 장바구니 수량을 가져옵니다.
+//            tot_pqty = cartService.shoppingCartCount(cid_fk);
+//            System.out.println("####장바구니 수량: " + tot_pqty);
+//        } 
+	        
 	    String cid_fk = dto != null ? dto.getId() : null;
 
 	    if (cid_fk == null) {
@@ -101,7 +111,7 @@ public class CartController {
 	    }
 
 	    try {
-	        // 장바구니 수량을 가져옵니다.
+	        // 장바구니 수량을 가져오기
 	        String tot_pqty = cartService.shoppingCartCount(cid_fk);
 	        return tot_pqty != null ? tot_pqty : "0"; // null 체크 후 0 반환
 	    } catch (Exception e) {

@@ -29,9 +29,9 @@
 
 	<!---------------------- 댓글 UI ----------------------->
 	<div class="mt-5 mb-3 d-flex justify-content-between">
-		<h6><i class="fa fa-comments-o"></i> 답변	</h6>
+		<h6><i class="fa fa-comments-o"></i> 내용	</h6>
 		<button id="btn-addreply" class="btn btn-sm btn-outline-secondary"
-			data-bs-target="#replyModal" data-bs-toggle="modal">재답변</button>
+			data-bs-target="#replyModal" data-bs-toggle="modal">답변</button>
 	</div>
 	<!-- 댓글 리스트 영역 -->
 	<ul class="p-0 replyArea" style="list-style: none;"></ul>
@@ -59,22 +59,22 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h5 class="modal-title">댓글 달기</h5>
+        <h5 class="modal-title">답변하기</h5>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body p-4">
          <div class="mb-3">
-            <label>댓글 내용</label>
+            <label>답변 내용</label>
             <textarea id="r_contents" name="r_contents" class="form-control"></textarea>
          </div>
          <div class="mb-3">
-            <label>댓글 작성자</label>
-            <input type="text" id="replyer" name="replyer" class="form-control"/>
+            <label>답변자</label>
+            <input type="text" id="replyer" name="replyer" class="form-control" readonly/>
          </div>
          <div class="mb-3">
             <label>등록일</label>
-            <input type="text" id="r_date" name="r_date" class="form-control"/>
+            <input type="text" id="r_date" name="r_date" class="form-control" readonly/>
          </div>
          
       </div>
@@ -169,7 +169,7 @@
 		// 새댓글 
 		$("#btn-addreply").on("click", ()=>{
 			taReplyContents.val("");
-			inputReplyer.val("");
+			inputReplyer.val("관리자");
 			
 			// 등록일 숨기기, div 부모중에 가장 가까운 div를 선택해서 감추기
 			inputReplyDate.closest("div").hide();
@@ -300,9 +300,9 @@
 		location.href="<c:url value='adQuestionList.do?viewPage=${pDto.viewPage}&searchType=${pDto.searchType}&keyword=${pDto.keyword}&cntPerPage=${pDto.cntPerPage}'/>";
 	});
 	
-	$("#btn-modify").click(()=>{
+	/* $("#btn-modify").click(()=>{
 		location.href="<c:url value='modify.do?bid=${dto.bid}&viewPage=${pDto.viewPage}&searchType=${pDto.searchType}&keyword=${pDto.keyword}&cntPerPage=${pDto.cntPerPage}'/>";
-	});
+	}); */
 </script>
 
 <%@ include file="../include/ad_footer.jsp"%>

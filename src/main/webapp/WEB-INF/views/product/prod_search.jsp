@@ -27,12 +27,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:if test="${slist==null}">
+			<c:if test="${list==null}">
 				<tr>
 					<td>상품이 존재하지 않습니다!!</td>
 				</tr>
 			</c:if>
-			<c:if test="${slist != null}">
+			<c:if test="${list != null}">
 				<c:forEach var="dto" items="${list}">
 				<tr>
 					<td>${dto.pnum}</td>
@@ -47,8 +47,8 @@
 					<td>
 						<!-- 로그인이 되어있을경우 -->
 					    <c:if test="${sessionScope.loginDTO.id != null}">
-					    	<a href="addCart.do?pnum=${dto.pnum}&pqty=1&pspec=${dto.pspec}" 
-					    		class="btn btn-primary">장바구니</a>
+				    		<a href="addCart.do?pnum_fk=${dto.pnum}&pqty=1&pspec=${dto.pspec}" 
+				    		class="btn btn-primary">장바구니 담기</a>
 					    </c:if>
 					    <!-- 로그인이 안되어있을경우 -->
 					    <c:if test="${sessionScope.loginDTO.id == null}">
@@ -64,12 +64,7 @@
 		</tbody>
 	</table> 
 </div>
-<script type="text/javascript">
-	function prodDel(pnum, pimage){
-		let isDel = confirm("삭제 하시겠습니까?")
-		if(isDel) location.href="prodDelete.do?pnum="+pnum+"&pimage="+pimage;
-	}
-</script>
+
 <%@include file="../include/footer.jsp" %>
 
 

@@ -5,19 +5,19 @@
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
-<div class="container w-50 m-5 p-5 shadow rounded"
+
+<div class="container w-50 mt-5 p-5 shadow rounded"
 	style="height: 400px">
 	<form action="<c:url value="login.do"/>" method="post">
 		<input type="hidden" name="moveUrl" value="${moveUrl}" size="80" />
 		<h3 class="text-center mb-4">로그인</h3>
-		<input class="form-control mb-3" type="text" id="id" name="id"
-			placeholder="아이디" autofocus /> <input class="form-control mb-2"
-			type="text" id="pw" name="pw" placeholder="비밀번호" />
-		<c:if
-			test="${requestScope.loginErr == 'idErr' || requestScope.loginErr == 'pwdErr'}">
-			<p class="text-danger text-center mt-3 mb-0" style="font-size: 15px">아이디
-				또는 비밀번호 불일치!!</p>
-		</c:if>
+		<input class="form-control mb-3" type="text" id="id" name="id" placeholder="아이디" autofocus /> 
+		<input class="form-control mb-2" type="password" id="pw" name="pw" placeholder="비밀번호" />
+			<c:if test="${requestScope.loginErr == 'idErr' || requestScope.loginErr == 'pwdErr'}">
+				<p class="text-danger text-center mt-3 mb-0" style="font-size: 15px">아이디
+					또는 비밀번호 불일치!!</p>
+			</c:if>
+			
 		<div class="text-center pt-4">
 			<input type="submit" class="btn btn-primary w-100" value="로그인" />
 		</div>

@@ -28,11 +28,20 @@
 	</div>
 
 	<!---------------------- 댓글 UI ----------------------->
-	<div class="mt-5 mb-3 d-flex justify-content-between">
-		<h6><i class="fa fa-comments-o"></i> 답변	</h6>
-		<button id="btn-addreply" class="btn btn-sm btn-outline-secondary"
-			data-bs-target="#replyModal" data-bs-toggle="modal">댓글</button>
-	</div>
+	<c:if test="${dto.type == 'GENERAL'}">
+		<div class="mt-5 mb-3 d-flex justify-content-between">
+			<h6><i class="fa fa-comments-o"></i> 댓글	</h6>
+			<button id="btn-addreply" class="btn btn-sm btn-outline-secondary"
+				data-bs-target="#replyModal" data-bs-toggle="modal">댓글달기</button>
+		</div>
+	</c:if>
+	<c:if test="${dto.type == 'QUESTION'}">
+		<div class="mt-5 mb-3 d-flex justify-content-between">
+			<h6><i class="fa fa-comments-o"></i> 답변	</h6>
+			<!-- <button id="btn-addreply" class="btn btn-sm btn-outline-secondary"
+				data-bs-target="#replyModal" data-bs-toggle="modal">댓글</button> -->
+		</div>
+	</c:if>
 	
 	<!-- 댓글 리스트 영역 -->
 	<ul class="p-0 replyArea" style="list-style: none;">
@@ -74,20 +83,20 @@
          </div>
          <div class="mb-3">
             <label>댓글 작성자</label>
-            <input type="text" id="replyer" name="replyer" class="form-control"/>
+            <input type="text" id="replyer" name="replyer" class="form-control" value="${sessionScope.loginDTO.name}" readonly/>
          </div>
          <div class="mb-3">
             <label>등록일</label>
-            <input type="text" id="r_date" name="r_date" class="form-control"/>
+            <input type="text" id="r_date" name="r_date" class="form-control" readonly/>
          </div>
          
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" id="btn-modal-modify" class="btn btn-sm btn-success">수정</button>
+        <!-- <button type="button" id="btn-modal-modify" class="btn btn-sm btn-success">수정</button>
         <button type="button" id="btn-modal-remove" class="btn btn-sm btn-danger">삭제</button>
-        <button type="button" id="btn-modal-register" class="btn btn-sm btn-primary">등록</button>
+        <button type="button" id="btn-modal-register" class="btn btn-sm btn-primary">등록</button> -->
         <button type="button" id="btn-modal-close" class="btn btn-sm btn-secondary">닫기</button>
       </div>
     </div>
@@ -173,7 +182,7 @@
 		// 새댓글 
 		$("#btn-addreply").on("click", ()=>{
 			taReplyContents.val("");
-			inputReplyer.val("");
+			/* inputReplyer.val(""); */
 			
 			// 등록일 숨기기, div 부모중에 가장 가까운 div를 선택해서 감추기
 			inputReplyDate.closest("div").hide();

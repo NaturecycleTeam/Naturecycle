@@ -298,6 +298,8 @@ public class ProductController {
 		return "redirect:prodList.do";		
 	}
 	
+	
+	
 	///////////////////////// User Product ////////////////////////////////
 	// 사진 클릭
 	@GetMapping("UprodView.do")
@@ -314,7 +316,7 @@ public class ProductController {
 		ProductDTO pDto = service.getProduct(pnum);
 		model.addAttribute("pDto", pDto);
 			
-		return "product/UprodView";
+		return "product/prodView";
 	}
 	
 	// 전체 상품 리스트
@@ -323,7 +325,7 @@ public class ProductController {
 		List<ProductDTO> list = service.uprodList();
 		model.addAttribute("list", list);
 		
-		return "product/UprodList";
+		return "product/prodList";
 	}
 	
 	
@@ -336,7 +338,7 @@ public class ProductController {
 		model.addAttribute("cList", cList);
 		model.addAttribute("cat_name", cat_name);
 		
-		return "product/UcategoryList";
+		return "product/categoryList";
 	}	
 		
 	// 메뉴 스펙 리스트 클릭 
@@ -351,7 +353,7 @@ public class ProductController {
 		model.addAttribute("pSpecName", pSpecName);
 		
 		
-		return "product/UspecList";
+		return "product/specList";
 	}
 	
 	// 상품 검색 리스트
@@ -363,7 +365,7 @@ public class ProductController {
 		// serviceImpl에서 셋팅된 pDto
 		model.addAttribute("pDto", pDto);
 				
-		return "/product/Uprod_list";
+		return "/product/prod_search";
 	}
 	
 }

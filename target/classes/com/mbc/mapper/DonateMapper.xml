@@ -19,5 +19,9 @@
     	VALUES (#{did_fk}, #{donation_amount})
     </insert>
     
+    <select id="donationList" resultType="DonationDTO">
+    	SELECT * FROM tbl_donation;
+    </select>
+    
     
 </mapper>

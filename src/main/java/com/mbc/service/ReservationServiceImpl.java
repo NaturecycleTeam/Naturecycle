@@ -32,8 +32,10 @@ public class ReservationServiceImpl implements ReservationService {
 	// 예약 확정하기
 	@Override
 	public void reservationConfirmed(int rno) {
-		mapper.reservationConfirmed(rno);		
+		
+		mapper.reservationConfirmed(rno);
 	}
+
 	
 	// 예약 취소하기
 	@Override
@@ -71,6 +73,12 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<String> getReservedTimes(String date) {
 		
 		return mapper.getReservedTimes(date);
+	}
+
+	@Override
+	public ReservationDTO getInfo(int rno) {
+		
+		return mapper.getInfo(rno);
 	}
 
 

@@ -33,20 +33,7 @@ public interface ReservationMapper {
 
 	List<String> getReservedTimes(String date);
 
-	
-	
-
-
-	
-
-
-
-
-
-	
-
-
-
+	ReservationDTO getInfo(int rno);
 
 	
 }

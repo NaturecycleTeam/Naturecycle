@@ -17,43 +17,56 @@
 </style>
 
 <div class="container w-75 p-5">
-	<div class="myQuestionInfo">
-		<ul>
-			<li><a href='<c:url value="myProfile.do?id=${sessionScope.loginDTO.id}"/>'>내 정보</a></li>
-			<li><a href='<c:url value="reservationInfo.do?rid_fk=${sessionScope.loginDTO.id}"/>'>예약 확인</a></li>
-			<li><a href='<c:url value="myQuestion.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의하기</a></li>
-			<li><a href='<c:url value="myQuestionList.do?mid_fk=${sessionScope.loginDTO.id}"/>'>문의사항 확인</a></li>
-		</ul>
-	</div><hr>
-	
-	<div class="container w-75 p-5">
-		<h4>문의사항 확인</h4>
-	
-		<table class="table">
-			<thead class="table-dark">
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>조회수</th>
-					<th>글쓴이</th>
-					<th>등록일</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="dto" items="${questionPosts}">
+	<h3 class="text-center mb-3" style="color : #30622f;"><i class="fa-solid fa-list-check"></i> 문의사항 확인</h3>
+
+	<table class="table">
+		<thead class="table" style="color:#00a600;">
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<!-- <th>조회수</th> -->
+				<th>글쓴이</th>
+				<th>등록일</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:if test="${questionPosts.size() == 0}">
 					<tr>
-						<td>${dto.bid}</td>
-						<td><a href='<c:url value="view.do?bid=${dto.bid}
-							&viewPage=${pDto.viewPage}&searchType=${pDto.searchType}&keyword=${pDto.keyword}
-							&cntPerPage=${pDto.cntPerPage}"/>'><c:out value="${dto.subject}"/> <b>[${dto.replyCnt}]</b> </a></td>
-						<td>${dto.hit}</td>
-						<td>${dto.writer}</td>
-						<td><fmt:formatDate value="${dto.reg_date}" pattern="yyyy-MM-dd"/></td>
+						<td colspan="6">문의 내역이 없습니다!!</td>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</c:if>
+				<c:if test="${questionPosts.size() != 0}">
+					<c:forEach var="dto" items="${questionPosts}">
+						<tr>
+							<td>${dto.bid}</td>
+							<c:if test="${dto.replyCnt != 0}" >
+								<td><a href='<c:url value="view.do?bid=${dto.bid}
+								&viewPage=${pDto.viewPage}&searchType=${pDto.searchType}&keyword=${pDto.keyword}
+								&cntPerPage=${pDto.cntPerPage}"/>'><c:out value="${dto.subject}"/> <b>[답변완료]</b> </a></td>
+							</c:if>
+							<c:if test="${dto.replyCnt == 0}" >
+								<td><a href='<c:url value="view.do?bid=${dto.bid}
+								&viewPage=${pDto.viewPage}&searchType=${pDto.searchType}&keyword=${pDto.keyword}
+								&cntPerPage=${pDto.cntPerPage}"/>'><c:out value="${dto.subject}"/> [답변대기]</a></td>
+							</c:if>
+							<%-- <td>${dto.hit}</td> --%>
+							<td>${dto.writer}</td>
+							<td><fmt:formatDate value="${dto.reg_date}" pattern="yyyy-MM-dd"/></td>
+						</tr>
+					</c:forEach>
+				</c:if>
+		</tbody>
+	</table>
+	<div>
+		<button id="reset" class="btn" style="background:#00a600;">돌아가기</button>
 	</div>
 </div>
+
+<script>
+
+	$("#reset").click(()=>{
+		location.href='<c:url value="myQuestion.do?mid_fk=${sessionScope.loginDTO.id}"/>';
+	});
+</script>
 
 <%@ include file="../include/footer.jsp"%>

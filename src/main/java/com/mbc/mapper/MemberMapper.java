@@ -51,4 +51,8 @@ public interface MemberMapper {
 
 	MemberDTO selectMember(String string);
 
+	void addPoint(String id, int point);
+
+	void updatePoint(String id, int point);
+
 }

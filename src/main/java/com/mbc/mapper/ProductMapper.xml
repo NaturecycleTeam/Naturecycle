@@ -16,18 +16,6 @@
 		SELECT * from tbl_product
 		ORDER BY pnum DESC		
 	</select>
-	
-	<!-- 상품 리스트
-	<select id="homeProductList" resultType="productDTO">
-		SELECT * from product_info
-		ORDER BY pnum DESC
-		LIMIT #{startIndex}, #{cntPerPage}
-	</select> -->
-	
-	<!-- 전체 상품 수
-	<select id="totalCnt" resultType="Integer">
-  		SELECT count(*) FROM product_info
-	</select> -->
 
 	<!-- 상품 삭제 -->
 	<delete id="deleteProduct">
@@ -78,12 +66,12 @@
 		<if test="searchType == 'C'.toString()">
 			WHERE pcategory_fk LIKE CONCAT('%',#{keyword},'%')
 		</if>
-		<!-- 글쓴이 검색 -->
+		<!-- 제조사 검색 -->
 		<if test="searchType == 'W'.toString()">
 			WHERE pcompany LIKE CONCAT('%',#{keyword},'%')
 		</if>
 
-		<if test="searchType == 'SC'.toString()">
+		<!-- <if test="searchType == 'SC'.toString()">
 			WHERE pname LIKE CONCAT('%',#{keyword},'%')
 			OR pcategory_fk
 			LIKE CONCAT('%',#{keyword},'%')
@@ -101,7 +89,7 @@
 			LIKE CONCAT('%',#{keyword},'%')
 			OR pcompany LIKE
 			CONCAT('%',#{keyword},'%')
-		</if>
+		</if> -->
 	</sql>
 
 	<select id="prodSearch" resultType="ProductDTO">

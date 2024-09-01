@@ -45,5 +45,9 @@ public interface MemberService {
 
 	String getuserinfo(String access_Token, HttpSession session, RedirectAttributes rttr);
 
+	void addPoint(String id, int point);
+
+	void updatePoint(String memberId, int newPoints);
+
 
 }

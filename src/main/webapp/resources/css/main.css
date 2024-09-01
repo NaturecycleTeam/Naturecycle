@@ -33,13 +33,13 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 /* header : 장바구니 */
 
 .shoppingcart_count{
-	position: absolute; z-index:1; left: 310px; bottom: 20px; 
+	position: absolute; z-index:1; left: 800px; bottom: 20px; 
 	border-radius:100%; background:crimson; height:20px; width:20px; 
 	text-align: center; color:white;	
 }
 
 .shoppingcart{
-	position: absolute; left: 280px; background:#30622f; border-radius:100%; width:45px
+	position: absolute; left: 770px; background:#30622f; border-radius:100%; width:45px
 }
 
 .fa-shopping-cart {
@@ -67,7 +67,7 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 /* header : 마이프로필 */
 
 .myinfo{
-	position: absolute; left: 330px; background:#30622f; border-radius:100%; width:45px;
+	position: absolute; left: 820px; background:#30622f; border-radius:100%; width:45px;
 }
 
 .fa-user-edit{
@@ -78,7 +78,7 @@ nav.navbar-expand-sm.sticky-top{background-color : white;}
 	color : black;
 }
 
-/* header : 검색창 */
+/* 제품 : 검색창 */
 .search {
 	border-right-style: none; border-color: #30622f; width: 500px;
 	border-radius: 20px 0px 0px 20px;
@@ -132,7 +132,7 @@ ul.footer_navbar-menu{
 }
 
 .question_btn {
-	background : #30622f;
+	background : #00a600;
 	border-style : none;
 	color : white;
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.mbc.domain.MemberDTO;
 import com.mbc.domain.PageDTO;
 import com.mbc.domain.ReservationDTO;
 
@@ -30,29 +31,6 @@ public interface ReservationService {
 
 	List<String> getReservedTimes(String date);
 
-	
-	
-	
-
-
-	
-
-	
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
+	ReservationDTO getInfo(int rno);
 
 }

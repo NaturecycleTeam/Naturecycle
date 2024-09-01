@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
+
+
 <section>
 
    <!-- sectionTitle -->
@@ -39,13 +41,13 @@
                                           <img src="resources/imgs/recycle_donation.jpg" alt="recycle_donation" style="width: 329px; height: 320px;">
                                        </span>
                                        <div class="recycle_content">
-                                           <h5 class="recycle_title">기부 캠페인에 참여해보세요!</h5>
+                                           <h5 class="recycle_title">우리 함께 나무심기</h5>
                                            <div class="recycle_text">
                                                <p>기부 캠페인을 진행하고 있습니다. NatureCycle과 함께하세요!</p>
                                            </div>
                                        </div>
                                    </a>
-                                   <a class="reservation_link" href="donation.do?id=${sessionScope.loginDTO.id}">NatureCycle과 함께하는 캠페인</a>
+                                   <a class="reservation_link" href="donation.do?id=${sessionScope.loginDTO.id}">기부하러 가기</a>
                                </div>
                            </div>
                        </div>
@@ -64,7 +66,7 @@
                                <div class="recycle_block">
                                    <a class="recycle_blockLink" href="<c:url value='reservation.do'/>">
                                        <span class="recycle_img" role="img" aria-label>
-                                          <img src="resources/imgs/recycle_donation.jpg" alt="recycle_donation" style="width: 329px; height: 320px;">
+                                          <img src="resources/imgs/coming_soon.png" alt="recycle_donation" style="width: 329px; height: 320px;">
                                        </span>
                                        <div class="recycle_content">
                                            <h5 class="recycle_title">환경 보호 캠페인에 참여해보세요!</h5>
@@ -73,7 +75,7 @@
                                            </div>
                                        </div>
                                    </a>
-                                   <a class="reservation_link" href="#">NatureCycle과 함께하는 캠페인</a>
+                                  <a class="reservation_link" href="<c:url value='campaignInfo.do'/>">NatureCycle과 함께하는 캠페인</a>
                                </div>
                            </div>
                        </div>

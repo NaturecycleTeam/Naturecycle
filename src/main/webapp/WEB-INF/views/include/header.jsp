@@ -8,37 +8,35 @@
 <title>NatureCycle</title>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- 폰트어썸 -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
+<!-- 부트스트랩 -->
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css' rel='stylesheet'>
-<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'></script>
-
+<!-- main.css -->
 <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" />
 
 </head>
 
 <style>
-
-body {
-	margin: 50px 100px 50px 100px; /* top right bottom left */
-}
-
-ul {
-	list-style: none; /* - 삭제 */
-}
-
-li>a {
-	text-decoration: none; /* 밑줄 삭제 */
-}
-
-.fa-seedling {
-   position: relative;
-    top: 21px;
-    color: yellowgreen;
-    
-}
-
+	body {
+		margin: 50px 100px 50px 100px; /* top right bottom left */
+	}
+	
+	ul {
+		list-style: none; /* - 삭제 */
+	}
+	
+	li>a {
+		text-decoration: none; /* 밑줄 삭제 */
+	}
+	
+	.fa-seedling {
+	   position: relative;
+	    top: 21px;
+	    color: yellowgreen;	    
+	}
 </style>
 
 <body>
@@ -92,7 +90,7 @@ li>a {
 	            </li>
 	
 	            <!-- Search Form -->
-	            <li class="nav-item my-auto">
+	            <%-- <li class="nav-item my-auto">
 	                <form action="<c:url value='/prodSearch.do'/>" id="searchForm" method="post" class="d-flex ms-5">
 	                    <input type="hidden" id="searchType" name="searchType" value="S">
 	                    <input type="text" id="keyword" name="keyword" placeholder="검색어 입력" class="form-control search" value="${pDto.keyword}">
@@ -100,7 +98,7 @@ li>a {
 	                        <i class="fa fa-search"></i>
 	                    </button>
 	                </form>
-	            </li>
+	            </li> --%>
 	
 	            <!-- Cart and User Profile -->
 	            <li class="nav-item d-flex justify-content-end align-items-center" style="position: relative">
@@ -122,8 +120,8 @@ li>a {
 	                </c:choose>
 	                
 	                <!-- User Profile Link -->
-	              <%--   <a class="nav-link myinfo" href="<c:url value='/myProfile.do?id=${sessionScope.loginDTO.id}'/>"> --%>
-	                <a class="nav-link myinfo" href="<c:url value='/myProfile.do?id=${sessionScope.loginDTO.id}'/>">
+	               <%--  <a class="nav-link myinfo" href="<c:url value='/myProfile.do?id=${sessionScope.loginDTO.id}'/>"> --%>
+                    <a class="nav-link myinfo" href="<c:url value='/myProfile.do'/>">
 	                    <i class="fas fa-user-edit ps-2"></i>
 	                </a>
 	            </li>
@@ -136,7 +134,8 @@ li>a {
 	 	<div class="container">
 		    <ul class="navbar-nav w-100">	   	
 				<div class="dropdown">
-				  	<button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"><img src="resources/imgs/menu.png"></button>
+				  	<button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+				  	<img src="resources/imgs/menu.png"></button>
 					<ul class="dropdown-menu">					
 						<c:if test="${categoryList.size() != 0}">
 						<div class="ms-3 mt-1 mb-3">
@@ -148,7 +147,8 @@ li>a {
 									<!-- <h class="mt-1 mb-2 ms-2"><b>도서</b></h> -->								
 									<c:forEach var="dto" items="${categoryList}">									
 										<c:set var="cnt" value="${cnt+1}" />
-										<li><a class="dropdown-item" href="UcatList.do?cat_num=${dto.cat_num}&code=${dto.cat_code}&cat_name=${dto.cat_name}">${dto.cat_name}</a></li>							   		
+										<li><a class="dropdown-item" href="UcatList.do?cat_num=${dto.cat_num}&code=${dto.cat_code}
+										&cat_name=${dto.cat_name}">${dto.cat_name}</a></li>							   		
 										<c:if test="${cnt%9==0}">
 									</div>
 								<div class="mb-2">
@@ -177,37 +177,39 @@ li>a {
 	  </div>	
 	</nav><hr>
 	
-	<script type="text/javascript">
-	    $(document).ready(function() {
-	        // 장바구니 카운트
-	        $.ajax({
-	            url: "shoppingCartCount.do",
-	            type: "GET",
-	            success: function(data) {
-	                if (data) {
-	                    $("#tot_pqty").text(data);
-	                    console.log("요청값@@@@ : ", data);
-	                } else {
-	                    $("#tot_pqty").text("Error");
-	                }
-	            },
-	            error: function(xhr, status, error) {
-	                console.error("AJAX 요청 에러:", error);
-	            }
-	        });
-	    });  // 여기에서 $(document).ready 함수가 닫힙니다.
-	    
-	    function logout() {
-	        location.href = "<c:url value='logout.do'/>";
-	    }        
-	</script>
-
 	
+<!--  자바스크립트  -->
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- 부트스트랩 js -->
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'></script>
 
-	<main>
-		<!-- <div class="container mt-5 d-flex" id="main"> -->
-		<!-- <div class="container d-flex justify-content-center"> -->
-		<div class="container" >
-			<%-- <%@ include file="u_left.jsp"%> --%>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // 장바구니 카운트
+        $.ajax({
+            url: "shoppingCartCount.do",
+            type: "GET",
+            success: function(data) {
+                if (data) {
+                    $("#tot_pqty").text(data);
+                    console.log("요청값@@@@ : ", data);
+                } else {
+                    $("#tot_pqty").text("Error");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX 요청 에러:", error);
+            }
+        });
+    });  // 여기에서 $(document).ready 함수가 닫힙니다.
+    
+    function logout() {
+        location.href = "<c:url value='logout.do'/>";
+    }        
+</script>
 
-			<!-- </header> -->
+
+
+<main>
+	<!-- 스티키 메뉴바 사용 -->
+	<div class="container" >
