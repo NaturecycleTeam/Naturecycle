@@ -1,0 +1,13 @@
+-- 포인트 테이블
+drop table tbl_point;
+create table tbl_point(
+	point_num int AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(20) NOT NULL,
+    point int,
+    date datetime default now(),
+    type VARCHAR(30),
+    
+	foreign key(id) references tbl_member(id)
+);
+
+select * from tbl_point;

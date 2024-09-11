@@ -4,8 +4,10 @@ package com.mbc.mapper;
 import java.util.List;
 
 import com.mbc.domain.AdminDTO;
-import com.mbc.domain.DonationDTO;
+import com.mbc.domain.ChartDTO;
+import com.mbc.domain.PointDTO;
 import com.mbc.domain.OrderDTO;
+import com.mbc.domain.OrderDetailDTO;
 
 public interface AdminMapper {
 
@@ -19,13 +21,23 @@ public interface AdminMapper {
 	
 	List<OrderDTO> monthlyPurchase();
 
-	List<OrderDTO> prod_purchase();
+	List<OrderDetailDTO> prod_purchase();
 
 	String totalPurchase();
 
 	String todayPurchase();
 	
-	List<DonationDTO> monthlyDonation();
+	List<PointDTO> monthlyDonation();
+
+	void saveChartData(ChartDTO dto);
+
+	List<ChartDTO> findById(String id);
+
+	void deleteChart(String canvasId);
+	
+	
+	
+	
 	
 //	
 //	////////////매출관리 페이지 ////////////////////

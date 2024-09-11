@@ -11,4 +11,6 @@ create table tbl_cart(
     foreign key (pnum_fk) references tbl_product(pnum)
  );
  
- select * from tbl_cart;
+alter table tbl_cart add (type varchar(20));
+ 
+select * from tbl_cart;

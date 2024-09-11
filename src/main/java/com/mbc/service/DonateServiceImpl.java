@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mbc.domain.DonationDTO;
+import com.mbc.domain.PointDTO;
 import com.mbc.domain.MemberDTO;
 import com.mbc.mapper.DonateMapper;
 
@@ -21,24 +21,37 @@ public class DonateServiceImpl implements DonateService {
 	}
 
 	@Override
-	/*public void donation(MemberDTO dto) {
-		mapper.donation(dto);
-	}*/
 	public void donation(MemberDTO dto) {
 		
         mapper.updatePoints(dto);
     }
 
 	@Override
-	public void donationAmount(DonationDTO dDto) {
+	public void donationAmount(PointDTO pDto) {
 		
-		mapper.donationAmount(dDto);
+		mapper.donationAmount(pDto);
 	}
 	
 	// 도네이션 리스트
 	@Override
-	public List<DonationDTO> donationList() {
+	public List<PointDTO> donationList() {
 		
 		return mapper.donationList();
 	}
+
+	// 나의 도네이션 리스트
+	@Override
+	public List<PointDTO> myDonationList(String id) {
+		
+		return mapper.myDonationList(id);
+	}
+	
+	// 내 보유 포인트(ajax)
+	@Override
+	public Integer getMyPoint(String id) {
+		
+		return mapper.getMyPoint(id);
+	}
+	
+
 }

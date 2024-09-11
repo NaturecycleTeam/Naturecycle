@@ -1,6 +1,9 @@
 package com.mbc.service;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -40,6 +43,7 @@ public class CartServiceImpl implements CartService{
 	// 카트 등록 (상품이 없으면)
 	@Override
 	public void addCart(CartDTO dto) {
+	    System.out.println("Adding cart to DB: " + dto); 
 		cartMapper.addCart(dto);
 		
 	}
@@ -62,6 +66,41 @@ public class CartServiceImpl implements CartService{
 		return cartMapper.shoppingCartCount(cid_fk);
 	}
 
+	// 찜하기 리스트 중복확인
+	@Override
+	public CartDTO checkFavorite(CartDTO dto) {
+		
+		return cartMapper.checkFavorite(dto);
+	}
+	
+	// 찜하기 추가
+	@Override
+	public void addFavorite(CartDTO dto) {
+		
+		cartMapper.addFavorite(dto);
+	}
+	
+	// 찜 리스트 불러오기
+	@Override
+	public List<CartDTO> favoriteList(String id) {
+		
+		return cartMapper.favoriteList(id);
+	}
+	
+	// 찜하기 상품를 장바구니로 이동
+	@Override
+	public void favoriteToCart(int cart_num) {
+		
+		cartMapper.favoriteToCart(cart_num);
+	}
+	
+	// 찜상품과 일치하는 상품이 장바구니에 있는지 체크
+	@Override
+	public CartDTO cartDtoByPnum(int cart_num) {
+		
+		return cartMapper.cartDtoByPnum(cart_num);
+	}
+
 	
 	
 	
@@ -73,6 +112,15 @@ public class CartServiceImpl implements CartService{
 	}
 
 
+	
+	@Override 
+	public List<CartDTO> getCartList(HttpSession session) {
+	  
+		return (List<CartDTO>) session.getAttribute("dtos"); 
+	}
+	 
+	
+	
 	
 	
 	

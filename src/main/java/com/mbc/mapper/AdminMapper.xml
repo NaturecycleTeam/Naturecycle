@@ -12,30 +12,14 @@
 	
 	<!-- 관리자홈 - 오늘매출 -->
 	<select id="todayPurchase" resultType="String">
-	<!-- 	SELECT sum(B.qty_ordered*B.price_each) AS TODAY_PURCHASE_AMOUNT				
-		FROM tbl_order A
-		LEFT
-		JOIN orderDetail B
-		ON A.order_num = B.order_num
-		WHERE DATE_FORMAT(A.order_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d') -->
-		<!-- 관리자홈 오늘매출 -->
-		SELECT sum(qty_ordered*price_each) AS TODAY_PURCHASE_AMOUNT				
+		SELECT sum(total_amount) AS TODAY_PURCHASE_AMOUNT				
 		FROM tbl_order
 		WHERE DATE_FORMAT(order_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d')		
 	</select>	
 		
 	<!-- 관리자홈 - 총매출 -->
 	<select id="totalPurchase" resultType="String">
-		<!-- WITH
-		TOT_PURCHASE AS(
-			SELECT SUM(B.qty_ordered*B.price_each) AS TOT_PURCHASE_AMOUNT				
-			FROM tbl_order A
-            LEFT
-            JOIN orderDetail B
-            ON A.order_num = B.order_num
-            )
-		SELECT TOT_PURCHASE_AMOUNT FROM TOT_PURCHASE -->
-		SELECT SUM(qty_ordered*price_each) AS TOT_PURCHASE_AMOUNT				
+		SELECT SUM(total_amount) AS TOT_PURCHASE_AMOUNT				
 		FROM tbl_order;
 	</select>	
 		
@@ -49,7 +33,7 @@
 			WHERE A.LEVEL <![CDATA[<]]> DATEDIFF("2024-12-31", "2024-01-01")
 			),
 			DAILY_PURCHASE AS (
-				SELECT DATE_FORMAT(order_date, "%Y-%m-%d") AS order_date, SUM(qty_ordered * price_each) AS PURCHASE_AMOUNT
+				SELECT DATE_FORMAT(order_date, "%Y-%m-%d") AS order_date, SUM(total_amount) AS PURCHASE_AMOUNT
 				FROM tbl_order
 				GROUP BY DATE_FORMAT(order_date, "%Y-%m-%d")
 			)
@@ -71,7 +55,7 @@
 			SUBSTR(order_date,1,4) AS YY,
 			SUBSTR(order_date,6,2) AS MM,
 			SUBSTR(order_date,9,2) AS DD,
-			SUM(qty_ordered*price_each) AS PURCHASE_AMOUNT
+			SUM(total_amount) AS PURCHASE_AMOUNT
 			FROM tbl_order
 			GROUP BY YY, MM
 		   )      
@@ -82,38 +66,23 @@
 	</select>
 	
 	<!-- 관리자 홈 - 상품판매량 차트 -->
-	<select id="prod_purchase" resultType="orderDTO">	
-		<!-- WITH
-		PROD_PURCHASE AS(
-						SELECT B.order_num as order_num,
-						B.qty_ordered AS PURCHASE_QTY,                
-						B.pcode AS pCode,
-						D.cat_name  AS cat_name
-						FROM orderDetail B               
-						LEFT JOIN tbl_product C ON B.pcode = C.pcategory_fk 
-						LEFT JOIN tbl_category D ON C.pcategory_fk  = D.cat_code
-						Group by order_num 	)
-		SELECT SUM(PURCHASE_QTY) AS totPQTY,    
-		       cat_name
-		FROM PROD_PURCHASE
-		GROUP BY cat_name; -->  
-		
-		SELECT SUM(A.qty_ordered) AS TOT_PQTY, C.cat_name
-		FROM tbl_order A             
-		LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
+	<select id="prod_purchase" resultType="orderDetailDTO">	
+		SELECT SUM(A.quantity) AS TOT_PQTY, C.cat_name
+		FROM tbl_orderDetail A           
+		LEFT JOIN tbl_product B ON B.pnum = A.pnum
 		LEFT JOIN tbl_category C ON B.pcategory_fk  = C.cat_code
 		GROUP BY C.cat_name;	 
 	</select>	
 	
 	<!-- 관리자 홈 - 기부금 차트 -->
-	<select id="monthlyDonation" resultType="donationDTO">
+	<select id="monthlyDonation" resultType="pointDTO">
 		WITH MONTHLY_DONATION AS(
-				SELECT donation_date,
-				SUBSTR(donation_date,1,4) AS YY,
-				SUBSTR(donation_date,6,2) AS MM,
-				SUBSTR(donation_date,9,2) AS DD,
-				SUM(donation_amount) AS monthlyAmount
-				FROM tbl_donation
+				SELECT date,
+				SUBSTR(date,1,4) AS YY,
+				SUBSTR(date,6,2) AS MM,
+				SUBSTR(date,9,2) AS DD,
+				SUM(point) AS monthlyAmount
+				FROM tbl_point
 				GROUP BY YY, MM
 			   )      
 		SELECT CONCAT(YY, '-', MM) AS donation_month,
@@ -121,6 +90,23 @@
 		FROM MONTHLY_DONATION 
 		ORDER BY donation_month;   
 	</select>
+	
+	<!-- 관리자홈 : 차트 저장  -->
+	<insert id="saveChartData">
+		 INSERT INTO tbl_chart (id, canvasId, dataUrl)
+   		 VALUES (#{id}, #{canvasId}, #{dataUrl})
+	</insert>
+	
+	<!-- 관리자홈 : 차트 불러오기  -->
+	<select id="findById" resultType="chartDTO">
+		SELECT * FROM tbl_chart 
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 관리자홈 : 차트 삭제하기 -->
+	<delete id="deleteChart">
+    	DELETE FROM tbl_chart WHERE canvasId = #{canvasId}
+	</delete>
 	
 <!-- 	
 	

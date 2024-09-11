@@ -26,6 +26,8 @@ create table tbl_board(
     writer varchar(50) not null,
     mid_fk varchar(20) not null,
     reg_date datetime default now() not null,
+    type varchar(20) not null,
+    replyCnt int default 0,
     
     foreign key (mid_fk) references tbl_member(id)
 );
@@ -115,20 +117,6 @@ create table tbl_product(
 
 select * from tbl_product;
 
--- 일대일　문의　게시판 테이블
-select * from product_info;
-
-drop table question_board;
-create table question_board(
-	bid int auto_increment primary key,
-    subject varchar(100) not null,
-    contents varchar(3000) not null,    
-    writer varchar(50) not null,                     
-    reg_date datetime default now() not null,
-    mid varchar(30) not null,
-    
-    foreign key(mid) references tbl_member(id)
-);
 
 -- 댓글　테이블
 drop table tbl_reply;
@@ -166,33 +154,66 @@ create table tbl_reservation(
 select * from tbl_reservation;    
 
 
--- 도네이션 테이블
-drop table tbl_donation;
-create table tbl_donation(
-	donation_num int AUTO_INCREMENT PRIMARY KEY,
-    did_fk VARCHAR(20) NOT NULL,
-    donation_amount int,
-    donation_date datetime default now(),
+-- 포인트 테이블
+drop table tbl_point;
+create table tbl_point(
+	point_num int AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(20) NOT NULL,
+    point int,
+    date datetime default now(),
+    type VARCHAR(30),
     
-	foreign key(did_fk) references tbl_member(id)
+	foreign key(id) references tbl_member(id)
 );
 
-select * from tbl_donation;
+select * from tbl_point;
+
+
 
 -- 주문 테이블
 drop table tbl_order;
 create table tbl_order(
 	order_num int AUTO_INCREMENT PRIMARY KEY,
-    pnum_fk int,
-    oid_fk varchar(20),
+    id varchar(20),
     order_date datetime default now(),
-    qty_ordered int,
-    price_each int,
+    total_amount int,
+    total_point int,
     dlv_status varchar(20),
     
-    foreign key(oid_fk) references tbl_member(id),
-	foreign key(pnum_fk) references tbl_product(pnum)    
+    foreign key(id) references tbl_member(id)  
 );
 
 select * from tbl_order;
+
+
+-- 주문상세 테이블
+drop table tbl_orderDetail;
+create table tbl_orderDetail(
+	orderDetail_num int AUTO_INCREMENT PRIMARY KEY,
+    order_num int,
+    pnum int,
+    quantity int,
+    unitPrice int,
+    unitPoint int,
+    totalPrice int AS (quantity * unitPrice) STORED,
+	totalPoint int AS (quantity * unitPoint) STORED,
+    
+    foreign key(order_num) references tbl_order(order_num),
+	foreign key(pnum) references tbl_product(pnum)    
+);
+
+select * from tbl_orderDetail;
+
+-- 그래프 테이블
+drop table tbl_chart;
+create table tbl_chart(
+	chart_num int primary key auto_increment,
+    id varchar(20),
+    canvasId varchar(20),
+    dataUrl varchar(30),
+    
+    foreign key (id) references tbl_member(id)
+ );
+ 
+ select * from tbl_chart
                          

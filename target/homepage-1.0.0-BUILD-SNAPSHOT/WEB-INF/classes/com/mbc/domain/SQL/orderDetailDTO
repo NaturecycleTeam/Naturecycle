@@ -1,0 +1,16 @@
+drop table tbl_orderDetail;
+create table tbl_orderDetail(
+	orderDetail_num int AUTO_INCREMENT PRIMARY KEY,
+    order_num int,
+    pnum int,
+    quantity int,
+    unitPrice int,
+    unitPoint int,
+    totalPrice int AS (quantity * unitPrice) STORED,
+	totalPoint int AS (quantity * unitPoint) STORED,
+    
+    foreign key(order_num) references tbl_order(order_num),
+	foreign key(pnum) references tbl_product(pnum)    
+);
+
+select * from tbl_orderDetail;

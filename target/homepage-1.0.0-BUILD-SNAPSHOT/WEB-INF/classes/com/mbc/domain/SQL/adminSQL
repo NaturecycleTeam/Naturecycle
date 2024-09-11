@@ -1,0 +1,16 @@
+-- 관리자 테이블
+drop table ad_member;
+create table ad_member (
+	ad_id       varchar(20) primary key not null,
+    ad_password varchar(20),
+    ad_name     varchar(20),
+    ad_group    varchar(20),
+    ad_tel      varchar(20),
+    ad_email    varchar(50)
+);
+
+insert into ad_member(ad_id, ad_password, ad_name, ad_group, ad_tel, ad_email)
+values('test', '1212', '1조', '운영자', '010-1234-4321', 'group1@test.com');
+
+select * from ad_member;
+commit;

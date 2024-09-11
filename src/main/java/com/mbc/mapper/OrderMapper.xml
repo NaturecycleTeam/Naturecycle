@@ -4,17 +4,35 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mbc.mapper.OrderMapper">
 
-	<insert id="orderInsert">
+	<!-- <insert id="orderInsert">
 		INSERT INTO tbl_order (pnum_fk, oid_fk, qty_ordered, price_each, point)
 		VALUES (#{pnum_fk}, #{oid_fk}, #{qty_ordered}, #{price_each}, #{point})
-	</insert>
+	</insert> -->
 	
+	<!-- 주문하기: orderDTO -->
+    <insert id="insertOrder" parameterType="OrderDTO" useGeneratedKeys="true" keyProperty="order_num">
+        INSERT INTO tbl_order (id, order_date, total_amount, total_point)
+        VALUES (#{id}, #{order_date}, #{total_amount}, #{total_point})
+    </insert>
+
+    <!-- 주문하기: orderDetailDTO -->
+    <insert id="insertOrderDetail" parameterType="OrderDetailDTO">
+        INSERT INTO tbl_orderDetail (order_num, pnum, quantity, unitPrice, unitPoint)
+        VALUES (#{order_num}, #{pnum}, #{quantity}, #{unitPrice}, #{unitPoint})
+    </insert>
+	
+	<!-- 주문할때 tbl_member에 포인트 적립 -->
 	<update id="pointInsert">
 		UPDATE tbl_member SET point = point + #{point}
 		WHERE id = #{id}
 	</update>
+	<!-- 주문할때 tbl_point에 내역 저장  -->
+	<insert id="pointObtained">
+		INSERT INTO tbl_point (id, point, pointType)
+		VALUES (#{id}, #{point}, #{pointType})
+	</insert>
 	
-	<select id="myOrderList" resultType="orderDTO">
+	<!-- <select id="myOrderList" resultType="orderDTO">
 		WITH ORDER_INFO AS(
 			SELECT 
                 A.order_date AS order_date,
@@ -33,24 +51,26 @@
                WHERE oid_fk = #{id}
 			GROUP BY YY, MM, DD, HH, minutes
 		   )      
-		<!-- SELECT DATE_FORMAT(order_date, '%Y-%m-%d %H:%i:%s') AS order_date, -->
+		SELECT DATE_FORMAT(order_date, '%Y-%m-%d %H:%i:%s') AS order_date,
 		SELECT order_date,
 			   order_num, pName, order_count, oid_fk, TOT_PURCHASE_AMOUNT    
 		FROM ORDER_INFO 
 		ORDER BY order_date DESC;     
-	</select>
+	</select> -->
 	
-	<!-- 주문 상세보기 (주문번호로 dto를 가져오고 그 dto와 같은 주문일을 가진 dto를 전부 가져옴 -->
-	<select id="myOrderDetail" resultType="String">
-		SELECT order_date FROM tbl_order
-		WHERE order_num = #{order_num}
+	<!-- 주문내역 리스트 불러오기 -->
+	<select id="myOrderList" resultType="orderDTO">
+		select * from tbl_order
+		where id = #{id}
+		ORDER BY order_date DESC
 	</select>
-	<select id="orderDetailList" resultType="OrderDTO">
-	    SELECT *
-		FROM tbl_order A
-		left join tbl_product B on A.pnum_fk = B.pnum
+	<!-- 주문내역 상세보기 -->
+	<select id="orderDetailList" resultType="orderDetailDTO">
+		SELECT *
+		FROM tbl_orderDetail A
+		left join tbl_product B on A.pnum = B.pnum
 		left join tbl_category C on B.pcategory_fk = C.cat_code
-	    WHERE order_date = #{order_date}
+	    WHERE order_num = #{order_num}
 	</select>
 		
 	

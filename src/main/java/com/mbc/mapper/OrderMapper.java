@@ -6,11 +6,17 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.mbc.domain.MemberDTO;
 import com.mbc.domain.OrderDTO;
+import com.mbc.domain.OrderDetailDTO;
+import com.mbc.domain.PointDTO;
 
 @Mapper
 public interface OrderMapper {
 
-	void orderInsert(OrderDTO dto);
+	// void orderInsert(OrderDTO dto);
+
+	void insertOrder(OrderDTO order);
+	
+	boolean insertOrderDetail(OrderDetailDTO orderDetail);
 
 	void pointInsert(MemberDTO mdto);
 
@@ -18,7 +24,10 @@ public interface OrderMapper {
 
 	String myOrderDetail(int order_num);
 
-	List<OrderDTO> orderDetailList(String order_date);
+	List<OrderDetailDTO> orderDetailList(int order_num);
+
+	void pointObtained(PointDTO pDto);
+
 
 	
 }

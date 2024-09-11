@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.mbc.domain.DonationDTO;
+import com.mbc.domain.PointDTO;
 import com.mbc.domain.MemberDTO;
 
 @Service
@@ -12,14 +12,18 @@ public interface DonateService {
 	
 	void donation(MemberDTO dto);
 
-	void donationAmount(DonationDTO dDto);
+	void donationAmount(PointDTO pDto);
 	
 	
 	MemberDTO donateInfo(String id);
 
-	List<DonationDTO> donationList();
+	List<PointDTO> donationList();
 
-	/* void donation(MemberDTO dto); */
+	List<PointDTO> myDonationList(String id);
+
+	Integer getMyPoint(String id);
+
+
 
 
 }

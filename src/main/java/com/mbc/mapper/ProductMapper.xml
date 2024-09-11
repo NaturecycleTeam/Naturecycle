@@ -94,8 +94,9 @@
 
 	<select id="prodSearch" resultType="ProductDTO">
 		SELECT * FROM tbl_product
-		<include refid="criteria"></include>
-			
+		<include refid="criteria"></include>		
 	</select>
+
+
 
 </mapper>

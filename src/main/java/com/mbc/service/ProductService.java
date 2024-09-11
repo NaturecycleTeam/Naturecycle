@@ -38,11 +38,7 @@ public interface ProductService {
 	List<ProductDTO> prodSearch(ProductDTO pDto);
 
 	List<ProductDTO> uprodList();
-	
-	// 상품 검색
-	
-	
-	
+
 	
 
 }

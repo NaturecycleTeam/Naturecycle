@@ -1,0 +1,34 @@
+-- 게시판(tbl_board) 테이블
+drop table tbl_board;
+create table tbl_board(
+	bid int auto_increment primary key,
+    subject varchar(100) not null,
+    contents varchar(3000) not null,
+    hit int default 0,
+    writer varchar(50) not null,
+    mid_fk varchar(20) not null,
+    reg_date datetime default now() not null,
+    type varchar(20) not null,
+    replyCnt int default 0,
+    
+    foreign key (mid_fk) references tbl_member(id)
+);
+
+select * from tbl_board;
+
+insert into tbl_board(subject, contents, writer)
+values('테스트!~~', '테스트', '아무개');
+
+select * from tbl_board
+where subject like '%제목%'
+order by bid desc
+limit 10, 10;
+
+-- 게시판(tbl_board) 테이블에 replycnt 컬럼을 추가
+-- alter table tbl_board add (replyCnt int default 0);
+
+-- safe update mode 해제 방법 : Edit > preferences > SQO Editor > Safe updates 체크 해제
+-- 초기 셋팅 (이미 댓글이 달려있는 상황이므로)
+update tbl_board set replyCnt = (select count(rno)
+							     from tbl_reply
+								 where tbl_reply.bid = tbl_board.bid);

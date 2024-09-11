@@ -1,21 +1,19 @@
 package com.mbc.service;
 
-import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mbc.domain.AdminDTO;
-import com.mbc.domain.DonationDTO;
+import com.mbc.domain.ChartDTO;
+import com.mbc.domain.PointDTO;
 import com.mbc.domain.OrderDTO;
-import com.mbc.domain.PageDTO;
-import com.mbc.mapper.AdminMapper;
+import com.mbc.domain.OrderDetailDTO;
+
 
 public interface AdminService {
 	
@@ -29,13 +27,20 @@ public interface AdminService {
 	// 월매출
 	List<OrderDTO> monthlyPurchase();
 	// 상품 정보
-	List<OrderDTO> prod_purchase();
+	List<OrderDetailDTO> prod_purchase();
 	// 총매출
 	String totalPurchase();
 	// 오늘 매출
 	String todayPurchase();
 	// 기부금
-	List<DonationDTO> monthlyDonation();
+	List<PointDTO> monthlyDonation();
+
+	// 차트 저장
+	void saveChartData(ChartDTO dto);
+	// 차트 불러오기
+	List<ChartDTO> getChartConfigsById(String id);
+	// 차트 삭제하기
+	void deleteChartByCanvasId(String canvasId);
 	
 	
 	

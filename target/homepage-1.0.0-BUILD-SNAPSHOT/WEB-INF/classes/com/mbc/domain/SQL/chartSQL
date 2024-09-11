@@ -1,0 +1,12 @@
+-- 그래프 테이블
+drop table tbl_chart;
+create table tbl_chart(
+	chart_num int primary key auto_increment,
+    id varchar(20),
+    canvasId varchar(20),
+    dataUrl varchar(30),
+    
+    foreign key (id) references tbl_member(id)
+ );
+ 
+ select * from tbl_chart

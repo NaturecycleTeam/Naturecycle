@@ -1,6 +1,7 @@
 package com.mbc.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,17 +36,20 @@ public class CartController {
 
 		MemberDTO dto = (MemberDTO) session.getAttribute("loginDTO");
 		String cid_kf = dto.getId();
-//		System.out.println("@@@@@@@@@dto : " + dto);
-//		System.out.println("@@@@@@@@@id : " + id);
 
 		ArrayList<CartDTO> cartList = cartService.cartList(cid_kf);
-
+		
 		for (CartDTO cdto : cartList) {
 			cdto.setTotal();
 		}
 
 		session.setAttribute("dtos", cartList);	
-		System.out.println("cartList////// : " + cartList);
+//		System.out.println("cartList////// : " + cartList);
+		
+		String id = dto.getId();
+		List<CartDTO> favorites = cartService.favoriteList(id);
+		session.setAttribute("favorites", favorites);
+//		System.out.println("찜하기 확인용"+ favorites);
 
 		return "product/cart_list";
 	}
@@ -55,8 +59,10 @@ public class CartController {
 	public String addCart(CartDTO dto, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("loginDTO");
 		dto.setCid_fk(mdto.getId());
-		CartDTO ckDTO = cartService.checkCart(dto);	
+		String type = "Cart";
+		dto.setType(type);
 		
+		CartDTO ckDTO = cartService.checkCart(dto);	
 		
 		if (ckDTO == null) {
 			cartService.addCart(dto);
@@ -93,15 +99,6 @@ public class CartController {
 	public String shoppingCartCount(Model model, HttpSession session) {
 		 // 세션에서 loginDTO 객체를 가져와서 id를 추출
 	    MemberDTO dto = (MemberDTO) session.getAttribute("loginDTO");
-	    
-//	    String cid_fk = dto.getId();
-//	    
-//	    String tot_pqty = "0";
-//        if (cid_fk != null) {
-//            // cid_fk가 null이 아닌 경우에만 장바구니 수량을 가져옵니다.
-//            tot_pqty = cartService.shoppingCartCount(cid_fk);
-//            System.out.println("####장바구니 수량: " + tot_pqty);
-//        } 
 	        
 	    String cid_fk = dto != null ? dto.getId() : null;
 
@@ -119,6 +116,66 @@ public class CartController {
 	        return "0"; // 예외 발생 시 장바구니 수량을 0으로 설정
 	    }
 	}	
+	
+	// 찜하기 추가
+	@RequestMapping("addFavorite.do")
+	public String addFavorite(CartDTO dto, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+		MemberDTO mdto = (MemberDTO) session.getAttribute("loginDTO");
+		String id = mdto.getId();
+		dto.setCid_fk(id);
+		String type = "Favorite";
+		dto.setType(type);
+		
+		CartDTO cDTO = cartService.checkFavorite(dto);	
+		
+		if (cDTO == null) {
+			cartService.addFavorite(dto);
+			redirectAttributes.addFlashAttribute("msg", "찜하기 등록 완료");
+		} else {
+			redirectAttributes.addFlashAttribute("msg", "이미 찜한 상품입니다!!");
+		}
+		
+		return "redirect:cartList.do";
+	}
+	
+	// 찜하기에서 장바구니 이동
+	@RequestMapping("favoriteToCart.do")
+	public String favoriteToCart(int cart_num, HttpSession session, RedirectAttributes redirectAttributes) {
+		
+		// cart_num으로 dto를 불러옴 -> dto.pnum과 cartList의 pnum이 일치하는지 반복문 -> 일치하면 에러, 안 일치하면 오케이
+		CartDTO dto = cartService.cartDtoByPnum(cart_num);
+		int pnum = dto.getPnum_fk();
+		
+		MemberDTO mDto = (MemberDTO) session.getAttribute("loginDTO");
+		String cid_kf = mDto.getId();
+
+		ArrayList<CartDTO> cartList = cartService.cartList(cid_kf);
+		boolean isProductInCart = false;
+
+	    // Check if the product is already in the cart
+	    for (CartDTO cdto : cartList) {
+	        if (pnum == cdto.getPnum_fk()) {
+	            isProductInCart = true;
+	            break;  // Product found, exit loop
+	        }
+	    }
+
+	    if (isProductInCart) {
+	        redirectAttributes.addFlashAttribute("msg", "장바구니에 이미 해당상품이 존재합니다!!!");
+	    } else {
+	        // Product is not in the cart, proceed with adding it
+	        cartService.favoriteToCart(cart_num);
+	        redirectAttributes.addFlashAttribute("msg", "찜하기에서 장바구니로 이동 완료!!!");
+	    }
+		
+		
+//		cartService.favoriteToCart(cart_num);
+//		redirectAttributes.addFlashAttribute("msg", "찜하기에서 장바구니로 이동 완료!!!");
+		
+		return "redirect:cartList.do";  // Redirect to cart list page
+	}
+	
+	
 	
 	
 	
@@ -196,6 +253,13 @@ public class CartController {
 		redirectAttributes.addFlashAttribute("msg", "장바구니2 삭제 완료");
 		return "redirect:checkout.do";
 	}
-	
+
+	// 결제하기에서 카트리스트 정보 받아오기
+	@GetMapping("getCartList.do")
+	@ResponseBody
+	public List<CartDTO> getCartList(HttpSession session){
+		
+		return cartService.getCartList(session);
+	}
 
 }

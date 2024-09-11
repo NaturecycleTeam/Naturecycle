@@ -19,10 +19,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mbc.domain.PointDTO;
 import com.mbc.domain.MemberDTO;
 import com.mbc.domain.ReservationDTO;
+import com.mbc.service.DonateService;
 import com.mbc.service.MemberService;
 import com.mbc.service.ReservationService;
+import com.mbc.util.PointType;
 import com.mbc.util.ReservationStatus;
 
 @Controller
@@ -33,6 +36,9 @@ public class ReservationController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+	private DonateService dService;
 
 	/////////////////// 관리자 //////////////////////
 	
@@ -58,21 +64,29 @@ public class ReservationController {
 		// 예약 번호(rno)에 해당하는 예약의 상태를 DONE으로 변경(xml에서 변경)
 	    service.reservationConfirmed(rno);
 	    redirectAttributes.addFlashAttribute("msg", "예약을 확정하였습니다!!");
-	    
+	   
 	    ReservationDTO dto = service.getInfo(rno);
 	    
 	    String id = dto.getRid_fk();
 	    int amount = dto.getAmount();
 	    int rPoint = amount * 100;
-
+	    
 	    // Retrieve member information from the session or service
 	    MemberDTO mDto = mService.memberIdCheck(id); // or however you get the MemberDTO
-	    
 	    String memberId = mDto.getId();
         int newPoints = mDto.getPoint()+ rPoint;
         
-	    // Update member information with the new points
-	    mService.updatePoint(memberId, newPoints); // Method should handle updating the member's points
+        
+	    // 멤버테이블 포인트 수정(적립)
+	    mService.updatePoint(memberId, newPoints);
+	    // 도네이션테이블 포인트(적립)
+	    PointDTO pDto = new PointDTO();
+	    
+	    pDto.setId(memberId);
+	    pDto.setPoint(rPoint);
+	    pDto.setPointType(PointType.RECYCLE);
+	    dService.donationAmount(pDto);
+	    
 	    
 	    // 예약 리스트 페이지로 리디렉션
 	    return "redirect:reservationList.do";

@@ -3,17 +3,21 @@ package com.mbc.controller;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,8 +27,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mbc.domain.AdminDTO;
-import com.mbc.domain.DonationDTO;
+import com.mbc.domain.ChartDTO;
+import com.mbc.domain.PointDTO;
 import com.mbc.domain.OrderDTO;
+import com.mbc.domain.OrderDetailDTO;
 import com.mbc.service.AdminService;
 
 @Controller
@@ -109,7 +115,7 @@ public class AdminController {
 	public String todayPurchase(Model model) {
 		
 		String todayPurchaseAmount = adService.todayPurchase();
-		System.out.println("####오늘 매출"+ todayPurchaseAmount);
+//		System.out.println("####오늘 매출"+ todayPurchaseAmount);
 		
 		return todayPurchaseAmount;
 	}	
@@ -191,18 +197,16 @@ public class AdminController {
 		Iterator<OrderDTO> it = list.iterator();
 		while(it.hasNext()) {
 			OrderDTO dto = it.next();
-			JsonObject object = new JsonObject();
 			
-			String date = dto.getORDER_MONTH();
-						
+			String date = dto.getORDER_MONTH();						
 			String sum = dto.getPURCHASE_AMOUNT();
 //			System.out.println(sum);
 			
+			JsonObject object = new JsonObject();
 			object.addProperty("date", date);
 			object.addProperty("sum", sum);
 			jArray.add(object);			
 		}
-		
 		
 		String json = gson.toJson(jArray);
 //		System.out.println("json 월데이터값" + json);	
@@ -215,14 +219,14 @@ public class AdminController {
 		@ResponseBody
 		public String prod_purchase(Model model) {
 			
-			List<OrderDTO> list =adService.prod_purchase();
+			List<OrderDetailDTO> list =adService.prod_purchase();
 			
 			Gson gson = new GsonBuilder().create();	
 			JsonArray jArray = new JsonArray();		
 			
-			Iterator<OrderDTO> it = list.iterator();
+			Iterator<OrderDetailDTO> it = list.iterator();
 			while(it.hasNext()) {
-				OrderDTO dto = it.next();
+				OrderDetailDTO dto = it.next();
 				JsonObject object = new JsonObject();
 
 				String totPQTY = dto.getTOT_PQTY();							
@@ -234,7 +238,7 @@ public class AdminController {
 			}			
 			
 			String json = gson.toJson(jArray);
-//			System.out.println("json 월데이터값" + json);	
+//			System.out.println("json 상품판매량" + json);	
 			
 			return json;
 		}
@@ -244,18 +248,17 @@ public class AdminController {
 		@ResponseBody
 		public String monthlyDonation(Model model) {
 			
-			List<DonationDTO> list =adService.monthlyDonation();
+			List<PointDTO> list =adService.monthlyDonation();
 			
 			Gson gson = new GsonBuilder().create();	
 			JsonArray jArray = new JsonArray();		
 		
-			Iterator<DonationDTO> it = list.iterator();
+			Iterator<PointDTO> it = list.iterator();
 			while(it.hasNext()) {
-				DonationDTO dto = it.next();
+				PointDTO dto = it.next();
 				JsonObject object = new JsonObject();
 				
-				String date = dto.getDonation_month();
-							
+				String date = dto.getDonation_month();			
 				String sum = dto.getMonthlyAmount().toString();
 //				System.out.println(sum);
 				
@@ -264,20 +267,104 @@ public class AdminController {
 				jArray.add(object);			
 			}
 			
-			
 			String json = gson.toJson(jArray);
-			System.out.println("json 도네이션 월데이터값" + json);	
+//			System.out.println("json 도네이션 월데이터값" + json);	
 			
 			return json;
 		}
+		
+		// 차트 저장
+		@PostMapping("saveChartConfig.do")
+		@ResponseBody
+		public Map<String, String> savaChartData(@RequestBody ChartDTO dto, HttpSession session) {
+		    Map<String, String> response = new HashMap<>();
+			if (dto == null || dto.getCanvasId() == null || dto.getDataUrl() == null) {
+				 response.put("status", "error");
+		         response.put("message", "invalid 데이터!!");
+		         return response;  // Return error response
+		    }
+		    
+		    AdminDTO aDto = (AdminDTO) session.getAttribute("adLoginDTO");
+		    if (aDto == null) {
+		    	 response.put("status", "error");
+		         response.put("message", "세션 만료!!");
+		         return response;  // Return error response;
+		    }
+		    
+		    String id = aDto.getAd_id();
+		    dto.setId(id);
+		    
+		    // 데이터베이스에 해당 canvasId가 있는지 체크    
+		    List<ChartDTO> list = adService.getChartConfigsById(id);
+		    for (ChartDTO item : list) {
+		        if (item.getCanvasId().equals(dto.getCanvasId())) {
+		        	 response.put("status", "error");
+		             response.put("message", "해당 위치에 이미 차트가 있습니다! 삭제 후 다시 시도해주세요!!");
+		             return response;  // Return error response
+		        }
+		    }
+		    
+		    try {
+		        adService.saveChartData(dto);
+		    } catch (Exception e) {
+		        e.printStackTrace(); // Log the exception
+		        response.put("status", "error");
+	            response.put("message", "에러발생!!");
+	            return response;  // Return error response
+		    }
+		    
+		    response.put("status", "success");
+		    response.put("message", "차트가 성공적으로 추가되었습니다.");
+		    
+		    return response;
+		}
+
+		// 차트 불러오기
+		@GetMapping("getSavedChart.do")
+	    @ResponseBody
+	    public String getSavedChartConfigs(HttpSession session) {
+	        AdminDTO aDto = (AdminDTO) session.getAttribute("adLoginDTO");
+	        String id = aDto.getAd_id();
+	        
+	        List<ChartDTO> list = adService.getChartConfigsById(id);
+//	        System.out.println("차트리스트 : " + list);
+	        
+	        Gson gson = new GsonBuilder().create();
+	        JsonArray jArray = new JsonArray();
+	        
+	        Iterator<ChartDTO> it = list.iterator();
+	        while(it.hasNext()) {
+	        	ChartDTO dto = it.next();
+	        	JsonObject object = new JsonObject(); 
+	        	
+	        	String canvasId = dto.getCanvasId();
+	        	String dataUrl = dto.getDataUrl();
+	        	
+	        	object.addProperty("canvasId", canvasId);
+	        	object.addProperty("dataUrl", dataUrl);
+	        	
+	        	jArray.add(object);
+	        }
+	        
+	        String json = gson.toJson(jArray);
+//	        System.out.println("json 차트 데이터값" + json);	
+	        
+	        return json;
+	    }
+		
+		// 차트 삭제하기
+		@PostMapping("deleteChart.do")
+		@ResponseBody
+		public String deleteChart(@RequestBody ChartDTO dto) {
+		    String canvasId = dto.getCanvasId();
+//		    System.out.println("canvasID 삭제 : " + canvasId);
+
+		    adService.deleteChartByCanvasId(canvasId);
+
+		    return "Chart deleted successfully";
+		}
+		
 }
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		

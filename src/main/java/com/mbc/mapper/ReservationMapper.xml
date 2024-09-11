@@ -8,7 +8,7 @@
 	<!-- 예약확정 -->
 	<update id="reservationConfirmed">
 		UPDATE tbl_reservation
-	    SET reservationStatus = 'DONE'
+	    SET reservationStatus = 'DONE'  <!-- #{status} -->
 	    WHERE rno = #{rno}
 	</update>
 	

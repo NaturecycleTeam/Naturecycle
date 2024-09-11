@@ -1,0 +1,8 @@
+-- 카테고리 테이블
+drop table tbl_category;
+create table tbl_category(
+    cat_num int auto_increment primary key,
+    cat_code varchar(10) unique not null,
+    cat_name varchar(20) not null
+);
+select * from tbl_category;

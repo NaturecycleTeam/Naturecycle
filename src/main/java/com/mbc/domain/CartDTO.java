@@ -13,6 +13,7 @@ public class CartDTO {
 	private int pnum_fk;
 	private int pqty;
 	private Date indate;
+	private String type;
 	
 	// 상품 dto
 	private String pname;
@@ -39,7 +40,7 @@ public class CartDTO {
 	public String toString() {
 		return "CartDTO [cart_num=" + cart_num + ", cid_fk=" + cid_fk + ", pnum_fk=" + pnum_fk + ", pqty=" + pqty + ", indate="
 				+ indate + ", pname=" + pname + ", pimage=" + pimage + ", price=" + price + ", point=" + point
-				+ ", pspec=" + pspec + ", totPrice=" + totPrice + ", totPoint=" + totPoint + "]";
+				+ ", pspec=" + pspec + ", totPrice=" + totPrice + ", totPoint=" + totPoint + ", type=" + type +"]";
 	}
 	
 }

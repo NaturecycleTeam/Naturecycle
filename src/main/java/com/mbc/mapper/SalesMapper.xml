@@ -29,7 +29,7 @@
 	        </if>
 	        <!-- 상품명 -->
 	        <if test="searchType == 'C'.toString()">
-	            B.pname LIKE CONCAT('%', #{keyword}, '%')
+	            C.pname LIKE CONCAT('%', #{keyword}, '%')
 	        </if>
 	        <!-- 주문일 -->
 	        <if test="searchType == 'W'.toString()">
@@ -39,65 +39,41 @@
 	    </where>
 	</sql>	
 	<select id="salesInfo" resultType="orderDTO">
-		<!-- SELECT A.order_num, A.order_date, B.qty_ordered, B.price_each, B.pname				
+		SELECT A.order_num, A.order_date, A.id, B.quantity, B.unitPrice, C.pname				
 		FROM tbl_order A
-		LEFT JOIN orderDetail B ON A.order_num = B.order_num
-		LEFT JOIN product_info C ON B.pcode = C.pcategory_fk
-		<include refid="criteria"></include>
-		ORDER BY A.order_date
-		LIMIT #{startIndex}, #{cntPerPage} -->
-		
-		SELECT A.order_num, A.order_date, A.qty_ordered, A.price_each, A.oid_fk, B.pname				
-		FROM tbl_order A
-		LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
+		LEFT JOIN tbl_orderDetail B ON A.order_num = B.order_num
+		LEFT JOIN tbl_product C ON B.pnum = C.pnum
 		<include refid="criteria"></include>
 		ORDER BY A.order_date DESC
 		LIMIT #{startIndex}, #{cntPerPage}
 	</select>
 	
 	<!-- 날짜 범위 지정 검색  -->
-	<select id="salesInfoPeriod" resultType="orderDTO">
-	    <!-- SELECT A.order_num, A.order_date, B.qty_ordered, B.price_each, B.pname				
-	    FROM tbl_order A
-	    LEFT JOIN orderDetail B ON A.order_num = B.order_num
-	    LEFT JOIN product_info C ON B.pcode = C.pcategory_fk
-	    WHERE A.order_date BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1 DAY)
-	    ORDER BY A.order_date -->
-	    <!-- LIMIT #{startIndex}, #{cntPerPage} -->
-	    
-	    SELECT A.order_num, A.oid_fk, A.order_date, A.qty_ordered, A.price_each, B.pname				
-	    FROM tbl_order A
-	    LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
-	    WHERE A.order_date BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1 DAY)
-	    ORDER BY A.order_date
+	<select id="salesInfoPeriod" resultType="orderDTO">	    
+	    SELECT A.order_num, A.order_date, A.id, B.quantity, B.unitPrice, C.pname				
+		FROM tbl_order A
+		LEFT JOIN tbl_orderDetail B ON A.order_num = B.order_num
+		LEFT JOIN tbl_product C ON B.pnum = C.pnum
+		WHERE A.order_date BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1 DAY)
+		ORDER BY A.order_date
 	    <!-- LIMIT #{startIndex}, #{cntPerPage} -->
 	</select>
 	
 	 <!-- 검색어 있을 때 전체 게시글 수 -->
 	  <select id="totalCnt" resultType="Integer">
 	  	SELECT count(*) 
-	  	FROM tbl_order A
-		LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
-		<!-- LEFT JOIN product_info C ON B.pcode = C.pcategory_fk -->
+		FROM tbl_order A
+		LEFT JOIN tbl_orderDetail B ON A.order_num = B.order_num
+		LEFT JOIN tbl_product C ON B.pnum = C.pnum
 		<include refid="criteria"></include>
 		ORDER BY A.order_date	  	
-	  	<!-- <include refid="criteria"></include> -->
 	  </select>
 	
 	<!-- 매출관리페이지 - 오늘매출 상세보기  -->
 	<select id="todayAjaxList" resultType="orderDTO">
-		<!-- SELECT A.order_num, A.order_date, B.qty_ordered, B.price_each, B.pname,
-		SUM(B.qty_ordered*B.price_each) AS TODAY_PURCHASE_AMOUNT				
-		FROM tbl_order A
-		LEFT JOIN orderDetail B ON A.order_num = B.order_num
-		LEFT JOIN product_info C ON B.pcode = C.pcategory_fk
-		WHERE DATE_FORMAT(A.order_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d') -->
-	
-		SELECT A.order_num, A.order_date, A.qty_ordered, A.price_each, B.pname,
-		A.qty_ordered*A.price_each AS TODAY_PURCHASE_AMOUNT				
-		FROM tbl_order A
-		LEFT JOIN tbl_product B ON A.pnum_fk = B.pnum
-		WHERE DATE_FORMAT(A.order_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d');
+		SELECT order_num, id, total_amount			
+		FROM tbl_order
+		WHERE DATE_FORMAT(order_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d');
 	</select>
 	
 	<!-- 매출관리페이지 - 일매출 차트(한달단위) -->
@@ -110,7 +86,7 @@
 		    WHERE A.LEVEL <![CDATA[<]]> DAY(LAST_DAY(NOW())) - 1
 			),
 			DAILY_PURCHASE AS (
-			    SELECT DATE_FORMAT(order_date, "%Y-%m-%d") AS order_date, SUM(qty_ordered * price_each) AS PURCHASE_AMOUNT
+			    SELECT DATE_FORMAT(order_date, "%Y-%m-%d") AS order_date, SUM(total_amount) AS PURCHASE_AMOUNT
 				FROM tbl_order
 				GROUP BY DATE_FORMAT(order_date, "%Y-%m-%d")
 			)

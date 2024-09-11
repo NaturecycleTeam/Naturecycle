@@ -6,19 +6,27 @@
 <mapper namespace="com.mbc.mapper.CartMapper">
 	<!-- 장바구니  -->	
 	<!-- 카트 전체 리스트 -->
-	<select id="cartList" resultType="CartDTO">
+<!-- 	<select id="cartList" resultType="CartDTO">
 		SELECT c.cart_num, c.cid_fk, c.pnum_fk, c.pqty, p.pimage, p.pname, p.price, p.point, p.pspec 
-		FROM tbl_cart c, tbl_product p WHERE c.pnum_fk = p.pnum AND c.cid_fk = #{cid_fk} 
+		FROM tbl_cart c, tbl_product p 
+		WHERE c.pnum_fk = p.pnum AND c.cid_fk = #{cid_fk} AND type = "Cart"
+	</select> -->
+	<select id="cartList" resultType="CartDTO">
+		SELECT * FROM tbl_cart c
+		LEFT JOIN tbl_product p ON p.pnum = c.pnum_fk
+		WHERE c.cid_fk = #{cid_fk} AND type = "Cart"
 	</select>
 	
 	<!-- 카트 등록 -->
 	<insert id="addCart" parameterType="CartDTO">
-		INSERT INTO tbl_cart(cid_fk, pnum_fk, pqty) VALUES(#{cid_fk}, #{pnum_fk}, #{pqty})
+		INSERT INTO tbl_cart(cid_fk, pnum_fk, pqty, type) 
+		VALUES(#{cid_fk}, #{pnum_fk}, #{pqty}, #{type})
 	</insert>
 	
 	<!-- 카트 리스트 체크(상품이 있는지 없는지) -->
  	<select id="checkCart" resultType="CartDTO"> 
-		SELECT * FROM tbl_cart WHERE cid_fk = #{cid_fk} AND pnum_fk = #{pnum_fk}
+		SELECT * FROM tbl_cart 
+		WHERE cid_fk = #{cid_fk} AND pnum_fk = #{pnum_fk}
 	</select>
 	
 	<!-- 카트 수정하기 OK -->
@@ -35,8 +43,43 @@
 	<select id="shoppingCartCount" resultType="String">
 		SELECT sum(pqty) AS tot_pqty
 		FROM tbl_cart
-		WHERE cid_fk = #{cid_fk}
+		WHERE cid_fk = #{cid_fk} AND type = "Cart"
 	</select>
+	
+	
+	
+	
+	<!-- 찜하기 리스트 체크(상품이 있는지 없는지) -->
+ 	<select id="checkFavorite" resultType="CartDTO"> 
+		SELECT * FROM tbl_cart 
+		WHERE cid_fk = #{cid_fk} AND pnum_fk = #{pnum_fk} AND type = 'Favorite'
+	</select>
+	
+	<!-- 찜하기 추가  -->
+	<insert id="addFavorite">
+		INSERT INTO tbl_cart (cid_fk, pnum_fk, type)
+		VALUES (#{cid_fk}, #{pnum_fk}, #{type})
+	</insert>
+	
+	<!-- 찜하기 전체 리스트 -->
+	<select id="favoriteList" resultType="CartDTO">
+		SELECT * FROM tbl_cart c
+		LEFT JOIN tbl_product p ON p.pnum = c.pnum_fk
+		WHERE c.cid_fk = #{id} AND type = "Favorite"
+	</select>
+	<!-- 찜하기에서 장바구니로 이동(타입수정) -->
+ 	<update id="favoriteToCart">
+		UPDATE tbl_cart 
+		SET type = 'Cart' 
+		WHERE cart_num = #{cart_num} AND type = 'Favorite'
+	</update>
+	
+	<!--  -->
+	<select id="cartDtoByPnum" resultType="CartDTO">
+		SELECT * FROM tbl_cart
+		WHERE cart_num = #{cart_num} 
+	</select>
+	
 	
 	
 	
@@ -47,5 +90,8 @@
 		DELETE FROM tbl_cart WHERE pnum_fk = #{param1} AND cid_fk = #{param2}
 	</delete>
 	
+	<select id="getCartList" resultType="com.mbc.domain.CartDTO">
+        SELECT * FROM tbl_cart WHERE user_id = #{userId}
+    </select>
 
 </mapper>

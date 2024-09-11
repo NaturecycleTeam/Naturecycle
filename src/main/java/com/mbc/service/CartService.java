@@ -1,6 +1,9 @@
 package com.mbc.service;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import com.mbc.domain.CartDTO;
 
@@ -23,5 +26,17 @@ public interface CartService {
 
 	String shoppingCartCount(String cid_fk);
 
+	List<CartDTO> getCartList(HttpSession session);
 	
+	
+	// 찜하기
+	CartDTO checkFavorite(CartDTO dto);
+
+	void addFavorite(CartDTO dto);
+
+	List<CartDTO> favoriteList(String id);
+
+	void favoriteToCart(int cart_num);
+
+	CartDTO cartDtoByPnum(int cart_num);
 }

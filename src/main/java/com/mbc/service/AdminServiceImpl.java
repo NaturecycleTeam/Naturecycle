@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mbc.domain.AdminDTO;
-import com.mbc.domain.DonationDTO;
+import com.mbc.domain.ChartDTO;
+import com.mbc.domain.PointDTO;
 import com.mbc.domain.OrderDTO;
+import com.mbc.domain.OrderDetailDTO;
 import com.mbc.domain.PageDTO;
 import com.mbc.mapper.AdminMapper;
 
@@ -95,16 +97,37 @@ public class AdminServiceImpl implements AdminService {
 	}
 	// 관리자홈 상품 판매량
 	@Override
-	public List<OrderDTO> prod_purchase() {
+	public List<OrderDetailDTO> prod_purchase() {
 		
 		return adMapper.prod_purchase();
 	}
 	
 	// 관리자홈 기부금 내역
 	@Override
-	public List<DonationDTO> monthlyDonation() {
+	public List<PointDTO> monthlyDonation() {
 		
 		return adMapper.monthlyDonation();
+	}
+	
+	// 관리자홈 차트저장
+	@Override
+	public void saveChartData(ChartDTO dto) {
+		
+		adMapper.saveChartData(dto);
+	}
+	
+	// 관리자홈 차트 불러오기
+	@Override
+	public List<ChartDTO> getChartConfigsById(String id) {
+		
+		return adMapper.findById(id);
+	}
+
+	// 관리자홈 차트 삭제하기
+	@Override
+	public void deleteChartByCanvasId(String canvasId) {
+		
+		adMapper.deleteChart(canvasId);
 	}		
 	
 	
